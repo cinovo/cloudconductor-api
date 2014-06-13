@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/cinovo/cloudconductor-server.png?branch=master)](https://travis-ci.org/cinovo/cloudconductor-server)
+[![Build Status](https://travis-ci.org/cinovo/cloudconductor-api.png?branch=master)](https://travis-ci.org/cinovo/cloudconductor-api)
 
 
 # Why use CloudConductor
