@@ -72,4 +72,12 @@ public interface IService extends IDefaultApi<Service> {
 	@DELETE
 	@Path(IRestPath.SERVICE_PKG_SINGLE)
 	public void removePackage(@PathParam(IRestPath.VAR_SERVICE) String service, @PathParam(IRestPath.VAR_PKG) String pkg);
+	
+	/**
+	 * @param service the service name
+	 * @param host the host name
+	 */
+	@PUT
+	@Path(IRestPath.SERVICE_APPROVE_STARTED)
+	public void approveServiceStarted(@PathParam(IRestPath.VAR_SERVICE) String service, @PathParam(IRestPath.VAR_HOST) String host);
 }

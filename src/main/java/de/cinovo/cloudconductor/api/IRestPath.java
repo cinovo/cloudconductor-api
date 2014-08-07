@@ -185,6 +185,11 @@ public interface IRestPath {
 	 */
 	public static final String SERVICE_PKG_SINGLE = IRestPath.SERVICE_PKG + "/{" + IRestPath.VAR_PKG + "}";
 	
+	/**
+	 * approve the started state of a service
+	 */
+	public static final String SERVICE_APPROVE_STARTED = "/{" + IRestPath.VAR_SERVICE + "}/approvestarted/{" + IRestPath.VAR_PKG + "}";
+	
 	// -------------------------------------------------------
 	// SSH KEY
 	// -------------------------------------------------------

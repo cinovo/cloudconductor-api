@@ -80,4 +80,14 @@ public class ServiceHandler extends DefaultRestHandler<Service> {
 		String path = this.pathGenerator(IRestPath.SERVICE_PKG_SINGLE, service, pkg);
 		this._delete(path);
 	}
+	
+	/**
+	 * @param service the service name
+	 * @param host the host name
+	 * @throws CloudConductorException Error indicating connection or data problems
+	 */
+	public void approveStarted(String service, String host) throws CloudConductorException {
+		String path = this.pathGenerator(IRestPath.SERVICE_APPROVE_STARTED, service, host);
+		this._put(path);
+	}
 }
