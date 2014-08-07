@@ -188,7 +188,7 @@ public interface IRestPath {
 	/**
 	 * approve the started state of a service
 	 */
-	public static final String SERVICE_APPROVE_STARTED = "/{" + IRestPath.VAR_SERVICE + "}/approvestarted/{" + IRestPath.VAR_PKG + "}";
+	public static final String SERVICE_APPROVE_STARTED = "/{" + IRestPath.VAR_SERVICE + "}/approvestarted/{" + IRestPath.VAR_HOST + "}";
 	
 	// -------------------------------------------------------
 	// SSH KEY
