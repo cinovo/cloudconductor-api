@@ -20,7 +20,6 @@ package de.cinovo.cloudconductor.api;
  * #L%
  */
 
-
 /**
  * Path's provided and supported by the api
  * 
@@ -245,4 +244,13 @@ public interface IRestPath {
 	 * io versions
 	 */
 	public static final String IO_VERSION = "/versions";
+	
+	// -------------------------------------------------------
+	// REPORT
+	// -------------------------------------------------------
+	/**
+	 * Report api
+	 */
+	public static final String REPORT = "/report";
+	
 }
