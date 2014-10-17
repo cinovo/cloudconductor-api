@@ -14,23 +14,23 @@ import java.util.concurrent.TimeUnit;
  *
  */
 public class SchedulerService {
-
+	
 	/**
 	 * the instance
 	 */
 	public static SchedulerService instance = new SchedulerService();
-
+	
 	private final ScheduledExecutorService ses;
 	private final HashMap<String, Runnable> tasks;
 	private final HashMap<String, ScheduledFuture<?>> runningTasks;
-	
-	
+
+
 	private SchedulerService() {
 		this.ses = Executors.newScheduledThreadPool(10);
 		this.runningTasks = new HashMap<>();
 		this.tasks = new HashMap<>();
 	}
-
+	
 	/**
 	 * @param identifier the task identifier
 	 * @param task the task
@@ -47,6 +47,16 @@ public class SchedulerService {
 	}
 
 	/**
+	 * @param identifier the task identifier
+	 * @param task the task
+	 */
+	public void register(String identifier, Runnable task) {
+		if (!this.tasks.containsKey(identifier)) {
+			this.tasks.put(identifier, task);
+		}
+	}
+	
+	/**
 	 * @param task the task
 	 * @param delay the delay
 	 * @param unit the unit
@@ -55,7 +65,15 @@ public class SchedulerService {
 	public ScheduledFuture<?> executeOnce(Runnable task, long delay, TimeUnit unit) {
 		return this.ses.schedule(task, delay, unit);
 	}
-
+	
+	/**
+	 * @param identifier the identifier
+	 * @return the future
+	 */
+	public ScheduledFuture<?> executeOnce(String identifier) {
+		return this.ses.schedule(this.tasks.get(identifier), 0, TimeUnit.SECONDS);
+	}
+	
 	/**
 	 * @param identifier the identifier
 	 * @param period the new period
@@ -73,7 +91,7 @@ public class SchedulerService {
 		}
 		this.runningTasks.put(identifier, this.ses.scheduleAtFixedRate(this.tasks.get(identifier), delay, period, unit));
 	}
-
+	
 	/**
 	 * @param identifier the identifier
 	 */
@@ -87,7 +105,7 @@ public class SchedulerService {
 			this.runningTasks.remove(identifier);
 		}
 	}
-	
+
 	/**
 	 * shut down
 	 */

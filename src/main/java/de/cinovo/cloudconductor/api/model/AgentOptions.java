@@ -16,15 +16,15 @@ public class AgentOptions {
 	private int aliveTimer = 2;
 	private TimeUnit aliveTimerUnit = TimeUnit.MINUTES;
 
-	private boolean doSshKeys = true;
+	private TaskState doSshKeys = TaskState.REPEAT;
 	private int sshKeysTimer = 15;
 	private TimeUnit sshKeysTimerUnit = TimeUnit.MINUTES;
 
-	private boolean doPackageManagement = true;
+	private TaskState doPackageManagement = TaskState.REPEAT;
 	private int packageManagementTimer = 15;
 	private TimeUnit packageManagementTimerUnit = TimeUnit.MINUTES;
 
-	private boolean doFileManagement = true;
+	private TaskState doFileManagement = TaskState.REPEAT;
 	private int fileManagementTimer = 15;
 	private TimeUnit fileManagementTimerUnit = TimeUnit.MINUTES;
 
@@ -44,7 +44,7 @@ public class AgentOptions {
 	 * @param fileManagementTimer the file timer
 	 * @param fileManagementTimerUnit timer unit
 	 */
-	public AgentOptions(@JsonProperty("aliveTimer") int aliveTimer, @JsonProperty("aliveTimerUnit") TimeUnit aliveTimerUnit, @JsonProperty("doSshKeys") boolean doSshKeys, @JsonProperty("sshKeysTimer") int sshKeysTimer, @JsonProperty("sshKeysTimerUnit") TimeUnit sshKeysTimerUnit, @JsonProperty("doPackageManagement") boolean doPackageManagement, @JsonProperty("packageManagementTimer") int packageManagementTimer, @JsonProperty("packageManagementTimerUnit") TimeUnit packageManagementTimerUnit, @JsonProperty("doFileManagement") boolean doFileManagement, @JsonProperty("fileManagementTimer") int fileManagementTimer, @JsonProperty("fileManagementTimerUnit") TimeUnit fileManagementTimerUnit) {
+	public AgentOptions(@JsonProperty("aliveTimer") int aliveTimer, @JsonProperty("aliveTimerUnit") TimeUnit aliveTimerUnit, @JsonProperty("doSshKeys") TaskState doSshKeys, @JsonProperty("sshKeysTimer") int sshKeysTimer, @JsonProperty("sshKeysTimerUnit") TimeUnit sshKeysTimerUnit, @JsonProperty("doPackageManagement") TaskState doPackageManagement, @JsonProperty("packageManagementTimer") int packageManagementTimer, @JsonProperty("packageManagementTimerUnit") TimeUnit packageManagementTimerUnit, @JsonProperty("doFileManagement") TaskState doFileManagement, @JsonProperty("fileManagementTimer") int fileManagementTimer, @JsonProperty("fileManagementTimerUnit") TimeUnit fileManagementTimerUnit) {
 		super();
 		this.aliveTimer = aliveTimer;
 		this.aliveTimerUnit = aliveTimerUnit;
@@ -90,14 +90,14 @@ public class AgentOptions {
 	/**
 	 * @return the doSshKeys
 	 */
-	public boolean isDoSshKeys() {
+	public TaskState getDoSshKeys() {
 		return this.doSshKeys;
 	}
 
 	/**
 	 * @param doSshKeys the doSshKeys to set
 	 */
-	public void setDoSshKeys(boolean doSshKeys) {
+	public void setDoSshKeys(TaskState doSshKeys) {
 		this.doSshKeys = doSshKeys;
 	}
 
@@ -132,14 +132,14 @@ public class AgentOptions {
 	/**
 	 * @return the doPackageManagement
 	 */
-	public boolean isDoPackageManagement() {
+	public TaskState getDoPackageManagement() {
 		return this.doPackageManagement;
 	}
 
 	/**
 	 * @param doPackageManagement the doPackageManagement to set
 	 */
-	public void setDoPackageManagement(boolean doPackageManagement) {
+	public void setDoPackageManagement(TaskState doPackageManagement) {
 		this.doPackageManagement = doPackageManagement;
 	}
 
@@ -174,14 +174,14 @@ public class AgentOptions {
 	/**
 	 * @return the doFileManagement
 	 */
-	public boolean isDoFileManagement() {
+	public TaskState getDoFileManagement() {
 		return this.doFileManagement;
 	}
 
 	/**
 	 * @param doFileManagement the doFileManagement to set
 	 */
-	public void setDoFileManagement(boolean doFileManagement) {
+	public void setDoFileManagement(TaskState doFileManagement) {
 		this.doFileManagement = doFileManagement;
 	}
 
