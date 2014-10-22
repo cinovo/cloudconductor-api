@@ -83,6 +83,15 @@ public interface IRestPath {
 	 */
 	public static final String AGENT_SERVICE_STATE = "/{" + IRestPath.VAR_TEMPLATE + "}/{" + IRestPath.VAR_HOST + "}/service";
 	
+	/**
+	 * notify server that agent is alive
+	 */
+	public static final String AGENT_HEART_BEAT = "/{" + IRestPath.VAR_TEMPLATE + "}/{" + IRestPath.VAR_HOST + "}/heartbeat";
+
+	/**
+	 * check if the server exists
+	 */
+	public static final String AGENT_PING = "/ping";
 	// -------------------------------------------------------
 	// CONFIG FILES
 	// -------------------------------------------------------
@@ -96,6 +105,10 @@ public interface IRestPath {
 	 */
 	public static final String FILE_DATA = "/{" + IRestPath.VAR_NAME + "}/data";
 	
+	/**
+	 * get all config files of a template
+	 */
+	public static final String FILE_CONFIG_FILES = "/{" + IRestPath.VAR_TEMPLATE + "}/files";
 	// -------------------------------------------------------
 	// CONFIG VALUES
 	// -------------------------------------------------------

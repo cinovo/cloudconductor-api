@@ -8,9 +8,9 @@ package de.cinovo.cloudconductor.api.lib.manager;
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License"); you may
  * not use this file except in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
@@ -30,42 +30,44 @@ import de.cinovo.cloudconductor.api.model.KeyValue;
 /**
  * Copyright 2013 Cinovo AG<br>
  * <br>
- * 
+ *
  * @author psigloch
- * 
+ *
  */
 public class ConfigValueHandler extends AbstractApiHandler {
-	
+
 	/**
 	 * @param cloudconductorUrl the config server url
 	 */
 	public ConfigValueHandler(String cloudconductorUrl) {
 		super(cloudconductorUrl);
 	}
-	
+
 	/**
 	 * @param template the template name
 	 * @return map containing config kv-pairs of the template
 	 * @throws CloudConductorException Error indicating connection or data problems
 	 */
+	@SuppressWarnings("unchecked")
 	public Map<String, String> getConfig(String template) throws CloudConductorException {
 		String path = this.pathGenerator(IRestPath.CONFIG + IRestPath.CONFIG_TEMPLATE, template);
 		JavaType type = AbstractApiHandler.mapper.getTypeFactory().constructMapType(HashMap.class, String.class, String.class);
 		return (Map<String, String>) this._get(path, type);
 	}
-	
+
 	/**
 	 * @param template the template name
 	 * @param service the serice name
 	 * @return map containing config kv-pairs of the service
 	 * @throws CloudConductorException Error indicating connection or data problems
 	 */
+	@SuppressWarnings("unchecked")
 	public Map<String, String> getConfig(String template, String service) throws CloudConductorException {
 		String path = this.pathGenerator(IRestPath.CONFIG + IRestPath.CONFIG_TEMPLATE_SERVICE, template, service);
 		JavaType type = AbstractApiHandler.mapper.getTypeFactory().constructMapType(HashMap.class, String.class, String.class);
 		return (Map<String, String>) this._get(path, type);
 	}
-	
+
 	/**
 	 * @param template the template name
 	 * @param service the serice name
@@ -77,7 +79,7 @@ public class ConfigValueHandler extends AbstractApiHandler {
 		String path = this.pathGenerator(IRestPath.CONFIG + IRestPath.CONFIG_TEMPLATE_SERVICE_KEY, template, service, key);
 		return this._get(path, String.class);
 	}
-	
+
 	/**
 	 * @param template the template name
 	 * @param key the config key
@@ -89,7 +91,7 @@ public class ConfigValueHandler extends AbstractApiHandler {
 		KeyValue kv = new KeyValue(key, value);
 		this._put(path, kv);
 	}
-	
+
 	/**
 	 * @param template the template name
 	 * @param service the service name
@@ -102,7 +104,7 @@ public class ConfigValueHandler extends AbstractApiHandler {
 		KeyValue kv = new KeyValue(key, value);
 		this._put(path, kv);
 	}
-	
+
 	/**
 	 * @param template the template name
 	 * @param key the config key
@@ -112,7 +114,7 @@ public class ConfigValueHandler extends AbstractApiHandler {
 		String path = this.pathGenerator(IRestPath.CONFIG + IRestPath.CONFIG_TEMPLATE_KEY, template, key);
 		this._delete(path);
 	}
-	
+
 	/**
 	 * @param template the template name
 	 * @param service the service name
@@ -123,5 +125,5 @@ public class ConfigValueHandler extends AbstractApiHandler {
 		String path = this.pathGenerator(IRestPath.CONFIG + IRestPath.CONFIG_TEMPLATE_SERVICE_KEY, template, service, key);
 		this._delete(path);
 	}
-	
+
 }

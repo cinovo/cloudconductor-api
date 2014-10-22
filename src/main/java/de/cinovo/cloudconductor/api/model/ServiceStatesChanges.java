@@ -9,9 +9,9 @@ package de.cinovo.cloudconductor.api.model;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,7 +19,6 @@ package de.cinovo.cloudconductor.api.model;
  * limitations under the License.
  * #L%
  */
-
 
 import java.util.Set;
 
@@ -30,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Copyright 2013 Cinovo AG<br>
  * <br>
  * The response part of the service update interaction.
- * 
+ *
  * @author mhilbert
  */
 public class ServiceStatesChanges {
@@ -38,23 +37,39 @@ public class ServiceStatesChanges {
 	private Set<String> toStart;
 	private Set<String> toStop;
 	private Set<String> toRestart;
+	@Deprecated
 	private Set<ConfigFile> configFiles;
 	
 	
 	/**
 	 * Class constructor.
-	 * 
+	 *
 	 * @param toStart a list of the init scripts of the services that need to be started
 	 * @param toStop a list of the init scripts of the services that need to be stopped
 	 * @param toRestart a list of the init scripts of the services that need to be restarted
 	 * @param configFileHashes the list of configuration files for the host
 	 */
 	@JsonCreator
+	@Deprecated
 	public ServiceStatesChanges(@JsonProperty("toStart") Set<String> toStart, @JsonProperty("toStop") Set<String> toStop, @JsonProperty("toRestart") Set<String> toRestart, @JsonProperty("configFiles") Set<ConfigFile> configFileHashes) {
 		this.toStart = toStart;
 		this.toStop = toStop;
 		this.toRestart = toRestart;
 		this.configFiles = configFileHashes;
+	}
+	
+	/**
+	 * Class constructor.
+	 *
+	 * @param toStart a list of the init scripts of the services that need to be started
+	 * @param toStop a list of the init scripts of the services that need to be stopped
+	 * @param toRestart a list of the init scripts of the services that need to be restarted
+	 */
+	@JsonCreator
+	public ServiceStatesChanges(@JsonProperty("toStart") Set<String> toStart, @JsonProperty("toStop") Set<String> toStop, @JsonProperty("toRestart") Set<String> toRestart) {
+		this.toStart = toStart;
+		this.toStop = toStop;
+		this.toRestart = toRestart;
 	}
 	
 	/**
@@ -74,6 +89,7 @@ public class ServiceStatesChanges {
 	/**
 	 * @return the configFiles
 	 */
+	@Deprecated
 	public Set<ConfigFile> getConfigFiles() {
 		return this.configFiles;
 	}

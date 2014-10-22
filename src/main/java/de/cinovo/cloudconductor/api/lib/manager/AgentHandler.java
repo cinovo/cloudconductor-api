@@ -8,9 +8,9 @@ package de.cinovo.cloudconductor.api.lib.manager;
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License"); you may
  * not use this file except in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
@@ -22,6 +22,7 @@ import java.util.Set;
 import de.cinovo.cloudconductor.api.IRestPath;
 import de.cinovo.cloudconductor.api.lib.exceptions.CloudConductorException;
 import de.cinovo.cloudconductor.api.lib.helper.AbstractApiHandler;
+import de.cinovo.cloudconductor.api.model.AgentOptions;
 import de.cinovo.cloudconductor.api.model.PackageState;
 import de.cinovo.cloudconductor.api.model.PackageStateChanges;
 import de.cinovo.cloudconductor.api.model.SSHKey;
@@ -33,9 +34,9 @@ import de.cinovo.cloudconductor.api.model.Template;
 /**
  * Copyright 2013 Cinovo AG<br>
  * <br>
- * 
+ *
  * @author psigloch
- * 
+ *
  */
 public class AgentHandler extends AbstractApiHandler {
 	
@@ -95,6 +96,7 @@ public class AgentHandler extends AbstractApiHandler {
 	 * @return the services of the template
 	 * @throws CloudConductorException Error indicating connection or data problems
 	 */
+	@SuppressWarnings("unchecked")
 	public Set<Service> getServices(String template) throws CloudConductorException {
 		String path = this.pathGenerator(IRestPath.TEMPLATE + IRestPath.TEMPLATE_SERVICE, template);
 		return (Set<Service>) this._get(path, this.getSetType(Service.class));
@@ -105,6 +107,7 @@ public class AgentHandler extends AbstractApiHandler {
 	 * @return the ssh keys of the template
 	 * @throws CloudConductorException Error indicating connection or data problems
 	 */
+	@SuppressWarnings("unchecked")
 	public Set<SSHKey> getSSHKeys(String template) throws CloudConductorException {
 		String path = this.pathGenerator(IRestPath.TEMPLATE + IRestPath.TEMPLATE_SSHKEY, template);
 		return (Set<SSHKey>) this._get(path, this.getSetType(SSHKey.class));
@@ -114,8 +117,29 @@ public class AgentHandler extends AbstractApiHandler {
 	 * @return collection of alive host names
 	 * @throws CloudConductorException Error indicating connection or data problems
 	 */
+	@SuppressWarnings("unchecked")
 	public Set<String> getAliveAgents() throws CloudConductorException {
 		String path = this.pathGenerator(IRestPath.AGENT);
 		return (Set<String>) this._get(path, this.getSetType(String.class));
+	}
+	
+	/**
+	 * @param template the template name
+	 * @param host the host name
+	 * @return the agent options of the template
+	 * @throws CloudConductorException Error indicating connection or data problems
+	 */
+	public AgentOptions heartBeat(String template, String host) throws CloudConductorException {
+		String path = this.pathGenerator(IRestPath.AGENT + IRestPath.AGENT_HEART_BEAT, template, host);
+		return (AgentOptions) this._get(path, this.getSetType(String.class));
+	}
+
+	/**
+	 * @return collection of alive host names
+	 * @throws CloudConductorException Error indicating connection or data problems
+	 */
+	public Boolean isServerAlive() throws CloudConductorException {
+		String path = this.pathGenerator(IRestPath.AGENT_PING);
+		return this._get(path, Boolean.class);
 	}
 }
