@@ -131,7 +131,7 @@ public class AgentHandler extends AbstractApiHandler {
 	 */
 	public AgentOptions heartBeat(String template, String host) throws CloudConductorException {
 		String path = this.pathGenerator(IRestPath.AGENT + IRestPath.AGENT_HEART_BEAT, template, host);
-		return (AgentOptions) this._get(path, this.getSetType(String.class));
+		return this._get(path, AgentOptions.class);
 	}
 	
 	/**
