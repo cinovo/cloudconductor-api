@@ -42,20 +42,10 @@ public class ServiceStatesChanges {
 	
 	
 	/**
-	 * Class constructor.
-	 *
-	 * @param toStart a list of the init scripts of the services that need to be started
-	 * @param toStop a list of the init scripts of the services that need to be stopped
-	 * @param toRestart a list of the init scripts of the services that need to be restarted
-	 * @param configFileHashes the list of configuration files for the host
+	 * @param configFiles the configFiles to set
 	 */
-	@JsonCreator
-	@Deprecated
-	public ServiceStatesChanges(@JsonProperty("toStart") Set<String> toStart, @JsonProperty("toStop") Set<String> toStop, @JsonProperty("toRestart") Set<String> toRestart, @JsonProperty("configFiles") Set<ConfigFile> configFileHashes) {
-		this.toStart = toStart;
-		this.toStop = toStop;
-		this.toRestart = toRestart;
-		this.configFiles = configFileHashes;
+	public void setConfigFiles(Set<ConfigFile> configFiles) {
+		this.configFiles = configFiles;
 	}
 	
 	/**
