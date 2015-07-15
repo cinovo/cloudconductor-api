@@ -23,8 +23,8 @@ public class SchedulerService {
 	private final ScheduledExecutorService ses;
 	private final HashMap<String, Runnable> tasks;
 	private final HashMap<String, ScheduledFuture<?>> runningTasks;
-
-
+	
+	
 	private SchedulerService() {
 		this.ses = Executors.newScheduledThreadPool(10);
 		this.runningTasks = new HashMap<>();
@@ -45,7 +45,7 @@ public class SchedulerService {
 			this.resetTask(identifier, period, unit);
 		}
 	}
-
+	
 	/**
 	 * @param identifier the task identifier
 	 * @param task the task
@@ -87,7 +87,14 @@ public class SchedulerService {
 		if (this.runningTasks.containsKey(identifier)) {
 			ScheduledFuture<?> task = this.runningTasks.get(identifier);
 			delay = task.getDelay(unit);
-			task.cancel(false);
+			while (!task.isDone()) {
+				task.cancel(false);
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// just skip
+				}
+			}
 		}
 		this.runningTasks.put(identifier, this.ses.scheduleAtFixedRate(this.tasks.get(identifier), delay, period, unit));
 	}
@@ -101,11 +108,18 @@ public class SchedulerService {
 		}
 		if (this.runningTasks.containsKey(identifier)) {
 			ScheduledFuture<?> task = this.runningTasks.get(identifier);
-			task.cancel(false);
+			while (!task.isDone()) {
+				task.cancel(false);
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// just skip
+				}
+			}
 			this.runningTasks.remove(identifier);
 		}
 	}
-
+	
 	/**
 	 * shut down
 	 */
