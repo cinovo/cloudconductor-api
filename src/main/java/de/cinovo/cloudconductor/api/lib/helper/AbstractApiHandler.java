@@ -210,7 +210,7 @@ public abstract class AbstractApiHandler {
 		try {
 			ObjectWriter bodyWriter = AbstractApiHandler.mapper.writer();
 			if ((type != null) && ((obj instanceof Set) || (obj instanceof List))) {
-				bodyWriter = bodyWriter.withType(type);
+				bodyWriter = bodyWriter.forType(type);
 			}
 			String body = bodyWriter.writeValueAsString(obj);
 			return this.request(path).body(body).header("Content-Type", MediaType.APPLICATION_JSON);
