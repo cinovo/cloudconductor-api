@@ -44,52 +44,52 @@ import de.taimos.httputils.WS;
  * @author psigloch, mhilbert
  */
 public abstract class AbstractApiHandler {
-
+	
 	/** object mapper for JSON (de)serialization */
 	public static final ObjectMapper mapper = MapperFactory.createDefault();
 	
 	private static final String VAR_PATTERN = "\\{([a-zA-Z]+)(\\:\\.\\*)?\\}";
-
+	
 	/** the URL of the config server */
 	private String serverUrl;
 	private String username;
 	private String password;
-
-
+	
+	
 	protected AbstractApiHandler(String cloudconductorUrl) {
 		this.serverUrl = cloudconductorUrl;
 	}
-
+	
 	protected AbstractApiHandler(String cloudconductorUrl, String username, String password) {
 		this.serverUrl = cloudconductorUrl;
 		this.username = username;
 		this.password = password;
 	}
-
+	
 	protected final Object _get(String path, JavaType type) throws CloudConductorException {
 		HttpResponse response = this.request(path).get();
 		AbstractApiHandler.assertSuccess(path, response);
 		return this.objectFromResponse(response, type);
 	}
-
+	
 	protected final <T> T _get(String path, Class<T> type) throws CloudConductorException {
 		HttpResponse response = this.request(path).get();
 		AbstractApiHandler.assertSuccess(path, response);
 		return this.objectFromResponse(response, type);
 	}
-
+	
 	protected final HttpResponse _put(String path) throws CloudConductorException {
 		HttpResponse response = this.request(path).put();
 		AbstractApiHandler.assertSuccess(path, response);
 		return response;
 	}
-
+	
 	protected final HttpResponse _put(String path, Object put) throws CloudConductorException {
 		HttpResponse response = this.request(path, put).put();
 		AbstractApiHandler.assertSuccess(path, response);
 		return response;
 	}
-
+	
 	protected final <T> T _put(String path, Object put, JavaType type) throws CloudConductorException {
 		HttpResponse response = this.request(path, put, type).put();
 		AbstractApiHandler.assertSuccess(path, response);
@@ -98,7 +98,7 @@ public abstract class AbstractApiHandler {
 		}
 		return this.objectFromResponse(response, type);
 	}
-
+	
 	protected final <T> T _put(String path, Object put, Class<T> type) throws CloudConductorException {
 		HttpResponse response = this._put(path, put);
 		if (type == null) {
@@ -106,13 +106,13 @@ public abstract class AbstractApiHandler {
 		}
 		return this.objectFromResponse(response, type);
 	}
-
+	
 	protected final HttpResponse _post(String path, Object post) throws CloudConductorException {
 		HttpResponse response = this.request(path, post).post();
 		AbstractApiHandler.assertSuccess(path, response);
 		return response;
 	}
-
+	
 	protected final <T> T _post(String path, Object post, JavaType type) throws CloudConductorException {
 		HttpResponse response = this.request(path, post, type).post();
 		AbstractApiHandler.assertSuccess(path, response);
@@ -121,7 +121,7 @@ public abstract class AbstractApiHandler {
 		}
 		return this.objectFromResponse(response, type);
 	}
-
+	
 	protected final <T> T _post(String path, Object post, Class<T> type) throws CloudConductorException {
 		HttpResponse response = this._post(path, post);
 		if (type == null) {
@@ -129,15 +129,16 @@ public abstract class AbstractApiHandler {
 		}
 		return this.objectFromResponse(response, type);
 	}
-
+	
 	protected final void _delete(String path) throws CloudConductorException {
 		HttpResponse response = this.request(path).delete();
 		AbstractApiHandler.assertSuccess(path, response);
 	}
-
+	
 	/**
 	 * Creates an object from the given HTTP response.
 	 *
+	 * @param <T> the returned object
 	 * @param response the HTTP response
 	 * @param type the expected Java type of the object
 	 * @return the Java object
@@ -150,16 +151,17 @@ public abstract class AbstractApiHandler {
 			throw new SerializationException("Failed to read object", e);
 		}
 	}
-
+	
 	/**
 	 * Creates an object from the given HTTP response.
 	 *
+	 * @param <T> the returned object
 	 * @param response the HTTP response
 	 * @param type the expected Java type of the object
 	 * @return the Java object
 	 * @throws SerializationException if the mapping was unsuccessful
 	 */
-	protected final <T> T objectFromResponse(HttpResponse response, JavaType type) throws SerializationException {
+	public final <T> T objectFromResponse(HttpResponse response, JavaType type) throws SerializationException {
 		try {
 			String value = WS.getResponseAsString(response);
 			if (value.isEmpty()) {
@@ -170,7 +172,7 @@ public abstract class AbstractApiHandler {
 			throw new SerializationException("Failed to read object", e);
 		}
 	}
-
+	
 	/**
 	 * Returns the plain text data returned in the given response.
 	 *
@@ -180,7 +182,7 @@ public abstract class AbstractApiHandler {
 	protected final String dataFromResponse(HttpResponse response) {
 		return WS.getResponseAsString(response);
 	}
-
+	
 	/**
 	 * Creates HTTP request for the given path.
 	 *
@@ -193,7 +195,7 @@ public abstract class AbstractApiHandler {
 		}
 		return WS.url(this.serverUrl + path);
 	}
-
+	
 	/**
 	 * Creates HTTP request for the given path with the given object as the body.
 	 *
@@ -205,7 +207,7 @@ public abstract class AbstractApiHandler {
 	protected final HTTPRequest request(String path, Object obj) throws SerializationException {
 		return this.request(path, obj, null);
 	}
-
+	
 	protected final HTTPRequest request(String path, Object obj, JavaType type) throws SerializationException {
 		try {
 			ObjectWriter bodyWriter = AbstractApiHandler.mapper.writer();
@@ -217,9 +219,9 @@ public abstract class AbstractApiHandler {
 		} catch (IOException e) {
 			throw new SerializationException();
 		}
-
+		
 	}
-
+	
 	protected static final void assertSuccess(String path, HttpResponse response) throws ClientErrorException, ServerErrorException {
 		switch (HttpStatusClass.get(response)) {
 		case CLIENT_ERROR:
@@ -230,11 +232,11 @@ public abstract class AbstractApiHandler {
 			break;
 		}
 	}
-
+	
 	protected final JavaType getSetType(Class<?> clazz) {
 		return AbstractApiHandler.mapper.getTypeFactory().constructCollectionType(Set.class, clazz);
 	}
-
+	
 	protected String pathGenerator(String path, String... replace) {
 		String[] split = path.split("/");
 		if (split.length < 1) {

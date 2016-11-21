@@ -20,7 +20,6 @@ package de.cinovo.cloudconductor.api.model;
  * #L%
  */
 
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -44,7 +43,7 @@ public class Dependency implements INamed {
 	/**
 	 * @param name the name of the RPM
 	 * @param version the version of the RPM
-	 * @param operator the operator (>, >=, ...)
+	 * @param operator the operator
 	 * @param type the dependency type as string
 	 */
 	@JsonCreator
