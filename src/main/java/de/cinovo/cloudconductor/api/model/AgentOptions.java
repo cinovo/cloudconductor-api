@@ -45,6 +45,7 @@ public class AgentOptions {
 	 * @param doFileManagement dp file management
 	 * @param fileManagementTimer the file timer
 	 * @param fileManagementTimerUnit timer unit
+	 * @param templateName templateName
 	 */
 	public AgentOptions(@JsonProperty("aliveTimer") int aliveTimer, @JsonProperty("aliveTimerUnit") TimeUnit aliveTimerUnit, @JsonProperty("doSshKeys") TaskState doSshKeys, @JsonProperty("sshKeysTimer") int sshKeysTimer, @JsonProperty("sshKeysTimerUnit") TimeUnit sshKeysTimerUnit, @JsonProperty("doPackageManagement") TaskState doPackageManagement, @JsonProperty("packageManagementTimer") int packageManagementTimer, @JsonProperty("packageManagementTimerUnit") TimeUnit packageManagementTimerUnit, @JsonProperty("doFileManagement") TaskState doFileManagement, @JsonProperty("fileManagementTimer") int fileManagementTimer, @JsonProperty("fileManagementTimerUnit") TimeUnit fileManagementTimerUnit, @JsonProperty("templateName") String templateName) {
 		super();
@@ -222,4 +223,12 @@ public class AgentOptions {
 	public String getTemplateName() {
 		return this.templateName;
 	}
+	
+	/**
+	 * @param templateName the templateName to set
+	 */
+	public void setTemplateName(String templateName) {
+		this.templateName = templateName;
+	}
+	
 }

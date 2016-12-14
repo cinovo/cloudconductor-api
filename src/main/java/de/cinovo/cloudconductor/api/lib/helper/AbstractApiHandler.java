@@ -40,7 +40,7 @@ import de.taimos.httputils.WS;
  * Copyright 2013 Cinovo AG<br>
  * <br>
  * Superclass for manager classes. Contains utility methods for the exclusive use by the concrete manager classes.
- *
+ * 
  * @author psigloch, mhilbert
  */
 public abstract class AbstractApiHandler {
@@ -54,16 +54,12 @@ public abstract class AbstractApiHandler {
 	private String serverUrl;
 	private String username;
 	private String password;
+	private String token;
+	private String agent;
 	
 	
 	protected AbstractApiHandler(String cloudconductorUrl) {
 		this.serverUrl = cloudconductorUrl;
-	}
-	
-	protected AbstractApiHandler(String cloudconductorUrl, String username, String password) {
-		this.serverUrl = cloudconductorUrl;
-		this.username = username;
-		this.password = password;
 	}
 	
 	protected final Object _get(String path, JavaType type) throws CloudConductorException {
@@ -137,7 +133,7 @@ public abstract class AbstractApiHandler {
 	
 	/**
 	 * Creates an object from the given HTTP response.
-	 *
+	 * 
 	 * @param <T> the returned object
 	 * @param response the HTTP response
 	 * @param type the expected Java type of the object
@@ -154,7 +150,7 @@ public abstract class AbstractApiHandler {
 	
 	/**
 	 * Creates an object from the given HTTP response.
-	 *
+	 * 
 	 * @param <T> the returned object
 	 * @param response the HTTP response
 	 * @param type the expected Java type of the object
@@ -175,7 +171,7 @@ public abstract class AbstractApiHandler {
 	
 	/**
 	 * Returns the plain text data returned in the given response.
-	 *
+	 * 
 	 * @param response the HTTP response
 	 * @return the plain text data.
 	 */
@@ -185,7 +181,7 @@ public abstract class AbstractApiHandler {
 	
 	/**
 	 * Creates HTTP request for the given path.
-	 *
+	 * 
 	 * @param path the path to the resource
 	 * @return the HTTP request
 	 */
@@ -193,12 +189,15 @@ public abstract class AbstractApiHandler {
 		if ((this.username != null) && (this.password != null)) {
 			return WS.url(this.serverUrl + path).authBasic(this.username, this.password);
 		}
+		if (this.token != null) {
+			return WS.url(this.serverUrl + path).auth("TOKEN " + this.token + "_" + this.agent);
+		}
 		return WS.url(this.serverUrl + path);
 	}
 	
 	/**
 	 * Creates HTTP request for the given path with the given object as the body.
-	 *
+	 * 
 	 * @param path the path to the resource
 	 * @param obj the object
 	 * @return the HTTP request
@@ -258,4 +257,23 @@ public abstract class AbstractApiHandler {
 		}
 		return buffer.toString();
 	}
+	
+	/**
+	 * @param password the password to set
+	 * @param username the user name
+	 */
+	protected void setPasswordMode(String password, String username) {
+		this.password = password;
+		this.username = username;
+	}
+	
+	/**
+	 * @param token the token to set
+	 * @param agent the agent name
+	 */
+	protected void setTokenMode(String token, String agent) {
+		this.token = token;
+		this.agent = agent;
+	}
+	
 }

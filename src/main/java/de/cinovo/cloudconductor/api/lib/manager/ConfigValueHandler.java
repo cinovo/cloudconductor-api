@@ -30,19 +30,29 @@ import de.cinovo.cloudconductor.api.model.KeyValue;
 /**
  * Copyright 2013 Cinovo AG<br>
  * <br>
- *
+ * 
  * @author psigloch
- *
+ * 
  */
 public class ConfigValueHandler extends AbstractApiHandler {
-
+	
 	/**
 	 * @param cloudconductorUrl the config server url
 	 */
 	public ConfigValueHandler(String cloudconductorUrl) {
 		super(cloudconductorUrl);
 	}
-
+	
+	/**
+	 * @param cloudconductorUrl the config server url
+	 * @param token the token
+	 * @param agent the agent
+	 */
+	public ConfigValueHandler(String cloudconductorUrl, String token, String agent) {
+		super(cloudconductorUrl);
+		this.setTokenMode(token, agent);
+	}
+	
 	/**
 	 * @param template the template name
 	 * @return map containing config kv-pairs of the template
@@ -54,7 +64,7 @@ public class ConfigValueHandler extends AbstractApiHandler {
 		JavaType type = AbstractApiHandler.mapper.getTypeFactory().constructMapType(HashMap.class, String.class, String.class);
 		return (Map<String, String>) this._get(path, type);
 	}
-
+	
 	/**
 	 * @param template the template name
 	 * @param service the serice name
@@ -67,7 +77,7 @@ public class ConfigValueHandler extends AbstractApiHandler {
 		JavaType type = AbstractApiHandler.mapper.getTypeFactory().constructMapType(HashMap.class, String.class, String.class);
 		return (Map<String, String>) this._get(path, type);
 	}
-
+	
 	/**
 	 * @param template the template name
 	 * @param service the serice name
@@ -79,7 +89,7 @@ public class ConfigValueHandler extends AbstractApiHandler {
 		String path = this.pathGenerator(IRestPath.CONFIG + IRestPath.CONFIG_TEMPLATE_SERVICE_KEY, template, service, key);
 		return this._get(path, String.class);
 	}
-
+	
 	/**
 	 * @param template the template name
 	 * @param key the config key
@@ -91,7 +101,7 @@ public class ConfigValueHandler extends AbstractApiHandler {
 		KeyValue kv = new KeyValue(key, value);
 		this._put(path, kv);
 	}
-
+	
 	/**
 	 * @param template the template name
 	 * @param service the service name
@@ -104,7 +114,7 @@ public class ConfigValueHandler extends AbstractApiHandler {
 		KeyValue kv = new KeyValue(key, value);
 		this._put(path, kv);
 	}
-
+	
 	/**
 	 * @param template the template name
 	 * @param key the config key
@@ -114,7 +124,7 @@ public class ConfigValueHandler extends AbstractApiHandler {
 		String path = this.pathGenerator(IRestPath.CONFIG + IRestPath.CONFIG_TEMPLATE_KEY, template, key);
 		this._delete(path);
 	}
-
+	
 	/**
 	 * @param template the template name
 	 * @param service the service name
@@ -125,5 +135,5 @@ public class ConfigValueHandler extends AbstractApiHandler {
 		String path = this.pathGenerator(IRestPath.CONFIG + IRestPath.CONFIG_TEMPLATE_SERVICE_KEY, template, service, key);
 		this._delete(path);
 	}
-
+	
 }

@@ -81,6 +81,7 @@ public interface IAgent {
 	/**
 	 * @param template the template name
 	 * @param host the host name
+	 * @param agent the agent name
 	 * @return the current agent options
 	 */
 	@GET

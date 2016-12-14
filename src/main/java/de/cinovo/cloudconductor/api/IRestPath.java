@@ -88,7 +88,7 @@ public interface IRestPath {
 	/**
 	 * notify server that agent is alive
 	 */
-	public static final String AGENT_HEART_BEAT = "/{" + IRestPath.VAR_TEMPLATE + "}/{" + IRestPath.VAR_HOST + "}/heartbeat";
+	public static final String AGENT_HEART_BEAT = "/{" + IRestPath.VAR_TEMPLATE + "}/{" + IRestPath.VAR_HOST + "}/{" + IRestPath.VAR_AGENT + "}/heartbeat";
 	
 	/**
 	 * check if the server exists
