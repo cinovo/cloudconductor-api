@@ -36,16 +36,16 @@ import de.cinovo.cloudconductor.api.model.ServiceStatesChanges;
 
 /**
  * Rest API for usage with node agent.
- *
+ * 
  * Copyright 2013 Cinovo AG<br>
  * <br>
- *
+ * 
  * @author psigloch
- *
+ * 
  */
 @Path(IRestPath.AGENT)
 public interface IAgent {
-
+	
 	/**
 	 * @return list of living agents listed within the cloudconductor.
 	 */
@@ -53,7 +53,7 @@ public interface IAgent {
 	@Path(IRestPath.ROOT)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Set<String> getAliveAgents();
-
+	
 	/**
 	 * @param template the template name
 	 * @param host the host name
@@ -65,7 +65,7 @@ public interface IAgent {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public PackageStateChanges notifyPackageState(@PathParam(IRestPath.VAR_TEMPLATE) String template, @PathParam(IRestPath.VAR_HOST) String host, PackageState rpmState);
-
+	
 	/**
 	 * @param template the template name
 	 * @param host the host name
@@ -86,7 +86,7 @@ public interface IAgent {
 	@GET
 	@Path(IRestPath.AGENT_HEART_BEAT)
 	@Produces(MediaType.APPLICATION_JSON)
-	public AgentOptions heartBeat(@PathParam(IRestPath.VAR_TEMPLATE) String template, @PathParam(IRestPath.VAR_HOST) String host);
+	public AgentOptions heartBeat(@PathParam(IRestPath.VAR_TEMPLATE) String template, @PathParam(IRestPath.VAR_HOST) String host, @PathParam(IRestPath.VAR_AGENT) String agent);
 	
 	/**
 	 * @return check if server is alive
