@@ -38,7 +38,7 @@ import de.cinovo.cloudconductor.api.model.Template;
  * @author psigloch
  *
  */
-public class AgentHandler extends AbstractApiHandler {
+public class 	AgentHandler extends AbstractApiHandler {
 
 	/**
 	 * @param cloudconductorUrl the config server url
