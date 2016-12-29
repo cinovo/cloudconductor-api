@@ -34,34 +34,15 @@ import javax.ws.rs.*;
  * @author psigloch
  *
  */
-@Path(IRestPath.FILE)
+@Path(IRestPath.DIRECTORY)
 public interface IDirectory extends IDefaultApi<Directory> {
-
-	///**
-	// * @param name the file name
-	// * @return the data
-	// */
-	//@GET
-	//@Path(IRestPath.FILE_DATA)
-	//@Produces(MediaType.APPLICATION_JSON)
-	//public String getData(@PathParam(IRestPath.VAR_NAME) String name);
-	//
-	///**
-	// * @param name the file name
-	// * @param data the data to save
-	// */
-	//@PUT
-	//@Path(IRestPath.FILE_DATA)
-	//@Consumes(MediaType.APPLICATION_JSON)
-	//@Produces(MediaType.APPLICATION_JSON)
-	//public void saveData(@PathParam(IRestPath.VAR_NAME) String name, String data);
 
 	/**
 	 * @param template the template name
 	 * @return the config files for the template
 	 */
 	@GET
-	@Path(IRestPath.FILE_CONFIG_FILES)
+	@Path(IRestPath.DIRECTORY_DIRECTORIES)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Directory[] getDirectories(@PathParam(IRestPath.VAR_TEMPLATE) String template);
 }

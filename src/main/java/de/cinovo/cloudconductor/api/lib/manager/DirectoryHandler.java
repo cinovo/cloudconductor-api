@@ -32,7 +32,7 @@ import java.util.Set;
  * @author psigloch
  *
  */
-public class DirectoryHandler extends DefaultRestHandler<ConfigFile> {
+public class DirectoryHandler extends DefaultRestHandler<Directory> {
 
 	/**
 	 * @param cloudconductorUrl the config server url
@@ -43,12 +43,12 @@ public class DirectoryHandler extends DefaultRestHandler<ConfigFile> {
 	
 	@Override
 	protected String getDefaultPath() {
-		return IRestPath.FILE;
+		return IRestPath.DIRECTORY;
 	}
 	
 	@Override
-	protected Class<ConfigFile> getAPIClass() {
-		return ConfigFile.class;
+	protected Class<Directory> getAPIClass() {
+		return Directory.class;
 	}
 
 	
@@ -59,7 +59,7 @@ public class DirectoryHandler extends DefaultRestHandler<ConfigFile> {
 	 */
 	@SuppressWarnings("unchecked")
 	public Set<Directory> getDirectoryByTemplate(String template) throws CloudConductorException {
-		String path = this.pathGenerator(IRestPath.FILE_CONFIG_FILES, template);
+		String path = this.pathGenerator(IRestPath.DIRECTORY_DIRECTORIES, template);
 		return (Set<Directory>) this._get(path, this.getSetType(Directory.class));
 	}
 }
