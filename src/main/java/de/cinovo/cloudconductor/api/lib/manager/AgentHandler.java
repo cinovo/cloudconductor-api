@@ -27,19 +27,29 @@ import de.cinovo.cloudconductor.api.model.*;
 /**
  * Copyright 2013 Cinovo AG<br>
  * <br>
- *
+ * 
  * @author psigloch
- *
+ * 
  */
-public class 	AgentHandler extends AbstractApiHandler {
-
+public class AgentHandler extends AbstractApiHandler {
+	
 	/**
 	 * @param cloudconductorUrl the config server url
 	 */
 	public AgentHandler(String cloudconductorUrl) {
 		super(cloudconductorUrl);
 	}
-
+	
+	/**
+	 * @param cloudconductorUrl the config server url
+	 * @param token the token
+	 * @param agent the agent
+	 */
+	public AgentHandler(String cloudconductorUrl, String token, String agent) {
+		super(cloudconductorUrl);
+		this.setTokenMode(token, agent);
+	}
+	
 	/**
 	 * @param template the template name
 	 * @param host the host name
@@ -51,7 +61,7 @@ public class 	AgentHandler extends AbstractApiHandler {
 		String path = this.pathGenerator(IRestPath.AGENT + IRestPath.AGENT_PACKAGE_STATE, template, host);
 		return this._put(path, state, PackageStateChanges.class);
 	}
-
+	
 	/**
 	 * @param template the template name
 	 * @param host the host name
@@ -63,7 +73,7 @@ public class 	AgentHandler extends AbstractApiHandler {
 		String path = this.pathGenerator(IRestPath.AGENT + IRestPath.AGENT_SERVICE_STATE, template, host);
 		return this._put(path, state, ServiceStatesChanges.class);
 	}
-
+	
 	/**
 	 * @param configFilename the name of the config file
 	 * @return the data of the config file
@@ -97,7 +107,7 @@ public class 	AgentHandler extends AbstractApiHandler {
 		ConfigFile file = this._get(path, ConfigFile.class);
 		return file.getFileMode();
 	}
-
+	
 	/**
 	 * @param template the template name
 	 * @return the template
@@ -107,7 +117,7 @@ public class 	AgentHandler extends AbstractApiHandler {
 		String path = this.pathGenerator(IRestPath.TEMPLATE + IRestPath.DEFAULT_NAME, template);
 		return this._get(path, Template.class);
 	}
-
+	
 	/**
 	 * @param template the template name
 	 * @return the services of the template
@@ -118,7 +128,7 @@ public class 	AgentHandler extends AbstractApiHandler {
 		String path = this.pathGenerator(IRestPath.TEMPLATE + IRestPath.TEMPLATE_SERVICE, template);
 		return (Set<Service>) this._get(path, this.getSetType(Service.class));
 	}
-
+	
 	/**
 	 * @param template the template name
 	 * @return the ssh keys of the template
@@ -129,7 +139,7 @@ public class 	AgentHandler extends AbstractApiHandler {
 		String path = this.pathGenerator(IRestPath.TEMPLATE + IRestPath.TEMPLATE_SSHKEY, template);
 		return (Set<SSHKey>) this._get(path, this.getSetType(SSHKey.class));
 	}
-
+	
 	/**
 	 * @return collection of alive host names
 	 * @throws CloudConductorException Error indicating connection or data problems
@@ -139,15 +149,15 @@ public class 	AgentHandler extends AbstractApiHandler {
 		String path = this.pathGenerator(IRestPath.AGENT);
 		return (Set<String>) this._get(path, this.getSetType(String.class));
 	}
-
+	
 	/**
 	 * @param template the template name
 	 * @param host the host name
 	 * @return the agent options of the template
 	 * @throws CloudConductorException Error indicating connection or data problems
 	 */
-	public AgentOptions heartBeat(String template, String host) throws CloudConductorException {
-		String path = this.pathGenerator(IRestPath.AGENT + IRestPath.AGENT_HEART_BEAT, template, host);
+	public AgentOptions heartBeat(String template, String host, String agent) throws CloudConductorException {
+		String path = this.pathGenerator(IRestPath.AGENT + IRestPath.AGENT_HEART_BEAT, template, host, agent);
 		return this._get(path, AgentOptions.class);
 	}
 	

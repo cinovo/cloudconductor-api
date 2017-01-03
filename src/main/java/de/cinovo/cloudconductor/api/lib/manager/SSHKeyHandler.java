@@ -37,6 +37,16 @@ public class SSHKeyHandler extends DefaultRestHandler<SSHKey> {
 		super(cloudconductorUrl);
 	}
 	
+	/**
+	 * @param cloudconductorUrl the config server url
+	 * @param token the token
+	 * @param agent the agent
+	 */
+	public SSHKeyHandler(String cloudconductorUrl, String token, String agent) {
+		super(cloudconductorUrl);
+		this.setTokenMode(token, agent);
+	}
+	
 	@Override
 	protected String getDefaultPath() {
 		return IRestPath.SSHKEY;

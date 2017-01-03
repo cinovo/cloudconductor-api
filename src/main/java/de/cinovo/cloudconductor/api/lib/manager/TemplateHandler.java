@@ -31,9 +31,9 @@ import de.cinovo.cloudconductor.api.model.Template;
 /**
  * Copyright 2013 Cinovo AG<br>
  * <br>
- *
+ * 
  * @author psigloch
- *
+ * 
  */
 public class TemplateHandler extends DefaultRestHandler<Template> {
 	
@@ -42,6 +42,16 @@ public class TemplateHandler extends DefaultRestHandler<Template> {
 	 */
 	public TemplateHandler(String cloudconductorUrl) {
 		super(cloudconductorUrl);
+	}
+	
+	/**
+	 * @param cloudconductorUrl the config server url
+	 * @param token the token
+	 * @param agent the agent
+	 */
+	public TemplateHandler(String cloudconductorUrl, String token, String agent) {
+		super(cloudconductorUrl);
+		this.setTokenMode(token, agent);
 	}
 	
 	@Override
@@ -67,7 +77,7 @@ public class TemplateHandler extends DefaultRestHandler<Template> {
 	
 	/**
 	 * DOES NOT MAKE SENSE??
-	 *
+	 * 
 	 * @param template the template name
 	 * @param host the host name
 	 * @throws CloudConductorException Error indicating connection or data problems
@@ -80,7 +90,7 @@ public class TemplateHandler extends DefaultRestHandler<Template> {
 	
 	/**
 	 * DOES NOT MAKE SENSE??
-	 *
+	 * 
 	 * @param template the template name
 	 * @param host the host name
 	 * @throws CloudConductorException Error indicating connection or data problems

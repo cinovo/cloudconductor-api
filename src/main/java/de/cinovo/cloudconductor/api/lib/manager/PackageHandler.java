@@ -28,57 +28,67 @@ import de.cinovo.cloudconductor.api.model.PackageVersion;
 /**
  * Copyright 2013 Cinovo AG<br>
  * <br>
- *
+ * 
  * @author psigloch
- *
+ * 
  */
 public class PackageHandler extends DefaultRestHandler<Package> {
-
+	
 	/**
 	 * @param cloudconductorUrl the config server url
 	 */
 	public PackageHandler(String cloudconductorUrl) {
 		super(cloudconductorUrl);
 	}
-
+	
+	/**
+	 * @param cloudconductorUrl the config server url
+	 * @param token the token
+	 * @param agent the agent
+	 */
+	public PackageHandler(String cloudconductorUrl, String token, String agent) {
+		super(cloudconductorUrl);
+		this.setTokenMode(token, agent);
+	}
+	
 	@Override
 	protected String getDefaultPath() {
 		return IRestPath.PKG;
 	}
-
+	
 	@Override
 	protected Class<Package> getAPIClass() {
 		return Package.class;
 	}
-
+	
 	/**
 	 * @param packageName the package name
 	 * @return set of available versions
 	 * @throws CloudConductorException Error indicating connection or data problems
 	 */
 	@SuppressWarnings("unchecked")
-	 public Set<PackageVersion> getRPMS(String packageName) throws CloudConductorException {
-		 String path = this.pathGenerator(IRestPath.PKG_VERSION, packageName);
-		 return (Set<PackageVersion>) this._get(path, this.getSetType(PackageVersion.class));
-	 }
-
-	 /**
-	  * @param packageName the package name
-	  * @param version the version
-	  * @throws CloudConductorException Error indicating connection or data problems
-	  */
-	 public void addRPM(String packageName, PackageVersion version) throws CloudConductorException {
-		 String path = this.pathGenerator(IRestPath.PKG_VERSION_SINGLE, packageName, version.getVersion());
-		 this._put(path, version);
-	 }
-
-	 /**
-	  * @param packageName the package name
-	  * @param version the version
-	  * @throws CloudConductorException Error indicating connection or data problems
-	  */
-	 public void removeRPM(String packageName, String version) throws CloudConductorException {
-		 String path = this.pathGenerator(IRestPath.PKG_VERSION_SINGLE, packageName, version);
-		 this._delete(path);
-	 }
+	public Set<PackageVersion> getRPMS(String packageName) throws CloudConductorException {
+		String path = this.pathGenerator(IRestPath.PKG_VERSION, packageName);
+		return (Set<PackageVersion>) this._get(path, this.getSetType(PackageVersion.class));
+	}
+	
+	/**
+	 * @param packageName the package name
+	 * @param version the version
+	 * @throws CloudConductorException Error indicating connection or data problems
+	 */
+	public void addRPM(String packageName, PackageVersion version) throws CloudConductorException {
+		String path = this.pathGenerator(IRestPath.PKG_VERSION_SINGLE, packageName, version.getVersion());
+		this._put(path, version);
+	}
+	
+	/**
+	 * @param packageName the package name
+	 * @param version the version
+	 * @throws CloudConductorException Error indicating connection or data problems
+	 */
+	public void removeRPM(String packageName, String version) throws CloudConductorException {
+		String path = this.pathGenerator(IRestPath.PKG_VERSION_SINGLE, packageName, version);
+		this._delete(path);
+	}
 }

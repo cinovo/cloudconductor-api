@@ -26,6 +26,16 @@ public class IOModuleHandler extends AbstractApiHandler {
 	}
 	
 	/**
+	 * @param cloudconductorUrl the config server url
+	 * @param token the token
+	 * @param agent the agent
+	 */
+	public IOModuleHandler(String cloudconductorUrl, String token, String agent) {
+		super(cloudconductorUrl);
+		this.setTokenMode(token, agent);
+	}
+	
+	/**
 	 * @param versions the versions of a package to add
 	 * @throws CloudConductorException Error indicating connection or data problems
 	 */

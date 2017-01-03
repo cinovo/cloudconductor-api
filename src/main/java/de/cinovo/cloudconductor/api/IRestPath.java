@@ -22,12 +22,12 @@ package de.cinovo.cloudconductor.api;
 
 /**
  * Path's provided and supported by the api
- *
+ * 
  * Copyright 2013 Cinovo AG<br>
  * <br>
- *
+ * 
  * @author psigloch
- *
+ * 
  */
 public interface IRestPath {
 
@@ -54,6 +54,8 @@ public interface IRestPath {
 	public static final String VAR_PKG = "pkg";
 	/** variable for version name */
 	public static final String VAR_VERSION = "version";
+	/** variable for agent name */
+	public static final String VAR_AGENT = "agent";
 
 	// -------------------------------------------------------
 	// DEFAULT
@@ -86,8 +88,8 @@ public interface IRestPath {
 	/**
 	 * notify server that agent is alive
 	 */
-	public static final String AGENT_HEART_BEAT = "/{" + IRestPath.VAR_TEMPLATE + "}/{" + IRestPath.VAR_HOST + "}/heartbeat";
-
+	public static final String AGENT_HEART_BEAT = "/{" + IRestPath.VAR_TEMPLATE + "}/{" + IRestPath.VAR_HOST + "}/{" + IRestPath.VAR_AGENT + "}/heartbeat";
+	
 	/**
 	 * check if the server exists
 	 */

@@ -28,67 +28,77 @@ import de.cinovo.cloudconductor.api.model.Service;
 /**
  * Copyright 2013 Cinovo AG<br>
  * <br>
- *
+ * 
  * @author psigloch
- *
+ * 
  */
 public class ServiceHandler extends DefaultRestHandler<Service> {
-
+	
 	/**
 	 * @param cloudconductorUrl the config server url
 	 */
 	public ServiceHandler(String cloudconductorUrl) {
 		super(cloudconductorUrl);
 	}
-
+	
+	/**
+	 * @param cloudconductorUrl the config server url
+	 * @param token the token
+	 * @param agent the agent
+	 */
+	public ServiceHandler(String cloudconductorUrl, String token, String agent) {
+		super(cloudconductorUrl);
+		this.setTokenMode(token, agent);
+	}
+	
 	@Override
 	protected String getDefaultPath() {
 		return IRestPath.SERVICE;
 	}
-
+	
 	@Override
 	protected Class<Service> getAPIClass() {
 		return Service.class;
 	}
-
+	
 	/**
 	 * @param service the service name
 	 * @return packages associated with the service
 	 * @throws CloudConductorException Error indicating connection or data problems
 	 */
 	@SuppressWarnings("unchecked")
-	 public Set<Package> getPackages(String service) throws CloudConductorException {
-		 String path = this.pathGenerator(IRestPath.SERVICE_PKG, service);
-		 return (Set<Package>) this._get(path, this.getSetType(Package.class));
-	 }
-
-	 /**
-	  * @param service the service name
-	  * @param pkg the package name
-	  * @throws CloudConductorException Error indicating connection or data problems
-	  */
-	 public void addPackage(String service, String pkg) throws CloudConductorException {
-		 String path = this.pathGenerator(IRestPath.SERVICE_PKG_SINGLE, service, pkg);
-		 this._put(path);
-	 }
-
-	 /**
-	  * @param service the service name
-	  * @param pkg the package name
-	  * @throws CloudConductorException Error indicating connection or data problems
-	  */
-	 public void removePackage(String service, String pkg) throws CloudConductorException {
-		 String path = this.pathGenerator(IRestPath.SERVICE_PKG_SINGLE, service, pkg);
-		 this._delete(path);
-	 }
-
-	 /**
-	  * @param service the service name
-	  * @param host the host name
-	  * @throws CloudConductorException Error indicating connection or data problems
-	  */
-	 public void approveStarted(String service, String host) throws CloudConductorException {
-		 String path = this.pathGenerator(IRestPath.SERVICE_APPROVE_STARTED, service, host);
-		 this._put(path);
-	 }
+	public Set<Package> getPackages(String service) throws CloudConductorException {
+		String path = this.pathGenerator(IRestPath.SERVICE_PKG, service);
+		return (Set<Package>) this._get(path, this.getSetType(Package.class));
+	}
+	
+	/**
+	 * @param service the service name
+	 * @param pkg the package name
+	 * @throws CloudConductorException Error indicating connection or data problems
+	 */
+	public void addPackage(String service, String pkg) throws CloudConductorException {
+		String path = this.pathGenerator(IRestPath.SERVICE_PKG_SINGLE, service, pkg);
+		this._put(path);
+	}
+	
+	/**
+	 * @param service the service name
+	 * @param pkg the package name
+	 * @throws CloudConductorException Error indicating connection or data problems
+	 */
+	public void removePackage(String service, String pkg) throws CloudConductorException {
+		String path = this.pathGenerator(IRestPath.SERVICE_PKG_SINGLE, service, pkg);
+		this._delete(path);
+	}
+	
+	/**
+	 * @param service the service name
+	 * @param host the host name
+	 * @throws CloudConductorException Error indicating connection or data problems
+	 */
+	public void approveStarted(String service, String host) throws CloudConductorException {
+		String path = this.pathGenerator(IRestPath.SERVICE_APPROVE_STARTED, service, host);
+		this._put(path);
+	}
 }

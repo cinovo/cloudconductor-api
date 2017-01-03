@@ -27,9 +27,9 @@ import de.cinovo.cloudconductor.api.model.ConfigFile;
 /**
  * Copyright 2013 Cinovo AG<br>
  * <br>
- *
+ * 
  * @author psigloch
- *
+ * 
  */
 public class ConfigFileHandler extends DefaultRestHandler<ConfigFile> {
 	
@@ -38,6 +38,16 @@ public class ConfigFileHandler extends DefaultRestHandler<ConfigFile> {
 	 */
 	public ConfigFileHandler(String cloudconductorUrl) {
 		super(cloudconductorUrl);
+	}
+	
+	/**
+	 * @param cloudconductorUrl the config server url
+	 * @param token the token
+	 * @param agent the agent
+	 */
+	public ConfigFileHandler(String cloudconductorUrl, String token, String agent) {
+		super(cloudconductorUrl);
+		this.setTokenMode(token, agent);
 	}
 	
 	@Override
