@@ -22,14 +22,7 @@ import java.util.Set;
 import de.cinovo.cloudconductor.api.IRestPath;
 import de.cinovo.cloudconductor.api.lib.exceptions.CloudConductorException;
 import de.cinovo.cloudconductor.api.lib.helper.AbstractApiHandler;
-import de.cinovo.cloudconductor.api.model.AgentOptions;
-import de.cinovo.cloudconductor.api.model.PackageState;
-import de.cinovo.cloudconductor.api.model.PackageStateChanges;
-import de.cinovo.cloudconductor.api.model.SSHKey;
-import de.cinovo.cloudconductor.api.model.Service;
-import de.cinovo.cloudconductor.api.model.ServiceStates;
-import de.cinovo.cloudconductor.api.model.ServiceStatesChanges;
-import de.cinovo.cloudconductor.api.model.Template;
+import de.cinovo.cloudconductor.api.model.*;
 
 /**
  * Copyright 2013 Cinovo AG<br>
@@ -89,6 +82,30 @@ public class AgentHandler extends AbstractApiHandler {
 	public String getConfigFileData(String configFilename) throws CloudConductorException {
 		String path = this.pathGenerator(IRestPath.FILE + IRestPath.FILE_DATA, configFilename);
 		return this._get(path, String.class);
+	}
+
+	/**
+	 *
+	 * @param directoryName
+	 * @return the directory filemode
+	 * @throws CloudConductorException
+	 */
+	public String getDirectoryFileMode(String directoryName) throws  CloudConductorException {
+		String path = this.pathGenerator(IRestPath.DIRECTORY + IRestPath.DIRECTORY_DATA, directoryName);
+		Directory dir = this._get(path, Directory.class);
+		return dir.getFileMode();
+	}
+
+	/**
+	 *
+	 * @param fileName
+	 * @return file filemode
+	 * @throws CloudConductorException
+	 */
+	public String getFileFileMode(String fileName) throws CloudConductorException {
+		String path = this.pathGenerator(IRestPath.FILE + IRestPath.FILE_DETAILS, fileName);
+		ConfigFile file = this._get(path, ConfigFile.class);
+		return file.getFileMode();
 	}
 	
 	/**

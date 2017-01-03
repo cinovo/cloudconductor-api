@@ -26,6 +26,8 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.print.DocFlavor;
+
 /**
  * Copyright 2013 Cinovo AG<br>
  * <br>
@@ -47,6 +49,8 @@ public class Template implements INamed {
 	private Set<String> sshkeys;
 	
 	private Set<String> configFiles;
+
+	private Set<String> directories;
 	
 	
 	/**
@@ -58,7 +62,7 @@ public class Template implements INamed {
 	 * @param sshkeys collection of ssh keys
 	 * @param configFiles collection of config files
 	 */
-	public Template(@JsonProperty("name") String name, @JsonProperty("description") String description, @JsonProperty("yum") String yum, @JsonProperty("rpms") Map<String, String> rpms, @JsonProperty("hosts") Set<String> hosts, @JsonProperty("sshekeys") Set<String> sshkeys, @JsonProperty("configfiles") Set<String> configFiles) {
+	public Template(@JsonProperty("name") String name, @JsonProperty("description") String description, @JsonProperty("yum") String yum, @JsonProperty("rpms") Map<String, String> rpms, @JsonProperty("hosts") Set<String> hosts, @JsonProperty("sshekeys") Set<String> sshkeys, @JsonProperty("configfiles") Set<String> configFiles, @JsonProperty("directories")Set<String> directories) {
 		super();
 		this.name = name;
 		this.description = description;
@@ -67,6 +71,7 @@ public class Template implements INamed {
 		this.hosts = hosts;
 		this.sshkeys = sshkeys;
 		this.configFiles = configFiles;
+		this.directories = directories;
 	}
 	
 	/**
@@ -111,6 +116,11 @@ public class Template implements INamed {
 	public Set<String> getConfigFiles() {
 		return this.configFiles;
 	}
+
+	/**
+	 * @return the directories
+	 */
+	public Set<String> getDirectories() { return this.directories; }
 	
 	/**
 	 * @return the yum
