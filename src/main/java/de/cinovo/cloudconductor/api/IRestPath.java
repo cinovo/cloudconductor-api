@@ -30,16 +30,16 @@ package de.cinovo.cloudconductor.api;
  *
  */
 public interface IRestPath {
-	
+
 	/**
 	 * current directory "/"
 	 */
 	public static final String ROOT = "/";
-	
+
 	// -------------------------------------------------------
 	// VARIABLES
 	// -------------------------------------------------------
-	
+
 	/** variable for name */
 	public static final String VAR_NAME = "name";
 	/** variable for template name */
@@ -54,35 +54,35 @@ public interface IRestPath {
 	public static final String VAR_PKG = "pkg";
 	/** variable for version name */
 	public static final String VAR_VERSION = "version";
-	
+
 	// -------------------------------------------------------
 	// DEFAULT
 	// -------------------------------------------------------
-	
+
 	/**
 	 * the default identifier for a name
 	 */
 	public static final String DEFAULT_NAME = "/{" + IRestPath.VAR_NAME + "}";
-	
+
 	// -------------------------------------------------------
 	// AGENT
 	// -------------------------------------------------------
-	
+
 	/**
 	 * agent api
 	 */
 	public static final String AGENT = "/agent";
-	
+
 	/**
 	 * notify package state for template and host
 	 */
 	public static final String AGENT_PACKAGE_STATE = "/{" + IRestPath.VAR_TEMPLATE + "}/{" + IRestPath.VAR_HOST + "}/package";
-	
+
 	/**
 	 * notify service state for template and host
 	 */
 	public static final String AGENT_SERVICE_STATE = "/{" + IRestPath.VAR_TEMPLATE + "}/{" + IRestPath.VAR_HOST + "}/service";
-	
+
 	/**
 	 * notify server that agent is alive
 	 */
@@ -99,20 +99,32 @@ public interface IRestPath {
 	 * configfile api
 	 */
 	public static final String FILE = "/file";
-	
+
 	/**
 	 * interact with the data of a configfile
 	 */
 	public static final String FILE_DATA = "/{" + IRestPath.VAR_NAME + "}/data";
-	
+
+	public static final String FILE_DETAILS = "/{" + IRestPath.VAR_NAME + "}";
+
 	/**
 	 * get all config files of a template
 	 */
 	public static final String FILE_CONFIG_FILES = "/{" + IRestPath.VAR_TEMPLATE + "}/files";
+
+	//--------------------------------------------------------
+	// DIRECTORIES
+	//--------------------------------------------------------
+	public static final String DIRECTORY = "/directory";
+
+	public static final String DIRECTORY_DATA = "/{" + IRestPath.VAR_NAME + "}";
+
+	public static final String DIRECTORY_DIRECTORIES = "/{" + IRestPath.VAR_TEMPLATE + "}/directories";
+
 	// -------------------------------------------------------
 	// CONFIG VALUES
 	// -------------------------------------------------------
-	
+
 	/**
 	 * config value api
 	 */
@@ -133,7 +145,7 @@ public interface IRestPath {
 	 * interact with the config of a service of a template for a specific key
 	 */
 	public static final String CONFIG_TEMPLATE_SERVICE_KEY = "/{" + IRestPath.VAR_TEMPLATE + "}/{" + IRestPath.VAR_SERVICE + ":.*}/{" + IRestPath.VAR_KEY + "}";
-	
+
 	// -------------------------------------------------------
 	// HOST
 	// -------------------------------------------------------
@@ -165,7 +177,7 @@ public interface IRestPath {
 	 * restarts a service on a host
 	 */
 	public static final String HOST_SERVICE_RESTART = IRestPath.HOST_SERVICE_SVC + "/restart";
-	
+
 	// -------------------------------------------------------
 	// PACKAGE
 	// -------------------------------------------------------
@@ -181,7 +193,7 @@ public interface IRestPath {
 	 * interact with the package versions of a host
 	 */
 	public static final String PKG_VERSION_SINGLE = IRestPath.PKG_VERSION + "/{" + IRestPath.VAR_VERSION + "}";
-	
+
 	// -------------------------------------------------------
 	// SERVICE
 	// -------------------------------------------------------
@@ -197,12 +209,12 @@ public interface IRestPath {
 	 * interact with the packages of a service
 	 */
 	public static final String SERVICE_PKG_SINGLE = IRestPath.SERVICE_PKG + "/{" + IRestPath.VAR_PKG + "}";
-	
+
 	/**
 	 * approve the started state of a service
 	 */
 	public static final String SERVICE_APPROVE_STARTED = "/{" + IRestPath.VAR_SERVICE + "}/approvestarted/{" + IRestPath.VAR_HOST + "}";
-	
+
 	// -------------------------------------------------------
 	// SSH KEY
 	// -------------------------------------------------------
@@ -210,7 +222,7 @@ public interface IRestPath {
 	 * service api
 	 */
 	public static final String SSHKEY = "/sshkeys";
-	
+
 	// -------------------------------------------------------
 	// TEMPLATE
 	// -------------------------------------------------------
@@ -250,7 +262,7 @@ public interface IRestPath {
 	 * interact with the package versions of a template
 	 */
 	public static final String TEMPLATE_VERSION_SINGLE = IRestPath.TEMPLATE_VERSION + "/{" + IRestPath.VAR_PKG + "}/{" + IRestPath.VAR_VERSION + "}";
-	
+
 	// -------------------------------------------------------
 	// IOModule
 	// -------------------------------------------------------
@@ -262,7 +274,7 @@ public interface IRestPath {
 	 * io versions
 	 */
 	public static final String IO_VERSION = "/versions";
-	
+
 	// -------------------------------------------------------
 	// REPORT
 	// -------------------------------------------------------
@@ -270,5 +282,5 @@ public interface IRestPath {
 	 * Report api
 	 */
 	public static final String REPORT = "/report";
-	
+
 }
