@@ -17,13 +17,12 @@ package de.cinovo.cloudconductor.api.lib.manager;
  * #L%
  */
 
+import java.util.Set;
+
 import de.cinovo.cloudconductor.api.IRestPath;
 import de.cinovo.cloudconductor.api.lib.exceptions.CloudConductorException;
 import de.cinovo.cloudconductor.api.lib.helper.DefaultRestHandler;
-import de.cinovo.cloudconductor.api.model.ConfigFile;
 import de.cinovo.cloudconductor.api.model.Directory;
-
-import java.util.Set;
 
 /**
  * Copyright 2013 Cinovo AG<br>
@@ -33,12 +32,22 @@ import java.util.Set;
  *
  */
 public class DirectoryHandler extends DefaultRestHandler<Directory> {
-
+	
 	/**
 	 * @param cloudconductorUrl the config server url
 	 */
 	public DirectoryHandler(String cloudconductorUrl) {
 		super(cloudconductorUrl);
+	}
+	
+	/**
+	 * @param cloudconductorUrl the config server url
+	 * @param token the token
+	 * @param agent the agent
+	 */
+	public DirectoryHandler(String cloudconductorUrl, String token, String agent) {
+		super(cloudconductorUrl);
+		this.setTokenMode(token, agent);
 	}
 	
 	@Override
@@ -50,7 +59,6 @@ public class DirectoryHandler extends DefaultRestHandler<Directory> {
 	protected Class<Directory> getAPIClass() {
 		return Directory.class;
 	}
-
 	
 	/**
 	 * @param template the template name
