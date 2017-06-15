@@ -57,6 +57,8 @@ public interface IRestPath {
 	/** variable for agent name */
 	public static final String VAR_AGENT = "agent";
 
+	public static final String VAR_UUID = "uuid";
+
 	// -------------------------------------------------------
 	// DEFAULT
 	// -------------------------------------------------------
@@ -78,17 +80,17 @@ public interface IRestPath {
 	/**
 	 * notify package state for template and host
 	 */
-	public static final String AGENT_PACKAGE_STATE = "/{" + IRestPath.VAR_TEMPLATE + "}/{" + IRestPath.VAR_HOST + "}/package";
+	public static final String AGENT_PACKAGE_STATE = "/{" + IRestPath.VAR_TEMPLATE + "}/{" + IRestPath.VAR_HOST + "}/{" + IRestPath.VAR_UUID + "}/package";
 
 	/**
 	 * notify service state for template and host
 	 */
-	public static final String AGENT_SERVICE_STATE = "/{" + IRestPath.VAR_TEMPLATE + "}/{" + IRestPath.VAR_HOST + "}/service";
+	public static final String AGENT_SERVICE_STATE = "/{" + IRestPath.VAR_TEMPLATE + "}/{" + IRestPath.VAR_HOST + "}/{" + IRestPath.VAR_UUID + "}/service";
 
 	/**
 	 * notify server that agent is alive
 	 */
-	public static final String AGENT_HEART_BEAT = "/{" + IRestPath.VAR_TEMPLATE + "}/{" + IRestPath.VAR_HOST + "}/{" + IRestPath.VAR_AGENT + "}/heartbeat";
+	public static final String AGENT_HEART_BEAT = "/{" + IRestPath.VAR_TEMPLATE + "}/{" + IRestPath.VAR_HOST + "}/{" + IRestPath.VAR_AGENT + "}/{" + IRestPath.VAR_UUID + "}/heartbeat";
 	
 	/**
 	 * check if the server exists

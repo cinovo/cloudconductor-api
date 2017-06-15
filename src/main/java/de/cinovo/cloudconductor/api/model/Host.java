@@ -41,6 +41,7 @@ public class Host implements INamed {
 	private Set<String> services;
 	// TODO add propper hostinfo
 	private String hostinfo;
+	private String uuid;
 	
 	
 	/**
@@ -48,13 +49,15 @@ public class Host implements INamed {
 	 * @param descr the description
 	 * @param template the template
 	 * @param services associated services
+	 * @param uuid the host uuid
 	 */
 	@JsonCreator
-	public Host(@JsonProperty("name") String name, @JsonProperty("description") String descr, @JsonProperty("template") String template, @JsonProperty("services") Set<String> services) {
+	public Host(@JsonProperty("name") String name, @JsonProperty("description") String descr, @JsonProperty("template") String template, @JsonProperty("services") Set<String> services, @JsonProperty("uuid") String uuid) {
 		this.name = name;
 		this.description = descr;
 		this.template = template;
 		this.services = services;
+		this.uuid = uuid;
 	}
 	
 	/**
@@ -92,5 +95,11 @@ public class Host implements INamed {
 	public String getTemplate() {
 		return this.template;
 	}
+
+	/**
+	 *
+	 * @return the host uuid
+	 */
+	public String getUuid() { return this.uuid; }
 	
 }

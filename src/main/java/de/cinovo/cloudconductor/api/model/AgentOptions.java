@@ -29,6 +29,9 @@ public class AgentOptions {
 	private TimeUnit fileManagementTimerUnit = TimeUnit.MINUTES;
 	
 	private String templateName;
+
+	private String uuid;
+
 	
 	
 	/**
@@ -46,8 +49,9 @@ public class AgentOptions {
 	 * @param fileManagementTimer the file timer
 	 * @param fileManagementTimerUnit timer unit
 	 * @param templateName templateName
+	 * @param uuid host uuid
 	 */
-	public AgentOptions(@JsonProperty("aliveTimer") int aliveTimer, @JsonProperty("aliveTimerUnit") TimeUnit aliveTimerUnit, @JsonProperty("doSshKeys") TaskState doSshKeys, @JsonProperty("sshKeysTimer") int sshKeysTimer, @JsonProperty("sshKeysTimerUnit") TimeUnit sshKeysTimerUnit, @JsonProperty("doPackageManagement") TaskState doPackageManagement, @JsonProperty("packageManagementTimer") int packageManagementTimer, @JsonProperty("packageManagementTimerUnit") TimeUnit packageManagementTimerUnit, @JsonProperty("doFileManagement") TaskState doFileManagement, @JsonProperty("fileManagementTimer") int fileManagementTimer, @JsonProperty("fileManagementTimerUnit") TimeUnit fileManagementTimerUnit, @JsonProperty("templateName") String templateName) {
+	public AgentOptions(@JsonProperty("aliveTimer") int aliveTimer, @JsonProperty("aliveTimerUnit") TimeUnit aliveTimerUnit, @JsonProperty("doSshKeys") TaskState doSshKeys, @JsonProperty("sshKeysTimer") int sshKeysTimer, @JsonProperty("sshKeysTimerUnit") TimeUnit sshKeysTimerUnit, @JsonProperty("doPackageManagement") TaskState doPackageManagement, @JsonProperty("packageManagementTimer") int packageManagementTimer, @JsonProperty("packageManagementTimerUnit") TimeUnit packageManagementTimerUnit, @JsonProperty("doFileManagement") TaskState doFileManagement, @JsonProperty("fileManagementTimer") int fileManagementTimer, @JsonProperty("fileManagementTimerUnit") TimeUnit fileManagementTimerUnit, @JsonProperty("templateName") String templateName, @JsonProperty("uuid") String uuid) {
 		super();
 		this.aliveTimer = aliveTimer;
 		this.aliveTimerUnit = aliveTimerUnit;
@@ -61,6 +65,7 @@ public class AgentOptions {
 		this.fileManagementTimer = fileManagementTimer;
 		this.fileManagementTimerUnit = fileManagementTimerUnit;
 		this.templateName = templateName;
+		this.uuid = uuid;
 	}
 	
 	/**
@@ -230,5 +235,12 @@ public class AgentOptions {
 	public void setTemplateName(String templateName) {
 		this.templateName = templateName;
 	}
-	
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
 }
