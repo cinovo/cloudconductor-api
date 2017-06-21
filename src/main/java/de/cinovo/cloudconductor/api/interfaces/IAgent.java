@@ -64,7 +64,7 @@ public interface IAgent {
 	@Path(IRestPath.AGENT_PACKAGE_STATE)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public PackageStateChanges notifyPackageState(@PathParam(IRestPath.VAR_TEMPLATE) String template, @PathParam(IRestPath.VAR_HOST) String host, PackageState rpmState);
+	public PackageStateChanges notifyPackageState(@PathParam(IRestPath.VAR_TEMPLATE) String template, @PathParam(IRestPath.VAR_HOST) String host, PackageState rpmState, @PathParam(IRestPath.VAR_UUID) String uuid);
 	
 	/**
 	 * @param template the template name
@@ -76,7 +76,7 @@ public interface IAgent {
 	@Path(IRestPath.AGENT_SERVICE_STATE)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public ServiceStatesChanges notifyServiceState(@PathParam(IRestPath.VAR_TEMPLATE) String template, @PathParam(IRestPath.VAR_HOST) String host, ServiceStates serviceState);
+	public ServiceStatesChanges notifyServiceState(@PathParam(IRestPath.VAR_TEMPLATE) String template, @PathParam(IRestPath.VAR_HOST) String host, ServiceStates serviceState, @PathParam(IRestPath.VAR_UUID) String uuid);
 	
 	/**
 	 * @param template the template name
@@ -87,7 +87,7 @@ public interface IAgent {
 	@GET
 	@Path(IRestPath.AGENT_HEART_BEAT)
 	@Produces(MediaType.APPLICATION_JSON)
-	public AgentOptions heartBeat(@PathParam(IRestPath.VAR_TEMPLATE) String template, @PathParam(IRestPath.VAR_HOST) String host, @PathParam(IRestPath.VAR_AGENT) String agent);
+	public AgentOptions heartBeat(@PathParam(IRestPath.VAR_TEMPLATE) String template, @PathParam(IRestPath.VAR_HOST) String host, @PathParam(IRestPath.VAR_AGENT) String agent, @PathParam(IRestPath.VAR_UUID) String uuid);
 	
 	/**
 	 * @return check if server is alive

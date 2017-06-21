@@ -57,8 +57,8 @@ public class AgentHandler extends AbstractApiHandler {
 	 * @return changes to the package state
 	 * @throws CloudConductorException Error indicating connection or data problems
 	 */
-	public PackageStateChanges notifyPackageState(String template, String host, PackageState state) throws CloudConductorException {
-		String path = this.pathGenerator(IRestPath.AGENT + IRestPath.AGENT_PACKAGE_STATE, template, host);
+	public PackageStateChanges notifyPackageState(String template, String host, PackageState state, String uuid) throws CloudConductorException {
+		String path = this.pathGenerator(IRestPath.AGENT + IRestPath.AGENT_PACKAGE_STATE, template, host, uuid);
 		return this._put(path, state, PackageStateChanges.class);
 	}
 	
@@ -69,8 +69,8 @@ public class AgentHandler extends AbstractApiHandler {
 	 * @return changes to the service state
 	 * @throws CloudConductorException Error indicating connection or data problems
 	 */
-	public ServiceStatesChanges notifyServiceState(String template, String host, ServiceStates state) throws CloudConductorException {
-		String path = this.pathGenerator(IRestPath.AGENT + IRestPath.AGENT_SERVICE_STATE, template, host);
+	public ServiceStatesChanges notifyServiceState(String template, String host, ServiceStates state, String uuid) throws CloudConductorException {
+		String path = this.pathGenerator(IRestPath.AGENT + IRestPath.AGENT_SERVICE_STATE, template, host, uuid);
 		return this._put(path, state, ServiceStatesChanges.class);
 	}
 	
@@ -156,8 +156,8 @@ public class AgentHandler extends AbstractApiHandler {
 	 * @return the agent options of the template
 	 * @throws CloudConductorException Error indicating connection or data problems
 	 */
-	public AgentOptions heartBeat(String template, String host, String agent) throws CloudConductorException {
-		String path = this.pathGenerator(IRestPath.AGENT + IRestPath.AGENT_HEART_BEAT, template, host, agent);
+	public AgentOptions heartBeat(String template, String host, String agent, String uuid) throws CloudConductorException {
+		String path = this.pathGenerator(IRestPath.AGENT + IRestPath.AGENT_HEART_BEAT, template, host, agent, uuid);
 		return this._get(path, AgentOptions.class);
 	}
 	

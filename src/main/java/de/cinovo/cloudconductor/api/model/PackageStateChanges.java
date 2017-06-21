@@ -95,5 +95,5 @@ public class PackageStateChanges {
 	public void setToErase(List<PackageVersion> toErase) {
 		this.toErase = toErase;
 	}
-	
+
 }
