@@ -1,4 +1,4 @@
-package de.cinovo.cloudconductor.api.lib.exceptions;
+package de.cinovo.cloudconductor.api.interfaces;
 
 /*
  * #%L
@@ -20,44 +20,50 @@ package de.cinovo.cloudconductor.api.lib.exceptions;
  * #L%
  */
 
+import de.cinovo.cloudconductor.api.MediaType;
+import de.cinovo.cloudconductor.api.model.RepoMirror;
+
+import javax.ws.rs.*;
 
 /**
  * Copyright 2013 Cinovo AG<br>
  * <br>
- * Exception for problems related to serialization or deserialization.
  * 
- * @author mhilbert
+ * @author psigloch
+ * 
  */
-public class SerializationException extends CloudConductorException {
-	
-	/** version UID for serialization */
-	private static final long serialVersionUID = 1L;
-	
-	
-	/**
-	 * Class constructor.
-	 */
-	public SerializationException() {
-		super();
-	}
+@Path("/repomirror")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
+public interface IRepoMirror {
 	
 	/**
-	 * Class constructor.
-	 * 
-	 * @param message the detail message
-	 * @param cause the cause
+	 * @param id the id
+	 * @return the mirror
 	 */
-	public SerializationException(String message, Throwable cause) {
-		super(message, cause);
-	}
+	@GET
+	@Path("/{id}")
+	RepoMirror get(@PathParam("id") Long id);
 	
 	/**
-	 * Class constructor.
-	 * 
-	 * @param message the detail message
+	 * @param id the server id
 	 */
-	public SerializationException(String message) {
-		super(message);
-	}
+	@DELETE
+	@Path("/{id}")
+	void delete(@PathParam("id") Long id);
 	
+	/**
+	 * @param mirror the mirror
+	 * @return the new id
+	 */
+	@POST
+	@Path("/")
+	Long newMirror(RepoMirror mirror);
+	
+	/**
+	 * @param mirror the mirror
+	 */
+	@PUT
+	@Path("/")
+	void editMirror(RepoMirror mirror);
 }

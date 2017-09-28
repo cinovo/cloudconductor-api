@@ -20,40 +20,28 @@ package de.cinovo.cloudconductor.api.model;
  * #L%
  */
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+import de.cinovo.cloudconductor.api.interfaces.INamed;
 
 import java.util.Set;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Copyright 2013 Cinovo AG<br>
  * <br>
- * 
+ *
  * @author psigloch
- * 
  */
+@JsonTypeInfo(include = As.PROPERTY, use = Id.CLASS)
 public class PackageVersion implements INamed {
-	
+
 	private String name;
 	private String version;
 	private Set<Dependency> dependencies;
-	
-	
-	/**
-	 * Class constructor.
-	 * 
-	 * @param name the base name of the RPM
-	 * @param version the version of the RPM
-	 * @param dependencies the dependencies of the RPM
-	 */
-	@JsonCreator
-	public PackageVersion(@JsonProperty("name") String name, @JsonProperty("version") String version, @JsonProperty("dependencies") Set<Dependency> dependencies) {
-		this.name = name;
-		this.version = version;
-		this.dependencies = dependencies;
-	}
-	
+	private Set<String> repos;
+
+
 	/**
 	 * @return the name
 	 */
@@ -61,18 +49,53 @@ public class PackageVersion implements INamed {
 	public String getName() {
 		return this.name;
 	}
-	
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	/**
 	 * @return the version
 	 */
 	public String getVersion() {
 		return this.version;
 	}
-	
+
+	/**
+	 * @param version the version to set
+	 */
+	public void setVersion(String version) {
+		this.version = version;
+	}
+
 	/**
 	 * @return the dependencies
 	 */
 	public Set<Dependency> getDependencies() {
 		return this.dependencies;
+	}
+
+	/**
+	 * @param dependencies the dependencies to set
+	 */
+	public void setDependencies(Set<Dependency> dependencies) {
+		this.dependencies = dependencies;
+	}
+
+	/**
+	 * @return the repos
+	 */
+	public Set<String> getRepos() {
+		return this.repos;
+	}
+
+	/**
+	 * @param repos the repos to set
+	 */
+	public void setRepos(Set<String> repos) {
+		this.repos = repos;
 	}
 }

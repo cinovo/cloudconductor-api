@@ -1,57 +1,91 @@
 package de.cinovo.cloudconductor.api.model;
 
-/*
- * #%L
- * cloudconductor-api
- * %%
- * Copyright (C) 2013 - 2014 Cinovo AG
- * %%
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * #L%
- */
+import java.util.Date;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import de.cinovo.cloudconductor.api.interfaces.INamed;
 
 /**
- * Copyright 2013 Cinovo AG<br>
+ * Copyright 2017 Cinovo AG<br>
  * <br>
  * 
- * @author psigloch
- * 
+ * @author mweise
+ *
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeInfo(include = As.PROPERTY, use = Id.CLASS)
 public class SSHKey implements INamed {
 	
-	private String key;
 	private String owner;
+	private String username;
+	private String key;
+	private Date lastChanged;
+	private List<String> templates;
 	
 	
 	/**
-	 * @param key the ssh key
-	 * @param owner the owner
+	 * Create a new ssh key.
 	 */
-	public SSHKey(@JsonProperty("key") String key, @JsonProperty("owner") String owner) {
+	public SSHKey() {
+		
+	}
+	
+	/**
+	 * 
+	 * @param owner the name of the key owner
+	 * @param key the content of the key
+	 */
+	public SSHKey(String owner, String key) {
+		this.owner = owner;
 		this.key = key;
+		this.lastChanged = new Date();
+	}
+	
+	/**
+	 * @param owner the owner of the ssh key
+	 * @param key the content of the ssh key
+	 * @param lastChangedDate the timestamp of the last change
+	 */
+	public SSHKey(String owner, String key, Long lastChangedDate) {
+		this.owner = owner;
+		this.key = key;
+		
+		this.lastChanged = new Date(lastChangedDate);
+	}
+	
+	/**
+	 * @return owner of the ssh key
+	 */
+	public String getOwner() {
+		return this.owner;
+	}
+	
+	/**
+	 * @param owner the name of the owner to set
+	 */
+	public void setOwner(String owner) {
 		this.owner = owner;
 	}
 	
 	/**
-	 * w
-	 * 
-	 * @return the key
+	 * @return the user name for the ssh key
+	 */
+	public String getUsername() {
+		return this.username;
+	}
+	
+	/**
+	 * @param username the user name to set
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	/**
+	 * @return the content of the ssh key
 	 */
 	public String getKey() {
 		return this.key;
@@ -65,23 +99,36 @@ public class SSHKey implements INamed {
 	}
 	
 	/**
-	 * @return the owner
+	 * @return the last date when this key was created or changed
 	 */
-	public String getOwner() {
-		return this.owner;
+	public Date getLastChanged() {
+		return this.lastChanged;
 	}
 	
 	/**
-	 * @param owner the owner to set
+	 * @param lastChanged the change date to set
 	 */
-	public void setOwner(String owner) {
-		this.owner = owner;
+	public void setLastChanged(Date lastChanged) {
+		this.lastChanged = lastChanged;
+	}
+	
+	/**
+	 * @return set of template names this ssh key belongs to
+	 */
+	public List<String> getTemplates() {
+		return this.templates;
+	}
+	
+	/**
+	 * @param templates the template names to set
+	 */
+	public void setTemplates(List<String> templates) {
+		this.templates = templates;
 	}
 	
 	@Override
-	@JsonIgnore
 	public String getName() {
-		return this.getOwner();
+		return this.owner;
 	}
 	
 }

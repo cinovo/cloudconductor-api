@@ -1,4 +1,4 @@
-package de.cinovo.cloudconductor.api.interfaces;
+package de.cinovo.cloudconductor.api.enums;
 
 /*
  * #%L
@@ -9,9 +9,9 @@ package de.cinovo.cloudconductor.api.interfaces;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,29 +20,19 @@ package de.cinovo.cloudconductor.api.interfaces;
  * #L%
  */
 
-import de.cinovo.cloudconductor.api.IRestPath;
-import de.cinovo.cloudconductor.api.MediaType;
-import de.cinovo.cloudconductor.api.model.ConfigFile;
-import de.cinovo.cloudconductor.api.model.Directory;
-
-import javax.ws.rs.*;
 
 /**
  * Copyright 2013 Cinovo AG<br>
  * <br>
- *
- * @author psigloch
- *
+ * Enumeration for dependency types.
+ * 
+ * @author mhilbert
  */
-@Path(IRestPath.DIRECTORY)
-public interface IDirectory extends IDefaultApi<Directory> {
-
-	/**
-	 * @param template the template name
-	 * @return the config files for the template
-	 */
-	@GET
-	@Path(IRestPath.DIRECTORY_DIRECTORIES)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Directory[] getDirectories(@PathParam(IRestPath.VAR_TEMPLATE) String template);
+public enum DependencyType {
+	/** requires */
+	REQUIRES,
+	/** provides */
+	PROVIDES,
+	/** conflicts */
+	CONFLICTS
 }

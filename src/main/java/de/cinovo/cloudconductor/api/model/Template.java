@@ -20,60 +20,31 @@ package de.cinovo.cloudconductor.api.model;
  * #L%
  */
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+import de.cinovo.cloudconductor.api.interfaces.INamed;
 
 import java.util.Map;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import javax.print.DocFlavor;
-
 /**
  * Copyright 2013 Cinovo AG<br>
  * <br>
- * 
+ *
  * @author psigloch
- * 
  */
+@JsonTypeInfo(include = As.PROPERTY, use = Id.CLASS)
 public class Template implements INamed {
-	
+
 	private String name;
 	private String description;
-	
-	private String yum;
-	
-	private Map<String, String> rpms;
-	
+	private Set<String> repos;
+	private Map<String, String> versions;
 	private Set<String> hosts;
-	
-	private Set<String> sshkeys;
-	
-	private Set<String> configFiles;
+	private Boolean autoUpdate;
+	private Boolean smoothUpdate;
 
-	private Set<String> directories;
-	
-	
-	/**
-	 * @param name the template name
-	 * @param description the description
-	 * @param yum the yum path
-	 * @param rpms map of versions
-	 * @param hosts collection of hosts
-	 * @param sshkeys collection of ssh keys
-	 * @param configFiles collection of config files
-	 */
-	public Template(@JsonProperty("name") String name, @JsonProperty("description") String description, @JsonProperty("yum") String yum, @JsonProperty("rpms") Map<String, String> rpms, @JsonProperty("hosts") Set<String> hosts, @JsonProperty("sshekeys") Set<String> sshkeys, @JsonProperty("configfiles") Set<String> configFiles, @JsonProperty("directories")Set<String> directories) {
-		super();
-		this.name = name;
-		this.description = description;
-		this.setYum(yum);
-		this.rpms = rpms;
-		this.hosts = hosts;
-		this.sshkeys = sshkeys;
-		this.configFiles = configFiles;
-		this.directories = directories;
-	}
-	
 	/**
 	 * @return the name
 	 */
@@ -81,59 +52,95 @@ public class Template implements INamed {
 	public String getName() {
 		return this.name;
 	}
-	
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	/**
 	 * @return the description
 	 */
 	public String getDescription() {
 		return this.description;
 	}
-	
+
 	/**
-	 * @return the rpms
+	 * @param description the description to set
 	 */
-	public Map<String, String> getRpms() {
-		return this.rpms;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	
+
+	/**
+	 * @return the versions
+	 */
+	public Map<String, String> getVersions() {
+		return this.versions;
+	}
+
+	/**
+	 * @param versions the versions to set
+	 */
+	public void setVersions(Map<String, String> versions) {
+		this.versions = versions;
+	}
+
 	/**
 	 * @return the hosts
 	 */
 	public Set<String> getHosts() {
 		return this.hosts;
 	}
-	
+
 	/**
-	 * @return the sshkeys
+	 * @param hosts the hosts to set
 	 */
-	public Set<String> getSshkeys() {
-		return this.sshkeys;
-	}
-	
-	/**
-	 * @return the configFiles
-	 */
-	public Set<String> getConfigFiles() {
-		return this.configFiles;
+	public void setHosts(Set<String> hosts) {
+		this.hosts = hosts;
 	}
 
 	/**
-	 * @return the directories
+	 * @return the repos
 	 */
-	public Set<String> getDirectories() { return this.directories; }
-	
-	/**
-	 * @return the yum
-	 */
-	public String getYum() {
-		return this.yum;
+	public Set<String> getRepos() {
+		return this.repos;
 	}
-	
+
 	/**
-	 * @param yum the yum to set
+	 * @param repos the repos to set
 	 */
-	public void setYum(String yum) {
-		this.yum = yum;
+	public void setRepos(Set<String> repos) {
+		this.repos = repos;
 	}
-	
+
+	/**
+	 * @return the autoUpdate
+	 */
+	public Boolean getAutoUpdate() {
+		return this.autoUpdate;
+	}
+
+	/**
+	 * @param autoUpdate the autoUpdate to set
+	 */
+	public void setAutoUpdate(Boolean autoUpdate) {
+		this.autoUpdate = autoUpdate;
+	}
+
+	/**
+	 * @return the smoothUpdate
+	 */
+	public Boolean getSmoothUpdate() {
+		return this.smoothUpdate;
+	}
+
+	/**
+	 * @param smoothUpdate the smoothUpdate to set
+	 */
+	public void setSmoothUpdate(Boolean smoothUpdate) {
+		this.smoothUpdate = smoothUpdate;
+	}
 }

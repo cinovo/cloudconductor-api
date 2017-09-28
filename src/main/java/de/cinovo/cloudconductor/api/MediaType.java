@@ -23,32 +23,26 @@ package de.cinovo.cloudconductor.api;
 /**
  * Media types used and supported by the config server <br>
  * <br>
- * Copyright 2013 Cinovo AG<br>
+ * Copyright 2017 Cinovo AG<br>
  *
  * @author psigloch
- *
- *
  */
 public interface MediaType {
-	
-	/** JSON media type */
+
+	/**
+	 * JSON media type
+	 */
 	static final String APPLICATION_JAVAPROPS = "application/x-javaprops";
-	/** JSON media type */
+	/**
+	 * JSON media type
+	 */
 	static final String APPLICATION_JAVAARGS = "application/x-javaargs";
-	/** JSON media type */
+	/**
+	 * JSON media type
+	 */
 	static final String APPLICATION_JSON = "application/json;charset=UTF-8";
-	/** text media type */
-	static final String TEXT_PLAIN = "text/plain;charset=UTF-8";
-	/** CSS media type */
-	static final String TEXT_CSS = "text/css;charset=UTF-8";
-	/** HTML media type */
+	/**
+	 * HTML media type
+	 */
 	static final String TEXT_HTML = "text/html;charset=UTF-8";
-	/** GIF MEDIA TYPE */
-	static final String IMAGE_GIF = "image/gif";
-	/** JS MEDIA TYPE */
-	static final String APPLICATION_JAVASCRIPT = "application/javascript";
-	/** font opentype MEDIA TYPE */
-	static final String FONT_OPENTYPE = "font/opentype";
-	/** Flash Shockwave TYPE */
-	static final String APPLICATION_FLASH = "application/x-shockwave-flash";
 }

@@ -1,64 +1,34 @@
 package de.cinovo.cloudconductor.api.model;
 
-/*
- * #%L
- * cloudconductor-api
- * %%
- * Copyright (C) 2013 - 2014 Cinovo AG
- * %%
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * #L%
- */
+import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
-import java.util.Set;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import de.cinovo.cloudconductor.api.enums.ServiceState;
+import de.cinovo.cloudconductor.api.interfaces.INamed;
 
 /**
- * Copyright 2013 Cinovo AG<br>
+ * Copyright 2017 Cinovo AG<br>
  * <br>
- * 
+ *
  * @author psigloch
- * 
  */
+@JsonTypeInfo(include = As.PROPERTY, use = Id.CLASS)
 public class Host implements INamed {
 	
 	private String name;
+	private String agent;
+	
 	private String description;
 	private String template;
-	private Set<String> services;
-	// TODO add propper hostinfo
-	private String hostinfo;
-	private String uuid;
 	
+	private Long lastSeen;
 	
-	/**
-	 * @param name the host name
-	 * @param descr the description
-	 * @param template the template
-	 * @param services associated services
-	 * @param uuid the host uuid
-	 */
-	@JsonCreator
-	public Host(@JsonProperty("name") String name, @JsonProperty("description") String descr, @JsonProperty("template") String template, @JsonProperty("services") Set<String> services, @JsonProperty("uuid") String uuid) {
-		this.name = name;
-		this.description = descr;
-		this.template = template;
-		this.services = services;
-		this.uuid = uuid;
-	}
+	private Map<String, ServiceState> services;
+	private Map<String, String> packages;
+	
 	
 	/**
 	 * @return the name
@@ -69,6 +39,27 @@ public class Host implements INamed {
 	}
 	
 	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	/**
+	 * @return the agent
+	 */
+	public String getAgent() {
+		return this.agent;
+	}
+	
+	/**
+	 * @param agent the agent to set
+	 */
+	public void setAgent(String agent) {
+		this.agent = agent;
+	}
+	
+	/**
 	 * @return the description
 	 */
 	public String getDescription() {
@@ -76,30 +67,65 @@ public class Host implements INamed {
 	}
 	
 	/**
-	 * @return the services
+	 * @param description the description to set
 	 */
-	public Set<String> getServices() {
-		return this.services;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	/**
-	 * @return the hostinfo
-	 */
-	public String getHostinfo() {
-		return this.hostinfo;
-	}
-	
-	/**
-	 * @return the template name
+	 * @return the template
 	 */
 	public String getTemplate() {
 		return this.template;
 	}
-
-	/**
-	 *
-	 * @return the host uuid
-	 */
-	public String getUuid() { return this.uuid; }
 	
+	/**
+	 * @param template the template to set
+	 */
+	public void setTemplate(String template) {
+		this.template = template;
+	}
+	
+	/**
+	 * @return the lastSeen
+	 */
+	public Long getLastSeen() {
+		return this.lastSeen;
+	}
+	
+	/**
+	 * @param lastSeen the lastSeen to set
+	 */
+	public void setLastSeen(Long lastSeen) {
+		this.lastSeen = lastSeen;
+	}
+	
+	/**
+	 * @return the services
+	 */
+	public Map<String, ServiceState> getServices() {
+		return this.services;
+	}
+	
+	/**
+	 * @param services the services to set
+	 */
+	public void setServices(Map<String, ServiceState> services) {
+		this.services = services;
+	}
+	
+	/**
+	 * @return the packages
+	 */
+	public Map<String, String> getPackages() {
+		return this.packages;
+	}
+	
+	/**
+	 * @param packages the packages to set
+	 */
+	public void setPackages(Map<String, String> packages) {
+		this.packages = packages;
+	}
 }

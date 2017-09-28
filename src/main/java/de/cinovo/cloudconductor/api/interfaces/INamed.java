@@ -1,14 +1,4 @@
-/**
- * 
- */
-/**
- * Copyright 2013 Cinovo AG<br>
- * <br>
- * 
- * @author psigloch
- * 
- */
-package de.cinovo.cloudconductor.api.model;
+package de.cinovo.cloudconductor.api.interfaces;
 
 /*
  * #%L
@@ -29,3 +19,24 @@ package de.cinovo.cloudconductor.api.model;
  * limitations under the License.
  * #L%
  */
+
+
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+
+/**
+ * Copyright 2013 Cinovo AG<br>
+ * <br>
+ * 
+ * @author psigloch
+ * 
+ */
+@JsonTypeInfo(include = As.PROPERTY, use = Id.CLASS)
+public interface INamed {
+	
+	/**
+	 * @return the name
+	 */
+	public String getName();
+}

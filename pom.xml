@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>oss-parent</artifactId>
@@ -7,10 +9,10 @@
 	</parent>
 	<groupId>de.cinovo.cloudconductor</groupId>
 	<artifactId>cloudconductor-api</artifactId>
-	<version>2.15-SNAPSHOT</version>
+	<version>3.0-SNAPSHOT</version>
 	<name>CloudConductor API</name>
 	<description>Server to manage deployment environments</description>
-	<inceptionYear>2014</inceptionYear>
+	<inceptionYear>2017</inceptionYear>
 	<organization>
 		<name>Cinovo AG</name>
 		<url>http://www.cinovo.de</url>
@@ -36,12 +38,8 @@
 			<organization>Cinovo AG</organization>
 		</contributor>
 		<contributor>
-			<name>Fabian Toth</name>
+			<name>Marc Weise</name>
 			<organization>Cinovo AG</organization>
-		</contributor>
-		<contributor>
-			<name>Matthias Mayer</name>
-			<email>matthias_mayer@gmx.de</email>
 		</contributor>
 	</contributors>
 	<licenses>
@@ -66,35 +64,18 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jackson.version>2.6.1</jackson.version>
+		<javax.ws.rs.version>2.0.1</javax.ws.rs.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>javax.ws.rs</groupId>
 			<artifactId>javax.ws.rs-api</artifactId>
-			<version>2.0.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>de.taimos</groupId>
-			<artifactId>httputils</artifactId>
-			<version>1.10</version>
+			<version>${javax.ws.rs.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.fasterxml.jackson.datatype</groupId>
-			<artifactId>jackson-datatype-joda</artifactId>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
 			<version>${jackson.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.datatype</groupId>
-			<artifactId>jackson-datatype-guava</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<build>
@@ -138,8 +119,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>

@@ -20,40 +20,28 @@ package de.cinovo.cloudconductor.api.model;
  * #L%
  */
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import de.cinovo.cloudconductor.api.DependencyType;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+import de.cinovo.cloudconductor.api.enums.DependencyType;
+import de.cinovo.cloudconductor.api.interfaces.INamed;
 
 /**
  * Copyright 2013 Cinovo AG<br>
  * <br>
  * A dependency.
- * 
+ *
  * @author psigloch
  */
+@JsonTypeInfo(include = As.PROPERTY, use = Id.CLASS)
 public class Dependency implements INamed {
-	
+
 	private String name;
 	private String version;
 	private String operator;
 	private DependencyType type;
-	
-	
-	/**
-	 * @param name the name of the RPM
-	 * @param version the version of the RPM
-	 * @param operator the operator
-	 * @param type the dependency type as string
-	 */
-	@JsonCreator
-	public Dependency(@JsonProperty("name") String name, @JsonProperty("version") String version, @JsonProperty("operator") String operator, @JsonProperty("type") String type) {
-		this.name = name;
-		this.version = version;
-		this.operator = operator;
-		this.type = DependencyType.valueOf(type);
-	}
-	
+
+
 	/**
 	 * @return the name
 	 */
@@ -61,26 +49,53 @@ public class Dependency implements INamed {
 	public String getName() {
 		return this.name;
 	}
-	
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	/**
 	 * @return the version
 	 */
 	public String getVersion() {
 		return this.version;
 	}
-	
+
+	/**
+	 * @param version the version to set
+	 */
+	public void setVersion(String version) {
+		this.version = version;
+	}
+
 	/**
 	 * @return the operator
 	 */
 	public String getOperator() {
 		return this.operator;
 	}
-	
+
+	/**
+	 * @param operator the operator to set
+	 */
+	public void setOperator(String operator) {
+		this.operator = operator;
+	}
+
 	/**
 	 * @return the type
 	 */
 	public DependencyType getType() {
 		return this.type;
 	}
-	
+
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(DependencyType type) {
+		this.type = type;
+	}
 }
