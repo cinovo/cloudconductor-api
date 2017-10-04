@@ -10,10 +10,10 @@ package de.cinovo.cloudconductor.api.enums;
 public enum RepoProviderType {
 	/** no provider chosen */
 	NONE,
-	/** {@link HTTPProvider} */
+	/** HTTPProvider */
 	HTTP,
-	/** {@link AWSS3Provider} */
+	/** AWSS3Provider */
 	AWSS3,
-	/** {@link FileProvider} */
+	/** FileProvider */
 	FILE
 }

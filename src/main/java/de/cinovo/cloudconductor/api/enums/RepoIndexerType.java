@@ -10,9 +10,9 @@ package de.cinovo.cloudconductor.api.enums;
 public enum RepoIndexerType {
 	/** no indexer chosen */
 	NONE,
-	/** {@link IndexFileIndexer} */
+	/** IndexFileIndexer */
 	FILE,
-	/** {@link RPMIndexer} */
+	/** RPMIndexer */
 	RPM
 	
 }
