@@ -20,12 +20,13 @@ package de.cinovo.cloudconductor.api.model;
  * #L%
  */
 
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
-import de.cinovo.cloudconductor.api.interfaces.INamed;
 
-import java.util.Set;
+import de.cinovo.cloudconductor.api.interfaces.INamed;
 
 /**
  * Copyright 2013 Cinovo AG<br>
@@ -35,13 +36,33 @@ import java.util.Set;
  */
 @JsonTypeInfo(include = As.PROPERTY, use = Id.CLASS)
 public class PackageVersion implements INamed {
-
+	
 	private String name;
 	private String version;
 	private Set<Dependency> dependencies;
 	private Set<String> repos;
-
-
+	
+	
+	/**
+	 * Create empty PackageVersion
+	 */
+	public PackageVersion() {
+		
+	}
+	
+	/**
+	 * Create PackageVersion with given name, version and dependencies.
+	 * 
+	 * @param name the name
+	 * @param version the version
+	 * @param dependencies set of dependencies
+	 */
+	public PackageVersion(String name, String version, Set<Dependency> dependencies) {
+		this.name = name;
+		this.version = version;
+		this.dependencies = dependencies;
+	}
+	
 	/**
 	 * @return the name
 	 */
@@ -49,49 +70,49 @@ public class PackageVersion implements INamed {
 	public String getName() {
 		return this.name;
 	}
-
+	
 	/**
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	/**
 	 * @return the version
 	 */
 	public String getVersion() {
 		return this.version;
 	}
-
+	
 	/**
 	 * @param version the version to set
 	 */
 	public void setVersion(String version) {
 		this.version = version;
 	}
-
+	
 	/**
 	 * @return the dependencies
 	 */
 	public Set<Dependency> getDependencies() {
 		return this.dependencies;
 	}
-
+	
 	/**
 	 * @param dependencies the dependencies to set
 	 */
 	public void setDependencies(Set<Dependency> dependencies) {
 		this.dependencies = dependencies;
 	}
-
+	
 	/**
 	 * @return the repos
 	 */
 	public Set<String> getRepos() {
 		return this.repos;
 	}
-
+	
 	/**
 	 * @param repos the repos to set
 	 */

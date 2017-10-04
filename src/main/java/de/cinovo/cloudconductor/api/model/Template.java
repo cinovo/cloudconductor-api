@@ -20,13 +20,14 @@ package de.cinovo.cloudconductor.api.model;
  * #L%
  */
 
+import java.util.Map;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
-import de.cinovo.cloudconductor.api.interfaces.INamed;
 
-import java.util.Map;
-import java.util.Set;
+import de.cinovo.cloudconductor.api.interfaces.INamed;
 
 /**
  * Copyright 2013 Cinovo AG<br>
@@ -36,15 +37,19 @@ import java.util.Set;
  */
 @JsonTypeInfo(include = As.PROPERTY, use = Id.CLASS)
 public class Template implements INamed {
-
+	
 	private String name;
 	private String description;
+	
+	private String yum;
+	
+	private Set<String> hosts;
 	private Set<String> repos;
 	private Map<String, String> versions;
-	private Set<String> hosts;
 	private Boolean autoUpdate;
 	private Boolean smoothUpdate;
-
+	
+	
 	/**
 	 * @return the name
 	 */
@@ -52,91 +57,105 @@ public class Template implements INamed {
 	public String getName() {
 		return this.name;
 	}
-
+	
 	/**
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	/**
 	 * @return the description
 	 */
 	public String getDescription() {
 		return this.description;
 	}
-
+	
 	/**
 	 * @param description the description to set
 	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+	
+	/**
+	 * @return the yum
+	 */
+	public String getYum() {
+		return this.yum;
+	}
+	
+	/**
+	 * @param yum the yum to set
+	 */
+	public void setYum(String yum) {
+		this.yum = yum;
+	}
+	
 	/**
 	 * @return the versions
 	 */
 	public Map<String, String> getVersions() {
 		return this.versions;
 	}
-
+	
 	/**
 	 * @param versions the versions to set
 	 */
 	public void setVersions(Map<String, String> versions) {
 		this.versions = versions;
 	}
-
+	
 	/**
 	 * @return the hosts
 	 */
 	public Set<String> getHosts() {
 		return this.hosts;
 	}
-
+	
 	/**
 	 * @param hosts the hosts to set
 	 */
 	public void setHosts(Set<String> hosts) {
 		this.hosts = hosts;
 	}
-
+	
 	/**
 	 * @return the repos
 	 */
 	public Set<String> getRepos() {
 		return this.repos;
 	}
-
+	
 	/**
 	 * @param repos the repos to set
 	 */
 	public void setRepos(Set<String> repos) {
 		this.repos = repos;
 	}
-
+	
 	/**
 	 * @return the autoUpdate
 	 */
 	public Boolean getAutoUpdate() {
 		return this.autoUpdate;
 	}
-
+	
 	/**
 	 * @param autoUpdate the autoUpdate to set
 	 */
 	public void setAutoUpdate(Boolean autoUpdate) {
 		this.autoUpdate = autoUpdate;
 	}
-
+	
 	/**
 	 * @return the smoothUpdate
 	 */
 	public Boolean getSmoothUpdate() {
 		return this.smoothUpdate;
 	}
-
+	
 	/**
 	 * @param smoothUpdate the smoothUpdate to set
 	 */
