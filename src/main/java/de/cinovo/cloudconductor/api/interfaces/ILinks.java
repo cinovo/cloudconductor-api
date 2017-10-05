@@ -12,6 +12,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
+import de.cinovo.cloudconductor.api.IRestPath;
 import de.cinovo.cloudconductor.api.MediaType;
 import de.cinovo.cloudconductor.api.model.AdditionalLink;
 
@@ -41,7 +42,7 @@ import de.cinovo.cloudconductor.api.model.AdditionalLink;
  *
  * @author thoeger
  */
-@Path("/links")
+@Path(IRestPath.LINK)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public interface ILinks {
@@ -69,8 +70,8 @@ public interface ILinks {
 	/**
 	 * @param id the id of the link to be deleted
 	 */
-	@Path("/{id}")
+	@Path(IRestPath.LINK_DETAIL)
 	@DELETE
-	void deleteLink(@PathParam("id") long id);
+	void deleteLink(@PathParam(IRestPath.VAR_LINKID) long id);
 	
 }

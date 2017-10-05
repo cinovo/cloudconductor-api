@@ -10,6 +10,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
+import de.cinovo.cloudconductor.api.IRestPath;
 import de.cinovo.cloudconductor.api.MediaType;
 import de.cinovo.cloudconductor.api.model.AgentOption;
 import de.cinovo.cloudconductor.api.model.Template;
@@ -20,7 +21,7 @@ import de.cinovo.cloudconductor.api.model.Template;
  *
  * @author psigloch
  */
-@Path("template")
+@Path(IRestPath.TEMPLATE)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public interface ITemplate {
@@ -41,16 +42,16 @@ public interface ITemplate {
 	 * @param templateName the template name
 	 */
 	@DELETE
-	@Path("/{template}")
-	void delete(@PathParam("template") String templateName);
+	@Path(IRestPath.TEMPLATE_DETAIL)
+	void delete(@PathParam(IRestPath.VAR_TEMPLATE) String templateName);
 	
 	/**
 	 * @param templateName the template name
 	 * @return the template
 	 */
 	@GET
-	@Path("/{template}")
-	Template get(@PathParam("template") String templateName);
+	@Path(IRestPath.TEMPLATE_DETAIL)
+	Template get(@PathParam(IRestPath.VAR_TEMPLATE) String templateName);
 	
 	/**
 	 * @param templateName the template name
@@ -58,8 +59,8 @@ public interface ITemplate {
 	 * @return the updated template
 	 */
 	@PUT
-	@Path("/{template}/package/{package}")
-	Template updatePackage(@PathParam("template") String templateName, @PathParam("package") String packageName);
+	@Path(IRestPath.TEMPLATE_PACKAGE)
+	Template updatePackage(@PathParam(IRestPath.VAR_TEMPLATE) String templateName, @PathParam(IRestPath.VAR_PKG) String packageName);
 	
 	/**
 	 * @param templateName the template name
@@ -67,16 +68,16 @@ public interface ITemplate {
 	 * @return the updated template
 	 */
 	@DELETE
-	@Path("/{template}/package/{package}")
-	Template deletePackage(@PathParam("template") String templateName, @PathParam("package") String packageName);
+	@Path(IRestPath.TEMPLATE_PACKAGE)
+	Template deletePackage(@PathParam(IRestPath.VAR_TEMPLATE) String templateName, @PathParam(IRestPath.VAR_PKG) String packageName);
 	
 	/**
 	 * @param templateName the name of the template
 	 * @return set of service objects
 	 */
 	@GET
-	@Path("/{template}/agentoption")
-	AgentOption getAgentOption(@PathParam("template") String templateName);
+	@Path(IRestPath.TEMPLATE_AGENTOPTION)
+	AgentOption getAgentOption(@PathParam(IRestPath.VAR_TEMPLATE) String templateName);
 	
 	/**
 	 * @param templateName the name of the template
@@ -84,6 +85,6 @@ public interface ITemplate {
 	 * @return set of service objects
 	 */
 	@PUT
-	@Path("/{template}/agentoption")
-	AgentOption saveAgentOption(@PathParam("template") String templateName, AgentOption option);
+	@Path(IRestPath.TEMPLATE_AGENTOPTION)
+	AgentOption saveAgentOption(@PathParam(IRestPath.VAR_TEMPLATE) String templateName, AgentOption option);
 }

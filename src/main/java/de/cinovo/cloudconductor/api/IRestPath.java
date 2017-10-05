@@ -58,6 +58,16 @@ public interface IRestPath {
 	public static final String VAR_AGENT = "agent";
 	/** variable for agent UUID */
 	public static final String VAR_UUID = "uuid";
+	/** variable for SSH key owner **/
+	public static final String VAR_OWNER = "owner";
+	/** variable for the id of a token **/
+	public static final String VAR_TOKENID = "tokenId";
+	/** variable for the id of a link **/
+	public static final String VAR_LINKID = "linkId";
+	/** variable for a repository **/
+	public static final String VAR_REPO = "repo";
+	/** variable for the id of a repo mirror **/
+	public static final String VAR_RMID = "rmId";
 	
 	// -------------------------------------------------------
 	// DEFAULT
@@ -105,7 +115,7 @@ public interface IRestPath {
 	public static final String FILE = "/file";
 	
 	/**
-	 * interact with the data of a configfile
+	 * interact with the data of a config file
 	 */
 	public static final String FILE_DATA = "/{" + IRestPath.VAR_NAME + "}/data";
 	/**
@@ -117,6 +127,10 @@ public interface IRestPath {
 	 * get all config files of a template
 	 */
 	public static final String FILE_CONFIG_FILES = "/{" + IRestPath.VAR_TEMPLATE + "}/files";
+	/**
+	 * interact with files of a specific template
+	 */
+	public static final String FILE_TEMPLATE = "/template/{" + IRestPath.VAR_TEMPLATE + "}";
 	
 	// -------------------------------------------------------
 	// CONFIG VALUES
@@ -142,6 +156,10 @@ public interface IRestPath {
 	 * interact with the config of a service of a template for a specific key
 	 */
 	public static final String CONFIG_TEMPLATE_SERVICE_KEY = "/{" + IRestPath.VAR_TEMPLATE + "}/{" + IRestPath.VAR_SERVICE + ":.*}/{" + IRestPath.VAR_KEY + "}";
+	/**
+	 * all configuration values not stacked
+	 */
+	public static final String CONFIG_TEMPLATE_UNSTACKED = "/{" + IRestPath.VAR_TEMPLATE + "}/unstacked";
 	
 	// -------------------------------------------------------
 	// HOST
@@ -149,15 +167,19 @@ public interface IRestPath {
 	/**
 	 * host api
 	 */
-	public static final String HOST = "/hosts";
+	public static final String HOST = "/host";
+	/**
+	 * interact with a single host
+	 */
+	public static final String HOST_DETAIL = "/{" + IRestPath.VAR_HOST + "}";
 	/**
 	 * interact with the services of a host
 	 */
-	public static final String HOST_SERVICES = "/{" + IRestPath.VAR_HOST + "}/services";
+	public static final String HOST_SERVICES = "/{" + IRestPath.VAR_HOST + "}/service";
 	/**
 	 * interact with the services of a host
 	 */
-	public static final String HOST_SERVICE_SVC = "/{" + IRestPath.VAR_HOST + "}/services/{" + IRestPath.VAR_SERVICE + "}";
+	public static final String HOST_SERVICE_SVC = "/{" + IRestPath.VAR_HOST + "}/{" + IRestPath.VAR_SERVICE + "}";
 	/**
 	 * check if host is in sync with template
 	 */
@@ -181,15 +203,27 @@ public interface IRestPath {
 	/**
 	 * host api
 	 */
-	public static final String PKG = "/packages";
+	public static final String PKG = "/package";
+	/**
+	 * interact with single package
+	 */
+	public static final String PKG_DETAIL = "/{" + IRestPath.VAR_PKG + "}";
 	/**
 	 * interact with the package versions of a host
 	 */
 	public static final String PKG_VERSION = "/{" + IRestPath.VAR_PKG + "}/versions";
 	/**
+	 * interact with usage of a package
+	 */
+	public static final String PKG_USAGE = "/{" + IRestPath.VAR_PKG + "}/usage";
+	/**
 	 * interact with the package versions of a host
 	 */
 	public static final String PKG_VERSION_SINGLE = IRestPath.PKG_VERSION + "/{" + IRestPath.VAR_VERSION + "}";
+	/**
+	 * interact with package versions of a single repository
+	 */
+	public static final String PKG_VERSION_REPO = "/versions/repo/{" + IRestPath.VAR_REPO + "}";
 	
 	// -------------------------------------------------------
 	// SERVICE
@@ -197,7 +231,15 @@ public interface IRestPath {
 	/**
 	 * service api
 	 */
-	public static final String SERVICE = "/services";
+	public static final String SERVICE = "/service";
+	/**
+	 * interact with a single service
+	 */
+	public static final String SERVICE_DETAIL = "/{" + IRestPath.VAR_SERVICE + "}";
+	/**
+	 * interact with the usage of a single service
+	 */
+	public static final String SERVICE_USAGE = "/{" + IRestPath.VAR_SERVICE + "}/usage";
 	/**
 	 * interact with the packages of a service
 	 */
@@ -218,7 +260,11 @@ public interface IRestPath {
 	/**
 	 * service api
 	 */
-	public static final String SSHKEY = "/sshkeys";
+	public static final String SSHKEY = "/ssh";
+	/**
+	 * interact with a single ssh key
+	 */
+	public static final String SSHKEY_DETAIL = "/{" + IRestPath.VAR_OWNER + "}";
 	
 	// -------------------------------------------------------
 	// TEMPLATE
@@ -226,7 +272,19 @@ public interface IRestPath {
 	/**
 	 * template api
 	 */
-	public static final String TEMPLATE = "/templates";
+	public static final String TEMPLATE = "/template";
+	/**
+	 * interact with a single template
+	 */
+	public static final String TEMPLATE_DETAIL = "/{" + IRestPath.VAR_TEMPLATE + "}";
+	/**
+	 * interact with a single package of a single template
+	 */
+	public static final String TEMPLATE_PACKAGE = "/{" + IRestPath.VAR_TEMPLATE + "}/package/{" + IRestPath.VAR_PKG + "}";
+	/**
+	 * interact with the agent option of a single template
+	 */
+	public static final String TEMPLATE_AGENTOPTION = "/{" + IRestPath.VAR_TEMPLATE + "}/agentoption";
 	/**
 	 * interact with the services of a template
 	 */
@@ -279,5 +337,66 @@ public interface IRestPath {
 	 * Report api
 	 */
 	public static final String REPORT = "/report";
+	
+	// -------------------------------------------------------
+	// AUTH TOKEN
+	// -------------------------------------------------------
+	/**
+	 * auth token api
+	 */
+	public static final String AUTHTOKEN = "/authtoken";
+	/**
+	 * generate a new token
+	 */
+	public static final String AUTHTOKEN_GENERATE = "/generate";
+	/**
+	 * revoke an existing token
+	 */
+	public static final String AUTHTOKEN_REVOKE = "/{" + IRestPath.VAR_TOKENID + "}/revoke";
+	
+	// -------------------------------------------------------
+	// Link
+	// -------------------------------------------------------
+	/**
+	 * link API
+	 */
+	public static final String LINK = "/links";
+	/**
+	 * interact with a single link
+	 */
+	public static final String LINK_DETAIL = "/{" + IRestPath.VAR_LINKID + "}";
+	
+	// -------------------------------------------------------
+	// Repository
+	// -------------------------------------------------------
+	/**
+	 * repository API
+	 */
+	public static final String REPO = "/repo";
+	/**
+	 * interact with a single repository
+	 */
+	public static final String REPO_DETAIL = "/{" + IRestPath.VAR_NAME + "}";
+	
+	// -------------------------------------------------------
+	// Repository Mirror
+	// -------------------------------------------------------
+	/**
+	 * repository mirror API
+	 */
+	public static final String REPOMIRROR = "/repomirror";
+	/**
+	 * interact with a single repository mirror
+	 */
+	public static final String REPOMIRROR_DETAIL = "/{" + IRestPath.VAR_RMID + "}";
+	
+	/**
+	 * settings API
+	 */
+	public static final String SETTINGS = "/settings";
+	/**
+	 * websockets configuration API
+	 */
+	public static final String WSCONFIG = "/wsconfig";
 	
 }

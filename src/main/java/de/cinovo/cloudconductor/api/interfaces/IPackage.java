@@ -1,12 +1,18 @@
 package de.cinovo.cloudconductor.api.interfaces;
 
+import java.util.Map;
+import java.util.Set;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+
+import de.cinovo.cloudconductor.api.IRestPath;
 import de.cinovo.cloudconductor.api.MediaType;
 import de.cinovo.cloudconductor.api.model.Package;
 import de.cinovo.cloudconductor.api.model.PackageVersion;
-
-import javax.ws.rs.*;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Copyright 2017 Cinovo AG<br>
@@ -14,26 +20,25 @@ import java.util.Set;
  *
  * @author psigloch
  */
-@Path("/package")
+@Path(IRestPath.PKG)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public interface IPackage {
-
+	
 	/**
 	 * @return set of packages
 	 */
 	@GET
 	Set<Package> get();
-
+	
 	/**
 	 * @param pkgName the name of the package
 	 * @return the package
 	 */
 	@GET
-	@Path("/{package}")
-	Package get(@PathParam("package") String pkgName);
-
-
+	@Path(IRestPath.PKG_DETAIL)
+	Package get(@PathParam(IRestPath.VAR_PKG) String pkgName);
+	
 	/**
 	 * Get the existing package versions of a package
 	 *
@@ -41,17 +46,17 @@ public interface IPackage {
 	 * @return collection of package versions
 	 */
 	@GET
-	@Path("/{pkg}/versions")
-	Set<PackageVersion> getVersions(@PathParam("pkg") String pkgname);
-
+	@Path(IRestPath.PKG_VERSION)
+	Set<PackageVersion> getVersions(@PathParam(IRestPath.VAR_PKG) String pkgname);
+	
 	/**
-	 * @param pkgname the pacakge name
+	 * @param pkgname the package name
 	 * @return map of template-packageVersion pairs
 	 */
 	@GET
-	@Path("/{pkg}/usage")
-	Map<String, String> getUsage(@PathParam("pkg") String pkgname);
-
+	@Path(IRestPath.PKG_USAGE)
+	Map<String, String> getUsage(@PathParam(IRestPath.VAR_PKG) String pkgname);
+	
 	/**
 	 * Get the existing package versions of a repo
 	 *
@@ -59,6 +64,6 @@ public interface IPackage {
 	 * @return collection of package versions
 	 */
 	@GET
-	@Path("/versions/repo/{repo}")
-	Set<PackageVersion> getVersionsForRepo(@PathParam("repo") String repoName);
+	@Path(IRestPath.PKG_VERSION_REPO)
+	Set<PackageVersion> getVersionsForRepo(@PathParam(IRestPath.VAR_REPO) String repoName);
 }

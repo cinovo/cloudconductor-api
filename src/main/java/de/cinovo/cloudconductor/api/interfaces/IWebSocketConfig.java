@@ -5,6 +5,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import de.cinovo.cloudconductor.api.IRestPath;
 import de.cinovo.cloudconductor.api.MediaType;
 import de.cinovo.cloudconductor.api.model.WebSocketConfig;
 
@@ -16,7 +17,7 @@ import de.cinovo.cloudconductor.api.model.WebSocketConfig;
  * @author mweise
  *
  */
-@Path("/wsconfig")
+@Path(IRestPath.WSCONFIG)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public interface IWebSocketConfig {

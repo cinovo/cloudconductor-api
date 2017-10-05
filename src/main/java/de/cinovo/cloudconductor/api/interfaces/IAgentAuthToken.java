@@ -9,6 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
+import de.cinovo.cloudconductor.api.IRestPath;
 import de.cinovo.cloudconductor.api.MediaType;
 import de.cinovo.cloudconductor.api.model.AgentAuthToken;
 
@@ -20,7 +21,7 @@ import de.cinovo.cloudconductor.api.model.AgentAuthToken;
  * @author mweise
  *
  */
-@Path("/authtoken")
+@Path(IRestPath.AUTHTOKEN)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public interface IAgentAuthToken {
@@ -35,7 +36,7 @@ public interface IAgentAuthToken {
 	 * @return the generated token
 	 */
 	@PUT
-	@Path("/generate")
+	@Path(IRestPath.AUTHTOKEN_GENERATE)
 	AgentAuthToken generateNewToken();
 	
 	/**
@@ -45,7 +46,7 @@ public interface IAgentAuthToken {
 	 * @param comment optional text why token is revoked
 	 */
 	@PUT
-	@Path("/{tokenId}/revoke")
-	void revokeToken(@PathParam("tokenId") Long tokenId, String comment);
+	@Path(IRestPath.AUTHTOKEN_REVOKE)
+	void revokeToken(@PathParam(IRestPath.VAR_TOKENID) Long tokenId, String comment);
 	
 }

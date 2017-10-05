@@ -1,9 +1,14 @@
 package de.cinovo.cloudconductor.api.interfaces;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+
+import de.cinovo.cloudconductor.api.IRestPath;
 import de.cinovo.cloudconductor.api.MediaType;
 import de.cinovo.cloudconductor.api.model.Settings;
-
-import javax.ws.rs.*;
 
 /**
  * Copyright 2017 Cinovo AG<br>
@@ -11,17 +16,17 @@ import javax.ws.rs.*;
  *
  * @author psigloch
  */
-@Path("settings")
+@Path(IRestPath.SETTINGS)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public interface ISettings {
-
+	
 	/**
 	 * @return set of service objects
 	 */
 	@GET
 	Settings get();
-
+	
 	/**
 	 * @param settings the settings to save
 	 */
