@@ -13,6 +13,7 @@ import javax.ws.rs.Produces;
 import de.cinovo.cloudconductor.api.IRestPath;
 import de.cinovo.cloudconductor.api.MediaType;
 import de.cinovo.cloudconductor.api.model.AgentOption;
+import de.cinovo.cloudconductor.api.model.SSHKey;
 import de.cinovo.cloudconductor.api.model.Template;
 
 /**
@@ -87,4 +88,12 @@ public interface ITemplate {
 	@PUT
 	@Path(IRestPath.TEMPLATE_AGENTOPTION)
 	AgentOption saveAgentOption(@PathParam(IRestPath.VAR_TEMPLATE) String templateName, AgentOption option);
+	
+	/**
+	 * @param templateName the name of the template
+	 * @return keys which belong to the given template
+	 */
+	@GET
+	@Path(IRestPath.TEMPLATE_SSHKEY)
+	SSHKey[] getSSHKeysForTemplate(@PathParam(IRestPath.VAR_TEMPLATE) String templateName);
 }
