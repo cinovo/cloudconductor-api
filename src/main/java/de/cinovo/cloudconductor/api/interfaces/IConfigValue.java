@@ -40,29 +40,29 @@ public interface IConfigValue {
 	@GET
 	@Path(IRestPath.CONFIG_TEMPLATE)
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_JAVAARGS, MediaType.APPLICATION_JAVAPROPS})
-	Collection<ConfigValue> get(@PathParam(IRestPath.VAR_TEMPLATE) String template);
+	ConfigValue[] get(@PathParam(IRestPath.VAR_TEMPLATE) String template);
 	
 	/**
 	 * Returns all configuration key of a template in a non stacked variant
 	 *
 	 * @param template the template name
-	 * @return set of config values
+	 * @return array of configuration values
 	 */
 	@GET
 	@Path(IRestPath.CONFIG_TEMPLATE_UNSTACKED)
-	Collection<ConfigValue> getUnstacked(@PathParam(IRestPath.VAR_TEMPLATE) String template);
+	ConfigValue[] getUnstacked(@PathParam(IRestPath.VAR_TEMPLATE) String template);
 	
 	/**
 	 * Returns configuration of the given service within the template as Key-Value Pairs
 	 *
 	 * @param template the template name
 	 * @param service the name of the service
-	 * @return map of key value pairs representing the configuration of the service within the template
+	 * @return array of key value pairs representing the configuration of the service within the template
 	 */
 	@GET
 	@Path(IRestPath.CONFIG_TEMPLATE_SERVICE)
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_JAVAARGS, MediaType.APPLICATION_JAVAPROPS})
-	Collection<ConfigValue> get(@PathParam(IRestPath.VAR_TEMPLATE) String template, @PathParam(IRestPath.VAR_SERVICE) String service);
+	ConfigValue[] get(@PathParam(IRestPath.VAR_TEMPLATE) String template, @PathParam(IRestPath.VAR_SERVICE) String service);
 	
 	/**
 	 * Returns the value for a key of the given service within the template as Key-Value Pairs

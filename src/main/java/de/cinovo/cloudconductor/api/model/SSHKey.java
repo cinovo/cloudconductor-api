@@ -1,5 +1,6 @@
 package de.cinovo.cloudconductor.api.model;
 
+import java.beans.Transient;
 import java.util.Date;
 import java.util.List;
 
@@ -126,6 +127,7 @@ public class SSHKey implements INamed {
 		this.templates = templates;
 	}
 	
+	@Transient
 	@Override
 	public String getName() {
 		return this.owner;
