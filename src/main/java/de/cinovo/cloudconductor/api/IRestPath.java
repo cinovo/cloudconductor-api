@@ -122,11 +122,6 @@ public interface IRestPath {
 	 * interact with details of a configuration file
 	 */
 	public static final String FILE_DETAILS = "/{" + IRestPath.VAR_NAME + "}";
-	
-	/**
-	 * get all config files of a template
-	 */
-	public static final String FILE_CONFIG_FILES = "/{" + IRestPath.VAR_TEMPLATE + "}/files";
 	/**
 	 * interact with files of a specific template
 	 */
@@ -317,6 +312,10 @@ public interface IRestPath {
 	 * interact with the package versions of a template
 	 */
 	public static final String TEMPLATE_VERSION_SINGLE = IRestPath.TEMPLATE_VERSION + "/{" + IRestPath.VAR_PKG + "}/{" + IRestPath.VAR_VERSION + "}";
+	/**
+	 * interact with repositories of a template
+	 */
+	public static final String TEMPLATE_REPO = "/{" + IRestPath.VAR_TEMPLATE + "}/repo";
 	
 	// -------------------------------------------------------
 	// IOModule

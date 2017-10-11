@@ -13,7 +13,9 @@ import javax.ws.rs.Produces;
 import de.cinovo.cloudconductor.api.IRestPath;
 import de.cinovo.cloudconductor.api.MediaType;
 import de.cinovo.cloudconductor.api.model.AgentOption;
+import de.cinovo.cloudconductor.api.model.Repo;
 import de.cinovo.cloudconductor.api.model.SSHKey;
+import de.cinovo.cloudconductor.api.model.Service;
 import de.cinovo.cloudconductor.api.model.Template;
 
 /**
@@ -96,4 +98,21 @@ public interface ITemplate {
 	@GET
 	@Path(IRestPath.TEMPLATE_SSHKEY)
 	SSHKey[] getSSHKeysForTemplate(@PathParam(IRestPath.VAR_TEMPLATE) String templateName);
+	
+	/**
+	 * @param templateName the name of the template
+	 * @return services which belong to the given template
+	 */
+	@GET
+	@Path(IRestPath.TEMPLATE_SERVICE)
+	Service[] getServicesForTemplate(@PathParam(IRestPath.VAR_TEMPLATE) String templateName);
+	
+	/**
+	 * 
+	 * @param templateName the name of the template
+	 * @return repositories which belong to the given template
+	 */
+	@GET
+	@Path(IRestPath.TEMPLATE_REPO)
+	Repo[] getReposForTemplate(@PathParam(IRestPath.VAR_TEMPLATE) String templateName);
 }
