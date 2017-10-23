@@ -45,27 +45,27 @@ import de.cinovo.cloudconductor.api.model.ConfigFile;
 public interface IFile {
 	
 	/**
-	 * @return set of api objects
+	 * @return all configuration files
 	 */
 	@GET
 	public ConfigFile[] get();
 	
 	/**
-	 * @param apiObject the api object
+	 * @param fileToSave the file to be saved
 	 */
 	@PUT
-	public void save(ConfigFile apiObject);
+	public void save(ConfigFile fileToSave);
 	
 	/**
-	 * @param name the name of the api object
-	 * @return the api object
+	 * @param name the name of the file
+	 * @return the configuration file with the given name
 	 */
 	@GET
 	@Path(IRestPath.FILE_DETAILS)
 	public ConfigFile get(@PathParam(IRestPath.VAR_NAME) String name);
 	
 	/**
-	 * @param name the name of the api object
+	 * @param name the name of the file to be deleted
 	 */
 	@DELETE
 	@Path(IRestPath.FILE_DETAILS)
@@ -73,7 +73,7 @@ public interface IFile {
 	
 	/**
 	 * @param name the file name
-	 * @return the data
+	 * @return the data of the file
 	 */
 	@GET
 	@Path(IRestPath.FILE_DATA)
@@ -81,15 +81,15 @@ public interface IFile {
 	
 	/**
 	 * @param name the file name
-	 * @param data the data to save
+	 * @param data the file data to save
 	 */
 	@PUT
 	@Path(IRestPath.FILE_DATA)
 	public void saveData(@PathParam(IRestPath.VAR_NAME) String name, String data);
 	
 	/**
-	 * @param template the template name
-	 * @return the config files for the template
+	 * @param template the name of the template
+	 * @return the configuration files for the given template
 	 */
 	@GET
 	@Path(IRestPath.FILE_TEMPLATE)

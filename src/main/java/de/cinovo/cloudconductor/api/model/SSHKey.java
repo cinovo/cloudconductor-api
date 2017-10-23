@@ -1,9 +1,9 @@
 package de.cinovo.cloudconductor.api.model;
 
-import java.beans.Transient;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
@@ -127,7 +127,7 @@ public class SSHKey implements INamed {
 		this.templates = templates;
 	}
 	
-	@Transient
+	@JsonIgnore
 	@Override
 	public String getName() {
 		return this.owner;
