@@ -20,8 +20,10 @@ package de.cinovo.cloudconductor.api.model;
  * #L%
  */
 
+import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
@@ -39,8 +41,8 @@ public class PackageVersion implements INamed {
 	
 	private String name;
 	private String version;
-	private Set<Dependency> dependencies;
-	private Set<String> repos;
+	private Set<Dependency> dependencies = new HashSet<>();
+	private Set<String> repos = new HashSet<>();
 	
 	
 	/**
@@ -118,5 +120,11 @@ public class PackageVersion implements INamed {
 	 */
 	public void setRepos(Set<String> repos) {
 		this.repos = repos;
+	}
+	
+	@Override
+	@JsonIgnore
+	public String toString() {
+		return this.name + ":" + this.version + " (" + this.repos.toString() + ")";
 	}
 }
