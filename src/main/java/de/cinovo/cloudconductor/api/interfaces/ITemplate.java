@@ -13,6 +13,7 @@ import javax.ws.rs.Produces;
 import de.cinovo.cloudconductor.api.IRestPath;
 import de.cinovo.cloudconductor.api.MediaType;
 import de.cinovo.cloudconductor.api.model.AgentOption;
+import de.cinovo.cloudconductor.api.model.PackageVersion;
 import de.cinovo.cloudconductor.api.model.Repo;
 import de.cinovo.cloudconductor.api.model.SSHKey;
 import de.cinovo.cloudconductor.api.model.Service;
@@ -115,4 +116,12 @@ public interface ITemplate {
 	@GET
 	@Path(IRestPath.TEMPLATE_REPO)
 	Repo[] getReposForTemplate(@PathParam(IRestPath.VAR_TEMPLATE) String templateName);
+	
+	/**
+	 * @param templateName the name of the template
+	 * @return package versions used in the given template
+	 */
+	@GET
+	@Path(IRestPath.TEMPLATE_VERSION)
+	PackageVersion[] getPackageVersionsForTemplate(@PathParam(IRestPath.VAR_TEMPLATE) String templateName);
 }

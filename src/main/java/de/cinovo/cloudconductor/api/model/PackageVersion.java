@@ -127,4 +127,34 @@ public class PackageVersion implements INamed {
 	public String toString() {
 		return this.name + ":" + this.version + " (" + this.repos.toString() + ")";
 	}
+	
+	@Override
+	@JsonIgnore
+	public boolean equals(Object obj) {
+		if (!(obj instanceof PackageVersion)) {
+			return false;
+		}
+		
+		PackageVersion other = (PackageVersion) obj;
+		if (this.name == null) {
+			return false;
+		}
+		if (!this.name.equals(other.getName())) {
+			return false;
+		}
+		
+		if (this.version == null) {
+			return false;
+		}
+		return this.version.equals(other.getVersion());
+	}
+	
+	@Override
+	@JsonIgnore
+	public int hashCode() {
+		int val = (this.getVersion() == null) ? 0 : this.getVersion().hashCode();
+		int parent = (this.getName() == null) ? 0 : this.getName().hashCode();
+		return val * parent;
+	}
+	
 }
