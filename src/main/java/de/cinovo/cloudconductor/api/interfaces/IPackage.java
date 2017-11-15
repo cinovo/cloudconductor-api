@@ -4,10 +4,15 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import de.cinovo.cloudconductor.api.IRestPath;
 import de.cinovo.cloudconductor.api.MediaType;
@@ -26,10 +31,15 @@ import de.cinovo.cloudconductor.api.model.PackageVersion;
 public interface IPackage {
 	
 	/**
-	 * @return set of packages
+	 * @param page the number of the page
+	 * @param pageSize the number of packages per page
+	 * @param uriInfo the uri info
+	 * @return response including page of packages
 	 */
 	@GET
-	Set<Package> get();
+	Response get(@DefaultValue("0") @QueryParam("page") int page, //
+			@DefaultValue("0") @QueryParam("per_page") int pageSize, //
+			@Context UriInfo uriInfo);
 	
 	/**
 	 * @param pkgName the name of the package
