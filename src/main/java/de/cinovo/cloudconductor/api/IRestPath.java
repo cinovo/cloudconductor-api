@@ -398,4 +398,8 @@ public interface IRestPath {
 	 */
 	public static final String WSCONFIG = "/wsconfig";
 	
+	/**
+	 * statistics API
+	 */
+	public static final String STATS = "/stats";
 }
