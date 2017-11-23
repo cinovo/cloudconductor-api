@@ -20,6 +20,11 @@ package de.cinovo.cloudconductor.api.interfaces;
  * #L%
  */
 
+import de.cinovo.cloudconductor.api.IRestPath;
+import de.cinovo.cloudconductor.api.MediaType;
+import de.cinovo.cloudconductor.api.model.ConfigFile;
+
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -28,70 +33,72 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-import de.cinovo.cloudconductor.api.IRestPath;
-import de.cinovo.cloudconductor.api.MediaType;
-import de.cinovo.cloudconductor.api.model.ConfigFile;
-
 /**
  * Copyright 2013 Cinovo AG<br>
  * <br>
  *
  * @author psigloch
- *
  */
 @Path(IRestPath.FILE)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public interface IFile {
-	
+
 	/**
 	 * @return all configuration files
 	 */
 	@GET
-	public ConfigFile[] get();
-	
+	@RolesAllowed({"VIEW_CONFIGURATIONS", "EDIT_CONFIGURATIONS", "USE_AGENT_API"})
+	ConfigFile[] get();
+
 	/**
 	 * @param fileToSave the file to be saved
 	 */
 	@PUT
-	public void save(ConfigFile fileToSave);
-	
+	@RolesAllowed({"EDIT_CONFIGURATIONS"})
+	void save(ConfigFile fileToSave);
+
 	/**
 	 * @param name the name of the file
 	 * @return the configuration file with the given name
 	 */
 	@GET
 	@Path(IRestPath.FILE_DETAILS)
-	public ConfigFile get(@PathParam(IRestPath.VAR_NAME) String name);
-	
+	@RolesAllowed({"VIEW_CONFIGURATIONS", "EDIT_CONFIGURATIONS", "USE_AGENT_API"})
+	ConfigFile get(@PathParam(IRestPath.VAR_NAME) String name);
+
 	/**
 	 * @param name the name of the file to be deleted
 	 */
 	@DELETE
 	@Path(IRestPath.FILE_DETAILS)
-	public void delete(@PathParam(IRestPath.VAR_NAME) String name);
-	
+	@RolesAllowed({"EDIT_CONFIGURATIONS"})
+	void delete(@PathParam(IRestPath.VAR_NAME) String name);
+
 	/**
 	 * @param name the file name
 	 * @return the data of the file
 	 */
 	@GET
 	@Path(IRestPath.FILE_DATA)
-	public String getData(@PathParam(IRestPath.VAR_NAME) String name);
-	
+	@RolesAllowed({"VIEW_CONFIGURATIONS", "EDIT_CONFIGURATIONS", "USE_AGENT_API"})
+	String getData(@PathParam(IRestPath.VAR_NAME) String name);
+
 	/**
 	 * @param name the file name
 	 * @param data the file data to save
 	 */
 	@PUT
 	@Path(IRestPath.FILE_DATA)
-	public void saveData(@PathParam(IRestPath.VAR_NAME) String name, String data);
-	
+	@RolesAllowed({"EDIT_CONFIGURATIONS"})
+	void saveData(@PathParam(IRestPath.VAR_NAME) String name, String data);
+
 	/**
 	 * @param template the name of the template
 	 * @return the configuration files for the given template
 	 */
 	@GET
 	@Path(IRestPath.FILE_TEMPLATE)
-	public ConfigFile[] getConfigFiles(@PathParam(IRestPath.VAR_TEMPLATE) String template);
+	@RolesAllowed({"VIEW_CONFIGURATIONS", "EDIT_CONFIGURATIONS", "USE_AGENT_API"})
+	ConfigFile[] getConfigFiles(@PathParam(IRestPath.VAR_TEMPLATE) String template);
 }

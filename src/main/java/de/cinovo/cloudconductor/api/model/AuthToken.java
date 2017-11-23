@@ -1,10 +1,10 @@
 package de.cinovo.cloudconductor.api.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+
+import java.util.Date;
 
 /**
  * 
@@ -15,28 +15,12 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
  *
  */
 @JsonTypeInfo(include = As.PROPERTY, use = Id.CLASS)
-public class AgentAuthToken {
+public class AuthToken {
 	
-	private Long id;
 	private String token;
 	private Date creationDate;
 	private Date revoked;
-	private String revokeComment;
-	
-	
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return this.id;
-	}
-	
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
+
 	
 	/**
 	 * @return the token
@@ -78,20 +62,6 @@ public class AgentAuthToken {
 	 */
 	public void setRevoked(Date revoked) {
 		this.revoked = revoked;
-	}
-	
-	/**
-	 * @return the revokeComment
-	 */
-	public String getRevokeComment() {
-		return this.revokeComment;
-	}
-	
-	/**
-	 * @param revokeComment the revokeComment to set
-	 */
-	public void setRevokeComment(String revokeComment) {
-		this.revokeComment = revokeComment;
 	}
 	
 }

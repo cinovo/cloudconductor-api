@@ -1,7 +1,10 @@
 package de.cinovo.cloudconductor.api.interfaces;
 
-import java.util.List;
+import de.cinovo.cloudconductor.api.IRestPath;
+import de.cinovo.cloudconductor.api.MediaType;
+import de.cinovo.cloudconductor.api.model.AdditionalLink;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -11,10 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
-
-import de.cinovo.cloudconductor.api.IRestPath;
-import de.cinovo.cloudconductor.api.MediaType;
-import de.cinovo.cloudconductor.api.model.AdditionalLink;
+import java.util.List;
 
 /*
  * #%L
@@ -51,6 +51,7 @@ public interface ILinks {
 	 * @return list of additional links
 	 */
 	@GET
+	@RolesAllowed({"VIEW_CONFIGURATIONS","EDIT_CONFIGURATIONS"})
 	List<AdditionalLink> getLinks();
 	
 	/**
@@ -58,6 +59,7 @@ public interface ILinks {
 	 * @return the response
 	 */
 	@POST
+	@RolesAllowed({"EDIT_CONFIGURATIONS"})
 	Response createLink(AdditionalLink link);
 	
 	/**
@@ -65,6 +67,7 @@ public interface ILinks {
 	 * @return the updated link
 	 */
 	@PUT
+	@RolesAllowed({"EDIT_CONFIGURATIONS"})
 	AdditionalLink updateLink(AdditionalLink link);
 	
 	/**
@@ -72,6 +75,7 @@ public interface ILinks {
 	 */
 	@Path(IRestPath.LINK_DETAIL)
 	@DELETE
+	@RolesAllowed({"EDIT_CONFIGURATIONS"})
 	void deleteLink(@PathParam(IRestPath.VAR_LINKID) long id);
 	
 }

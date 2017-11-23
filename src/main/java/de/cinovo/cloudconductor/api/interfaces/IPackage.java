@@ -1,8 +1,11 @@
 package de.cinovo.cloudconductor.api.interfaces;
 
-import java.util.Map;
-import java.util.Set;
+import de.cinovo.cloudconductor.api.IRestPath;
+import de.cinovo.cloudconductor.api.MediaType;
+import de.cinovo.cloudconductor.api.model.Package;
+import de.cinovo.cloudconductor.api.model.PackageVersion;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
@@ -13,11 +16,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-
-import de.cinovo.cloudconductor.api.IRestPath;
-import de.cinovo.cloudconductor.api.MediaType;
-import de.cinovo.cloudconductor.api.model.Package;
-import de.cinovo.cloudconductor.api.model.PackageVersion;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Copyright 2017 Cinovo AG<br>
@@ -37,6 +37,7 @@ public interface IPackage {
 	 * @return response including page of packages
 	 */
 	@GET
+	@RolesAllowed({"VIEW_CONFIGURATIONS","EDIT_CONFIGURATIONS"})
 	Response get(@DefaultValue("0") @QueryParam("page") int page, //
 			@DefaultValue("0") @QueryParam("per_page") int pageSize, //
 			@Context UriInfo uriInfo);
@@ -47,6 +48,7 @@ public interface IPackage {
 	 */
 	@GET
 	@Path(IRestPath.PKG_DETAIL)
+	@RolesAllowed({"VIEW_CONFIGURATIONS","EDIT_CONFIGURATIONS"})
 	Package get(@PathParam(IRestPath.VAR_PKG) String pkgName);
 	
 	/**
@@ -57,6 +59,7 @@ public interface IPackage {
 	 */
 	@GET
 	@Path(IRestPath.PKG_VERSION)
+	@RolesAllowed({"VIEW_CONFIGURATIONS","EDIT_CONFIGURATIONS"})
 	Set<PackageVersion> getVersions(@PathParam(IRestPath.VAR_PKG) String pkgname);
 	
 	/**
@@ -65,6 +68,7 @@ public interface IPackage {
 	 */
 	@GET
 	@Path(IRestPath.PKG_USAGE)
+	@RolesAllowed({"VIEW_CONFIGURATIONS","EDIT_CONFIGURATIONS"})
 	Map<String, String> getUsage(@PathParam(IRestPath.VAR_PKG) String pkgname);
 	
 	/**
@@ -75,5 +79,6 @@ public interface IPackage {
 	 */
 	@GET
 	@Path(IRestPath.PKG_VERSION_REPO)
+	@RolesAllowed({"VIEW_CONFIGURATIONS","EDIT_CONFIGURATIONS"})
 	Set<PackageVersion> getVersionsForRepo(@PathParam(IRestPath.VAR_REPO) String repoName);
 }

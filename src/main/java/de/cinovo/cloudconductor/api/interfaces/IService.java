@@ -20,8 +20,11 @@ package de.cinovo.cloudconductor.api.interfaces;
  * #L%
  */
 
-import java.util.Map;
+import de.cinovo.cloudconductor.api.IRestPath;
+import de.cinovo.cloudconductor.api.MediaType;
+import de.cinovo.cloudconductor.api.model.Service;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -29,10 +32,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-
-import de.cinovo.cloudconductor.api.IRestPath;
-import de.cinovo.cloudconductor.api.MediaType;
-import de.cinovo.cloudconductor.api.model.Service;
+import java.util.Map;
 
 /**
  * Copyright 2017 Cinovo AG<br>
@@ -49,6 +49,7 @@ public interface IService {
 	 * @return set of service objects
 	 */
 	@GET
+	@RolesAllowed({"VIEW_CONFIGURATIONS","EDIT_CONFIGURATIONS"})
 	Service[] get();
 	
 	/**
@@ -57,12 +58,14 @@ public interface IService {
 	 */
 	@GET
 	@Path(IRestPath.SERVICE_DETAIL)
+	@RolesAllowed({"VIEW_CONFIGURATIONS","EDIT_CONFIGURATIONS"})
 	Service get(@PathParam(IRestPath.VAR_SERVICE) String service);
 	
 	/**
 	 * @param apiObject the service object
 	 */
 	@PUT
+	@RolesAllowed({"EDIT_CONFIGURATIONS"})
 	void save(Service apiObject);
 	
 	/**
@@ -70,6 +73,7 @@ public interface IService {
 	 */
 	@DELETE
 	@Path(IRestPath.SERVICE_DETAIL)
+	@RolesAllowed({"EDIT_CONFIGURATIONS"})
 	void delete(@PathParam(IRestPath.VAR_SERVICE) String service);
 	
 	/**
@@ -79,5 +83,6 @@ public interface IService {
 	@GET
 	@Path(IRestPath.SERVICE_USAGE)
 	@Produces(MediaType.APPLICATION_JSON)
+	@RolesAllowed({"VIEW_CONFIGURATIONS","EDIT_CONFIGURATIONS"})
 	Map<String, String> getUsage(@PathParam(IRestPath.VAR_SERVICE) String service);
 }

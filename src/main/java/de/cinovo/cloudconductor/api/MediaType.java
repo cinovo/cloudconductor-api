@@ -32,17 +32,17 @@ public interface MediaType {
 	/**
 	 * JSON media type
 	 */
-	static final String APPLICATION_JAVAPROPS = "application/x-javaprops";
+	String APPLICATION_JAVAPROPS = "application/x-javaprops";
 	/**
 	 * JSON media type
 	 */
-	static final String APPLICATION_JAVAARGS = "application/x-javaargs";
+	String APPLICATION_JAVAARGS = "application/x-javaargs";
 	/**
 	 * JSON media type
 	 */
-	static final String APPLICATION_JSON = "application/json;charset=UTF-8";
+	String APPLICATION_JSON = "application/json;charset=UTF-8";
 	/**
 	 * HTML media type
 	 */
-	static final String TEXT_HTML = "text/html;charset=UTF-8";
+	String TEXT_HTML = "text/html;charset=UTF-8";
 }

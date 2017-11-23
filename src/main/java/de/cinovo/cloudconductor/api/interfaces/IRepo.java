@@ -20,6 +20,11 @@ package de.cinovo.cloudconductor.api.interfaces;
  * #L%
  */
 
+import de.cinovo.cloudconductor.api.IRestPath;
+import de.cinovo.cloudconductor.api.MediaType;
+import de.cinovo.cloudconductor.api.model.Repo;
+
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -28,10 +33,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-
-import de.cinovo.cloudconductor.api.IRestPath;
-import de.cinovo.cloudconductor.api.MediaType;
-import de.cinovo.cloudconductor.api.model.Repo;
 
 /**
  * Copyright 2013 Cinovo AG<br>
@@ -48,6 +49,7 @@ public interface IRepo {
 	 * @return set of api objects
 	 */
 	@GET
+	@RolesAllowed({"VIEW_CONFIGURATIONS","EDIT_CONFIGURATIONS"})
 	Repo[] get();
 	
 	/**
@@ -56,6 +58,7 @@ public interface IRepo {
 	 */
 	@GET
 	@Path(IRestPath.REPO_DETAIL)
+	@RolesAllowed({"VIEW_CONFIGURATIONS","EDIT_CONFIGURATIONS"})
 	Repo get(@PathParam(IRestPath.VAR_NAME) String name);
 	
 	/**
@@ -63,12 +66,14 @@ public interface IRepo {
 	 * @return the new id
 	 */
 	@POST
+	@RolesAllowed({"EDIT_CONFIGURATIONS"})
 	Long newRepo(Repo repo);
 	
 	/**
 	 * @param repo the {@link Repo}
 	 */
 	@PUT
+	@RolesAllowed({"EDIT_CONFIGURATIONS"})
 	void edit(Repo repo);
 	
 	/**
@@ -76,5 +81,6 @@ public interface IRepo {
 	 */
 	@DELETE
 	@Path(IRestPath.REPO_DETAIL)
+	@RolesAllowed({"EDIT_CONFIGURATIONS"})
 	void delete(@PathParam(IRestPath.VAR_NAME) String name);
 }
