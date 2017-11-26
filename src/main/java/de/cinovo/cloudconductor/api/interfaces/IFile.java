@@ -91,6 +91,7 @@ public interface IFile {
 	@PUT
 	@Path(IRestPath.FILE_DATA)
 	@RolesAllowed({"EDIT_CONFIGURATIONS"})
+	@Consumes({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON})
 	void saveData(@PathParam(IRestPath.VAR_NAME) String name, String data);
 
 	/**

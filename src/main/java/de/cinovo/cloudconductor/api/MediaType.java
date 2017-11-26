@@ -42,6 +42,10 @@ public interface MediaType {
 	 */
 	String APPLICATION_JSON = "application/json;charset=UTF-8";
 	/**
+	 * plain text media type
+	 */
+	String TEXT_PLAIN = "text/plain";
+	/**
 	 * HTML media type
 	 */
 	String TEXT_HTML = "text/html;charset=UTF-8";
