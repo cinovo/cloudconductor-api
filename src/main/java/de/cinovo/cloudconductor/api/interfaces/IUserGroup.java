@@ -29,22 +29,32 @@ public interface IUserGroup {
 	 * @return list of usergroups
 	 */
 	@GET
-	@RolesAllowed({"VIEW_USERS", "EDIT_USER"})
+	@RolesAllowed({"VIEW_USERS", "EDIT_USERS"})
 	List<UserGroup> getUserGroups();
 	
 	/**
 	 * @param userGroup the user group to save
 	 */
 	@PUT
-	@RolesAllowed({"EDIT_USER"})
+	@RolesAllowed({"EDIT_USERS"})
 	void save(UserGroup userGroup);
+	
+	/**
+	 * 
+	 * @param userGroupName the name of the user group
+	 * @return the requested user group
+	 */
+	@GET
+	@Path("/{usergroupname}")
+	@RolesAllowed({"VIEW_USERS", "EDIT_USERS"})
+	UserGroup getUserGroup(@PathParam("usergroupname") String userGroupName);
 	
 	/**
 	 * @param userGroupName the user group name
 	 */
 	@DELETE
 	@Path("/{usergroupname}")
-	@RolesAllowed({"EDIT_USER"})
+	@RolesAllowed({"EDIT_USERS"})
 	void delete(@PathParam("usergroupname") String userGroupName);
 	
 }

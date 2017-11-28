@@ -31,22 +31,32 @@ public interface IUser {
 	 * @return list of users
 	 */
 	@GET
-	@RolesAllowed({"VIEW_USERS", "EDIT_USER"})
+	@RolesAllowed({"VIEW_USERS", "EDIT_USERS"})
 	List<User> getUsers();
 	
 	/**
 	 * @param user the user to save
 	 */
 	@PUT
-	@RolesAllowed({"EDIT_USER"})
+	@RolesAllowed({"EDIT_USERS"})
 	void save(User user);
+	
+	/**
+	 * 
+	 * @param userName the user name
+	 * @return the requested user
+	 */
+	@GET
+	@Path("/{username}")
+	@RolesAllowed({"VIEW_USERS", "EDIT_USERS"})
+	User getUser(@PathParam("username") String userName);
 	
 	/**
 	 * @param userName the user name
 	 */
 	@DELETE
 	@Path("/{username}")
-	@RolesAllowed({"EDIT_USER"})
+	@RolesAllowed({"EDIT_USERS"})
 	void delete(@PathParam("username") String userName);
 	
 	/**
@@ -55,7 +65,7 @@ public interface IUser {
 	 */
 	@POST
 	@Path("/{username}/authtoken")
-	@RolesAllowed({"EDIT_USER"})
+	@RolesAllowed({"EDIT_USERS"})
 	User createAuthToken(@PathParam("username") String userName);
 	
 	/**
@@ -65,7 +75,7 @@ public interface IUser {
 	 */
 	@DELETE
 	@Path("/{username}/authtoken")
-	@RolesAllowed({"EDIT_USER"})
+	@RolesAllowed({"EDIT_USERS"})
 	User revokeAuthToken(@PathParam("username") String userName, String token);
 	
 	/**
