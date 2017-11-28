@@ -74,9 +74,9 @@ public interface IUser {
 	 * @return the User which was changed
 	 */
 	@DELETE
-	@Path("/{username}/authtoken")
+	@Path("/{username}/authtoken/{token}")
 	@RolesAllowed({"EDIT_USERS"})
-	User revokeAuthToken(@PathParam("username") String userName, String token);
+	User revokeAuthToken(@PathParam("username") String userName, @PathParam("token") String token);
 	
 	/**
 	 * @param pwChange the password change request
