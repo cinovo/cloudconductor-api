@@ -12,6 +12,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import de.cinovo.cloudconductor.api.MediaType;
+import de.cinovo.cloudconductor.api.model.User;
 import de.cinovo.cloudconductor.api.model.UserGroup;
 
 /**
@@ -56,5 +57,15 @@ public interface IUserGroup {
 	@Path("/{usergroupname}")
 	@RolesAllowed({"EDIT_USERS"})
 	void delete(@PathParam("usergroupname") String userGroupName);
+	
+	/**
+	 * 
+	 * @param userGroupName
+	 * @return list of group members
+	 */
+	@GET
+	@Path("/{usergroupname}/members")
+	@RolesAllowed({"VIEW_USERS", "EDIT_USERS"})
+	List<User> getGroupMembers(@PathParam("usergroupname") String userGroupName);
 	
 }
