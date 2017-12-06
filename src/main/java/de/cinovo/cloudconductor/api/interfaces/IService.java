@@ -20,9 +20,7 @@ package de.cinovo.cloudconductor.api.interfaces;
  * #L%
  */
 
-import de.cinovo.cloudconductor.api.IRestPath;
-import de.cinovo.cloudconductor.api.MediaType;
-import de.cinovo.cloudconductor.api.model.Service;
+import java.util.Map;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
@@ -32,7 +30,9 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import java.util.Map;
+
+import de.cinovo.cloudconductor.api.MediaType;
+import de.cinovo.cloudconductor.api.model.Service;
 
 /**
  * Copyright 2017 Cinovo AG<br>
@@ -40,7 +40,7 @@ import java.util.Map;
  *
  * @author psigloch
  */
-@Path(IRestPath.SERVICE)
+@Path("/service")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public interface IService {
@@ -49,7 +49,7 @@ public interface IService {
 	 * @return set of service objects
 	 */
 	@GET
-	@RolesAllowed({"VIEW_CONFIGURATIONS","EDIT_CONFIGURATIONS"})
+	@RolesAllowed({"VIEW_CONFIGURATIONS", "EDIT_CONFIGURATIONS"})
 	Service[] get();
 	
 	/**
@@ -57,9 +57,9 @@ public interface IService {
 	 * @return the api object
 	 */
 	@GET
-	@Path(IRestPath.SERVICE_DETAIL)
-	@RolesAllowed({"VIEW_CONFIGURATIONS","EDIT_CONFIGURATIONS"})
-	Service get(@PathParam(IRestPath.VAR_SERVICE) String service);
+	@Path("/{service}")
+	@RolesAllowed({"VIEW_CONFIGURATIONS", "EDIT_CONFIGURATIONS"})
+	Service get(@PathParam("service") String service);
 	
 	/**
 	 * @param apiObject the service object
@@ -72,17 +72,17 @@ public interface IService {
 	 * @param service the service name
 	 */
 	@DELETE
-	@Path(IRestPath.SERVICE_DETAIL)
+	@Path("/{service}")
 	@RolesAllowed({"EDIT_CONFIGURATIONS"})
-	void delete(@PathParam(IRestPath.VAR_SERVICE) String service);
+	void delete(@PathParam("service") String service);
 	
 	/**
 	 * @param service the service name
 	 * @return map of template-package pairs
 	 */
 	@GET
-	@Path(IRestPath.SERVICE_USAGE)
+	@Path("/{service}/usage")
 	@Produces(MediaType.APPLICATION_JSON)
-	@RolesAllowed({"VIEW_CONFIGURATIONS","EDIT_CONFIGURATIONS"})
-	Map<String, String> getUsage(@PathParam(IRestPath.VAR_SERVICE) String service);
+	@RolesAllowed({"VIEW_CONFIGURATIONS", "EDIT_CONFIGURATIONS"})
+	Map<String, String> getUsage(@PathParam("service") String service);
 }

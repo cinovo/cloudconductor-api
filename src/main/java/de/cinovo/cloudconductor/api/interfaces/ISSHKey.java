@@ -1,9 +1,5 @@
 package de.cinovo.cloudconductor.api.interfaces;
 
-import de.cinovo.cloudconductor.api.IRestPath;
-import de.cinovo.cloudconductor.api.MediaType;
-import de.cinovo.cloudconductor.api.model.SSHKey;
-
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -13,6 +9,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
+import de.cinovo.cloudconductor.api.MediaType;
+import de.cinovo.cloudconductor.api.model.SSHKey;
+
 /**
  * Copyright 2017 Cinovo AG<br>
  * <br>
@@ -20,7 +19,7 @@ import javax.ws.rs.Produces;
  * @author mweise
  *
  */
-@Path(IRestPath.SSHKEY)
+@Path("/ssh")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public interface ISSHKey {
@@ -29,7 +28,7 @@ public interface ISSHKey {
 	 * @return all SSH keys
 	 */
 	@GET
-	@RolesAllowed({"VIEW_SSH","EDIT_SSH"})
+	@RolesAllowed({"VIEW_SSH", "EDIT_SSH"})
 	SSHKey[] getKeys();
 	
 	/**
@@ -37,9 +36,9 @@ public interface ISSHKey {
 	 * @return the SSH key
 	 */
 	@GET
-	@Path(IRestPath.SSHKEY_DETAIL)
-	@RolesAllowed({"VIEW_SSH","EDIT_SSH"})
-	SSHKey getKey(@PathParam(IRestPath.VAR_OWNER) String owner);
+	@Path("/{owner}")
+	@RolesAllowed({"VIEW_SSH", "EDIT_SSH"})
+	SSHKey getKey(@PathParam("owner") String owner);
 	
 	/**
 	 * @param newKey the new key
@@ -52,8 +51,8 @@ public interface ISSHKey {
 	 * @param owner the owner of the key to delete
 	 */
 	@DELETE
-	@Path(IRestPath.SSHKEY_DETAIL)
+	@Path("/{owner}")
 	@RolesAllowed({"EDIT_SSH"})
-	void deleteKey(@PathParam(IRestPath.VAR_OWNER) String owner);
+	void deleteKey(@PathParam("owner") String owner);
 	
 }

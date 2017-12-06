@@ -20,10 +20,6 @@ package de.cinovo.cloudconductor.api.interfaces;
  * #L%
  */
 
-import de.cinovo.cloudconductor.api.IRestPath;
-import de.cinovo.cloudconductor.api.MediaType;
-import de.cinovo.cloudconductor.api.model.RepoMirror;
-
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -34,6 +30,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
+import de.cinovo.cloudconductor.api.MediaType;
+import de.cinovo.cloudconductor.api.model.RepoMirror;
+
 /**
  * Copyright 2013 Cinovo AG<br>
  * <br>
@@ -41,7 +40,7 @@ import javax.ws.rs.Produces;
  * @author psigloch
  * 
  */
-@Path(IRestPath.REPOMIRROR)
+@Path("/repomirror")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public interface IRepoMirror {
@@ -51,17 +50,17 @@ public interface IRepoMirror {
 	 * @return the mirror
 	 */
 	@GET
-	@Path(IRestPath.REPOMIRROR_DETAIL)
-	@RolesAllowed({"VIEW_CONFIGURATIONS","EDIT_CONFIGURATIONS"})
-	RepoMirror get(@PathParam(IRestPath.VAR_RMID) Long id);
+	@Path("/{rmId}")
+	@RolesAllowed({"VIEW_CONFIGURATIONS", "EDIT_CONFIGURATIONS"})
+	RepoMirror get(@PathParam("rmId") Long id);
 	
 	/**
 	 * @param id the server id
 	 */
 	@DELETE
-	@Path(IRestPath.REPOMIRROR_DETAIL)
+	@Path("/{rmId}")
 	@RolesAllowed({"EDIT_CONFIGURATIONS"})
-	void delete(@PathParam(IRestPath.VAR_RMID) Long id);
+	void delete(@PathParam("rmId") Long id);
 	
 	/**
 	 * @param mirror the mirror

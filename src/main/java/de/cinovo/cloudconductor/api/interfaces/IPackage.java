@@ -1,9 +1,7 @@
 package de.cinovo.cloudconductor.api.interfaces;
 
-import de.cinovo.cloudconductor.api.IRestPath;
-import de.cinovo.cloudconductor.api.MediaType;
-import de.cinovo.cloudconductor.api.model.Package;
-import de.cinovo.cloudconductor.api.model.PackageVersion;
+import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
@@ -16,8 +14,10 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import java.util.Map;
-import java.util.Set;
+
+import de.cinovo.cloudconductor.api.MediaType;
+import de.cinovo.cloudconductor.api.model.Package;
+import de.cinovo.cloudconductor.api.model.PackageVersion;
 
 /**
  * Copyright 2017 Cinovo AG<br>
@@ -25,7 +25,7 @@ import java.util.Set;
  *
  * @author psigloch
  */
-@Path(IRestPath.PKG)
+@Path("/package")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public interface IPackage {
@@ -37,7 +37,7 @@ public interface IPackage {
 	 * @return response including page of packages
 	 */
 	@GET
-	@RolesAllowed({"VIEW_CONFIGURATIONS","EDIT_CONFIGURATIONS"})
+	@RolesAllowed({"VIEW_CONFIGURATIONS", "EDIT_CONFIGURATIONS"})
 	Response get(@DefaultValue("0") @QueryParam("page") int page, //
 			@DefaultValue("0") @QueryParam("per_page") int pageSize, //
 			@Context UriInfo uriInfo);
@@ -47,9 +47,9 @@ public interface IPackage {
 	 * @return the package
 	 */
 	@GET
-	@Path(IRestPath.PKG_DETAIL)
-	@RolesAllowed({"VIEW_CONFIGURATIONS","EDIT_CONFIGURATIONS"})
-	Package get(@PathParam(IRestPath.VAR_PKG) String pkgName);
+	@Path("/{pkg}")
+	@RolesAllowed({"VIEW_CONFIGURATIONS", "EDIT_CONFIGURATIONS"})
+	Package get(@PathParam("pkg") String pkgName);
 	
 	/**
 	 * Get the existing package versions of a package
@@ -58,18 +58,18 @@ public interface IPackage {
 	 * @return collection of package versions
 	 */
 	@GET
-	@Path(IRestPath.PKG_VERSION)
-	@RolesAllowed({"VIEW_CONFIGURATIONS","EDIT_CONFIGURATIONS"})
-	Set<PackageVersion> getVersions(@PathParam(IRestPath.VAR_PKG) String pkgname);
+	@Path("/{pkg}/versions")
+	@RolesAllowed({"VIEW_CONFIGURATIONS", "EDIT_CONFIGURATIONS"})
+	Set<PackageVersion> getVersions(@PathParam("pkg") String pkgname);
 	
 	/**
 	 * @param pkgname the package name
 	 * @return map of template-packageVersion pairs
 	 */
 	@GET
-	@Path(IRestPath.PKG_USAGE)
-	@RolesAllowed({"VIEW_CONFIGURATIONS","EDIT_CONFIGURATIONS"})
-	Map<String, String> getUsage(@PathParam(IRestPath.VAR_PKG) String pkgname);
+	@Path("/{pkg}/usage")
+	@RolesAllowed({"VIEW_CONFIGURATIONS", "EDIT_CONFIGURATIONS"})
+	Map<String, String> getUsage(@PathParam("pkg") String pkgname);
 	
 	/**
 	 * Get the existing package versions of a repo
@@ -78,7 +78,7 @@ public interface IPackage {
 	 * @return collection of package versions
 	 */
 	@GET
-	@Path(IRestPath.PKG_VERSION_REPO)
-	@RolesAllowed({"VIEW_CONFIGURATIONS","EDIT_CONFIGURATIONS"})
-	Set<PackageVersion> getVersionsForRepo(@PathParam(IRestPath.VAR_REPO) String repoName);
+	@Path("/versions/repo/{repo}")
+	@RolesAllowed({"VIEW_CONFIGURATIONS", "EDIT_CONFIGURATIONS"})
+	Set<PackageVersion> getVersionsForRepo(@PathParam("repo") String repoName);
 }

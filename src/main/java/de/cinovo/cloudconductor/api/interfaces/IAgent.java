@@ -1,13 +1,5 @@
 package de.cinovo.cloudconductor.api.interfaces;
 
-import de.cinovo.cloudconductor.api.IRestPath;
-import de.cinovo.cloudconductor.api.MediaType;
-import de.cinovo.cloudconductor.api.model.AgentOption;
-import de.cinovo.cloudconductor.api.model.PackageState;
-import de.cinovo.cloudconductor.api.model.PackageStateChanges;
-import de.cinovo.cloudconductor.api.model.ServiceStates;
-import de.cinovo.cloudconductor.api.model.ServiceStatesChanges;
-
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -15,6 +7,13 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+
+import de.cinovo.cloudconductor.api.MediaType;
+import de.cinovo.cloudconductor.api.model.AgentOption;
+import de.cinovo.cloudconductor.api.model.PackageState;
+import de.cinovo.cloudconductor.api.model.PackageStateChanges;
+import de.cinovo.cloudconductor.api.model.ServiceStates;
+import de.cinovo.cloudconductor.api.model.ServiceStatesChanges;
 
 /**
  * 
@@ -24,7 +23,7 @@ import javax.ws.rs.Produces;
  * @author mweise
  *
  */
-@Path(IRestPath.AGENT)
+@Path("/agent")
 public interface IAgent {
 	
 	/**
@@ -35,11 +34,11 @@ public interface IAgent {
 	 * @return list of instructions with changes to match the template
 	 */
 	@PUT
-	@Path(IRestPath.AGENT_PACKAGE_STATE)
+	@Path("/{template}/{host}/{uuid}/package")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@RolesAllowed({"USE_AGENT_API"})
-	PackageStateChanges notifyPackageState(@PathParam(IRestPath.VAR_TEMPLATE) String template, @PathParam(IRestPath.VAR_HOST) String host, PackageState rpmState, @PathParam(IRestPath.VAR_UUID) String uuid);
+	PackageStateChanges notifyPackageState(@PathParam("template") String template, @PathParam("host") String host, PackageState rpmState, @PathParam("uuid") String uuid);
 	
 	/**
 	 * @param template the template name
@@ -49,11 +48,11 @@ public interface IAgent {
 	 * @return list of instructions with changes to match the template
 	 */
 	@PUT
-	@Path(IRestPath.AGENT_SERVICE_STATE)
+	@Path("/{template}/{host}/{uuid}/service")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@RolesAllowed({"USE_AGENT_API"})
-	ServiceStatesChanges notifyServiceState(@PathParam(IRestPath.VAR_TEMPLATE) String template, @PathParam(IRestPath.VAR_HOST) String host, ServiceStates serviceState, @PathParam(IRestPath.VAR_UUID) String uuid);
+	ServiceStatesChanges notifyServiceState(@PathParam("template") String template, @PathParam("host") String host, ServiceStates serviceState, @PathParam("uuid") String uuid);
 	
 	/**
 	 * @param template the template name
@@ -63,9 +62,9 @@ public interface IAgent {
 	 * @return the current agent options
 	 */
 	@GET
-	@Path(IRestPath.AGENT_HEART_BEAT)
+	@Path("/{template}/{host}/{agent}/{uuid}/heartbeat")
 	@Produces(MediaType.APPLICATION_JSON)
 	@RolesAllowed({"USE_AGENT_API"})
-	AgentOption heartBeat(@PathParam(IRestPath.VAR_TEMPLATE) String template, @PathParam(IRestPath.VAR_HOST) String host, @PathParam(IRestPath.VAR_AGENT) String agent, @PathParam(IRestPath.VAR_UUID) String uuidString);
+	AgentOption heartBeat(@PathParam("template") String template, @PathParam("host") String host, @PathParam("agent") String agent, @PathParam("uuid") String uuidString);
 	
 }
