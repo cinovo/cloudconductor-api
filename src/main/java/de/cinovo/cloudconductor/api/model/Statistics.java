@@ -18,36 +18,61 @@ public class Statistics {
 	private long numberOfServices;
 	private long numberOfPackages;
 	
+	
+	/**
+	 * @return the numberOfHosts
+	 */
 	public long getNumberOfHosts() {
-		return numberOfHosts;
+		return this.numberOfHosts;
 	}
 	
+	/**
+	 * @param numberOfHosts the numberOfHosts to set
+	 */
 	public void setNumberOfHosts(long numberOfHosts) {
 		this.numberOfHosts = numberOfHosts;
 	}
 	
+	/**
+	 * @return the numberOfTemplates
+	 */
 	public long getNumberOfTemplates() {
-		return numberOfTemplates;
+		return this.numberOfTemplates;
 	}
 	
+	/**
+	 * @param numberOfTemplates the numberOfTemplates to set
+	 */
 	public void setNumberOfTemplates(long numberOfTemplates) {
 		this.numberOfTemplates = numberOfTemplates;
 	}
 	
+	/**
+	 * @return the numberOfServices
+	 */
 	public long getNumberOfServices() {
-		return numberOfServices;
+		return this.numberOfServices;
 	}
 	
+	/**
+	 * @param numberOfServices the numberOfServices to set
+	 */
 	public void setNumberOfServices(long numberOfServices) {
 		this.numberOfServices = numberOfServices;
 	}
 	
+	/**
+	 * @return the numberOfPackages
+	 */
 	public long getNumberOfPackages() {
-		return numberOfPackages;
+		return this.numberOfPackages;
 	}
 	
+	/**
+	 * @param numberOfPackages the numberOfPackages to set
+	 */
 	public void setNumberOfPackages(long numberOfPackages) {
 		this.numberOfPackages = numberOfPackages;
 	}
-
+	
 }
