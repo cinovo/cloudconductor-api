@@ -1,7 +1,5 @@
 package de.cinovo.cloudconductor.api.interfaces;
 
-import java.util.Collection;
-
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -30,7 +28,7 @@ public interface IConfigValue {
 	 */
 	@GET
 	@RolesAllowed({"VIEW_CONFIGVALUES", "EDIT_CONFIGVALUES"})
-	Collection<String> getAvailableTemplates();
+	String[] getAvailableTemplates();
 	
 	/**
 	 * Returns configuration of the given template as Key-Value Pairs

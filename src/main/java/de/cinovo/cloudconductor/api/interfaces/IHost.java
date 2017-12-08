@@ -1,7 +1,5 @@
 package de.cinovo.cloudconductor.api.interfaces;
 
-import java.util.List;
-
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -31,7 +29,7 @@ public interface IHost {
 	 */
 	@GET
 	@RolesAllowed({"VIEW_HOST", "EDIT_HOST"})
-	List<Host> getHosts();
+	Host[] getHosts();
 	
 	/**
 	 * @param hostName the host name

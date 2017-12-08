@@ -1,7 +1,5 @@
 package de.cinovo.cloudconductor.api.interfaces;
 
-import java.util.Set;
-
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -35,7 +33,7 @@ public interface ITemplate {
 	 */
 	@GET
 	@RolesAllowed({"VIEW_TEMPLATE", "EDIT_TEMPLATE"})
-	Set<Template> get();
+	Template[] get();
 	
 	/**
 	 * @param template the template to save

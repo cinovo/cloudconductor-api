@@ -1,8 +1,6 @@
 package de.cinovo.cloudconductor.api.interfaces;
 
 import java.util.Map;
-import java.util.Set;
-
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
@@ -60,7 +58,7 @@ public interface IPackage {
 	@GET
 	@Path("/{pkg}/versions")
 	@RolesAllowed({"VIEW_CONFIGURATIONS", "EDIT_CONFIGURATIONS"})
-	Set<PackageVersion> getVersions(@PathParam("pkg") String pkgname);
+	PackageVersion[] getVersions(@PathParam("pkg") String pkgname);
 	
 	/**
 	 * @param pkgname the package name
@@ -80,5 +78,5 @@ public interface IPackage {
 	@GET
 	@Path("/versions/repo/{repo}")
 	@RolesAllowed({"VIEW_CONFIGURATIONS", "EDIT_CONFIGURATIONS"})
-	Set<PackageVersion> getVersionsForRepo(@PathParam("repo") String repoName);
+	PackageVersion[] getVersionsForRepo(@PathParam("repo") String repoName);
 }
