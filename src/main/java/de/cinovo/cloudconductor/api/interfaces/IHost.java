@@ -1,7 +1,7 @@
 package de.cinovo.cloudconductor.api.interfaces;
 
 import de.cinovo.cloudconductor.api.MediaType;
-import de.cinovo.cloudconductor.api.enums.ServiceState;
+import de.cinovo.cloudconductor.api.model.ChangeServiceState;
 import de.cinovo.cloudconductor.api.model.Host;
 
 import javax.annotation.security.RolesAllowed;
@@ -49,13 +49,10 @@ public interface IHost {
 	void deleteHost(@PathParam("host") String hostName);
 
 	/**
-	 * @param hostName    the host name
-	 * @param serviceName the service name
-	 * @param newState    the new state
+	 * @param changeServiceState the change service state object
 	 */
 	@PUT
-	@Path("/{host}/{service}")
+	@Path("/changeservicestate")
 	@RolesAllowed({"EDIT_HOST"})
-	@Consumes({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON})
-	void setServiceState(@PathParam("host") String hostName, @PathParam("service") String serviceName, ServiceState newState);
+	void setServiceState(ChangeServiceState changeServiceState);
 }
