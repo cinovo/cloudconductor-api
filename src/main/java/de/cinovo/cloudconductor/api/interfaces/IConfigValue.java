@@ -79,6 +79,20 @@ public interface IConfigValue {
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_JAVAARGS, MediaType.APPLICATION_JAVAPROPS})
 	@RolesAllowed({"VIEW_CONFIGVALUES", "EDIT_CONFIGVALUES", "USE_AGENT_API"})
 	String get(@PathParam("template") String template, @PathParam("service") String service, @PathParam("key") String key);
+
+	/**
+	 * Returns the value for a key of the given service within the template as Key-Value Pair, but does no parent matching
+	 *
+	 * @param template the template name
+	 * @param service the name of the service
+	 * @param key the name of the key
+	 * @return the value of the key of the service within the template
+	 */
+	@GET
+	@Path("/{template}/{service" + ":.*}/{key}/exact")
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_JAVAARGS, MediaType.APPLICATION_JAVAPROPS})
+	@RolesAllowed({"VIEW_CONFIGVALUES", "EDIT_CONFIGVALUES", "USE_AGENT_API"})
+	String getExact(@PathParam("template") String template, @PathParam("service") String service, @PathParam("key") String key);
 	
 	/**
 	 * Adds a new key-value pair to the configuration of a service within a template
