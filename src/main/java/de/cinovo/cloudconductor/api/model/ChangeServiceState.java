@@ -4,6 +4,7 @@ package de.cinovo.cloudconductor.api.model;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+import de.cinovo.cloudconductor.api.enums.ServiceState;
 
 /**
  * Copyright 2017 Cinovo AG<br>
@@ -16,7 +17,7 @@ public class ChangeServiceState {
 
 	private String host;
 	private String service;
-	private ServiceStates targetState;
+	private ServiceState targetState;
 
 	/**
 	 * @return the host
@@ -49,14 +50,14 @@ public class ChangeServiceState {
 	/**
 	 * @return the targetState
 	 */
-	public ServiceStates getTargetState() {
+	public ServiceState getTargetState() {
 		return this.targetState;
 	}
 
 	/**
 	 * @param targetState the targetState to set
 	 */
-	public void setTargetState(ServiceStates targetState) {
+	public void setTargetState(ServiceState targetState) {
 		this.targetState = targetState;
 	}
 }
