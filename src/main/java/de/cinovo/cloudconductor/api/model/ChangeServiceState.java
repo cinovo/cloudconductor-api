@@ -14,23 +14,22 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 @JsonTypeInfo(include = As.PROPERTY, use = Id.CLASS)
 public class ChangeServiceState {
 
-	private String template;
+	private String host;
 	private String service;
 	private ServiceStates targetState;
 
-
 	/**
-	 * @return the template
+	 * @return the host
 	 */
-	public String getTemplate() {
-		return this.template;
+	public String getHost() {
+		return this.host;
 	}
 
 	/**
-	 * @param template the template to set
+	 * @param host the host to set
 	 */
-	public void setTemplate(String template) {
-		this.template = template;
+	public void setHost(String host) {
+		this.host = host;
 	}
 
 	/**
