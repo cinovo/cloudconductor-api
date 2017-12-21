@@ -1,7 +1,5 @@
 package de.cinovo.cloudconductor.api.interfaces;
 
-import java.util.List;
-
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -31,7 +29,7 @@ public interface IUserGroup {
 	 */
 	@GET
 	@RolesAllowed({"VIEW_USERS", "EDIT_USERS"})
-	List<UserGroup> getUserGroups();
+	UserGroup[] getUserGroups();
 	
 	/**
 	 * @param userGroup the user group to save
@@ -66,6 +64,6 @@ public interface IUserGroup {
 	@GET
 	@Path("/{usergroupname}/members")
 	@RolesAllowed({"VIEW_USERS", "EDIT_USERS"})
-	List<User> getGroupMembers(@PathParam("usergroupname") String userGroupName);
+	User[] getGroupMembers(@PathParam("usergroupname") String userGroupName);
 	
 }

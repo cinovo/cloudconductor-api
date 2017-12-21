@@ -1,12 +1,9 @@
 package de.cinovo.cloudconductor.api.interfaces;
 
-import java.util.List;
-
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -32,7 +29,7 @@ public interface IUser {
 	 */
 	@GET
 	@RolesAllowed({"VIEW_USERS", "EDIT_USERS"})
-	List<User> getUsers();
+	User[] getUsers();
 	
 	/**
 	 * @param user the user to save
@@ -63,9 +60,11 @@ public interface IUser {
 	 * @param userName the user name
 	 * @return the user
 	 */
-	@POST
+	@PUT
 	@Path("/{username}/authtoken")
 	@RolesAllowed({"EDIT_USERS"})
+	@Consumes({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON})
+	@Produces(MediaType.APPLICATION_JSON)
 	User createAuthToken(@PathParam("username") String userName);
 	
 	/**
@@ -76,7 +75,7 @@ public interface IUser {
 	@DELETE
 	@Path("/{username}/authtoken/{token}")
 	@RolesAllowed({"EDIT_USERS"})
-	User revokeAuthToken(@PathParam("username") String userName, @PathParam("token") String token);
+	void revokeAuthToken(@PathParam("username") String userName, @PathParam("token") String token);
 	
 	/**
 	 * @param pwChange the password change request
