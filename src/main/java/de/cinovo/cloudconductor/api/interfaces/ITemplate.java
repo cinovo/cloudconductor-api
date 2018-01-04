@@ -15,6 +15,7 @@ import de.cinovo.cloudconductor.api.model.PackageVersion;
 import de.cinovo.cloudconductor.api.model.Repo;
 import de.cinovo.cloudconductor.api.model.SSHKey;
 import de.cinovo.cloudconductor.api.model.Service;
+import de.cinovo.cloudconductor.api.model.ServiceDefaultState;
 import de.cinovo.cloudconductor.api.model.Template;
 
 /**
@@ -115,6 +116,37 @@ public interface ITemplate {
 	@Path("/{template}/services")
 	@RolesAllowed({"VIEW_TEMPLATE", "EDIT_TEMPLATE"})
 	Service[] getServicesForTemplate(@PathParam("template") String templateName);
+	
+	/**
+	 * @param templateName the name of the template
+	 * @return default states for all services related to the given template
+	 */
+	@GET
+	@Path("/{template}/servicedefaultstate")
+	@RolesAllowed({"VIEW_TEMPLATE", "EDIT_TEMPLATE"})
+	ServiceDefaultState[] getServiceDefaultStates(@PathParam("template") String templateName);
+	
+	/**
+	 * 
+	 * @param templateName the name of the template
+	 * @param serviceName the name of the service
+	 * @return the default state of the given service in the template
+	 */
+	@GET
+	@Path("/{template}/servicedefaultstate/{service}")
+	@RolesAllowed({"VIEW_TEMPLATE", "EDIT_TEMPLATE"})
+	ServiceDefaultState getServiceDefaultState(@PathParam("template") String templateName, @PathParam("service") String serviceName);
+	
+	/**
+	 * @param templateName the name of the template
+	 * @param serviceName the name of the service
+	 * @param newDefaultState the new default state for the given service and template
+	 * @return the updated default state
+	 */
+	@PUT
+	@Path("/{template}/servicedefaultstate/{service}")
+	@RolesAllowed({"EDIT_TEMPLATE"})
+	ServiceDefaultState saveServiceDefaultState(@PathParam("template") String templateName, @PathParam("service") String serviceName, ServiceDefaultState newDefaultState);
 	
 	/**
 	 * 
