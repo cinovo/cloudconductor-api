@@ -20,6 +20,9 @@ package de.cinovo.cloudconductor.api.interfaces;
  * #L%
  */
 
+import de.cinovo.cloudconductor.api.MediaType;
+import de.cinovo.cloudconductor.api.model.Repo;
+
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -29,9 +32,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-
-import de.cinovo.cloudconductor.api.MediaType;
-import de.cinovo.cloudconductor.api.model.Repo;
 
 /**
  * Copyright 2013 Cinovo AG<br>
@@ -82,4 +82,12 @@ public interface IRepo {
 	@Path("/{name}")
 	@RolesAllowed({"EDIT_CONFIGURATIONS"})
 	void delete(@PathParam("name") String name);
+
+	/**
+	 * @param repoName the name of the the {@link Repo} to force the reindex on
+	 */
+	@PUT
+	@Path("/{name}/forceupdate")
+	@RolesAllowed({"EDIT_CONFIGURATIONS"})
+	void forceReindex(@PathParam("name") String repoName);
 }
