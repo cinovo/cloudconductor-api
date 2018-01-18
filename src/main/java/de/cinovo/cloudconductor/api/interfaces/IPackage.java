@@ -84,11 +84,11 @@ public interface IPackage {
 	/**
 	 * Get the package difference between the host and its template
 	 *
-	 * @param hostName the host name
+	 * @param hostUuid the host uuid
 	 * @return collection of package changes
 	 */
 	@GET
 	@Path("/changes/{host}")
 	@RolesAllowed({"VIEW_CONFIGURATIONS", "EDIT_CONFIGURATIONS"})
-	PackageStateChanges getPackageChanges(@PathParam("host") String hostName);
+	PackageStateChanges getPackageChanges(@PathParam("host") String hostUuid);
 }

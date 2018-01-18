@@ -15,22 +15,22 @@ import de.cinovo.cloudconductor.api.enums.ServiceState;
 @JsonTypeInfo(include = As.PROPERTY, use = Id.CLASS)
 public class ChangeServiceState {
 
-	private String host;
+	private String hostUuid;
 	private String service;
 	private ServiceState targetState;
 
 	/**
-	 * @return the host
+	 * @return the hostUuid
 	 */
-	public String getHost() {
-		return this.host;
+	public String getHostUuid() {
+		return this.hostUuid;
 	}
 
 	/**
-	 * @param host the host to set
+	 * @param hostUuid the hostUuid to set
 	 */
-	public void setHost(String host) {
-		this.host = host;
+	public void setHostUuid(String hostUuid) {
+		this.hostUuid = hostUuid;
 	}
 
 	/**

@@ -32,21 +32,21 @@ public interface IHost {
 	Host[] getHosts();
 
 	/**
-	 * @param hostName the host name
+	 * @param hostUuid the host uuid
 	 * @return the Host
 	 */
 	@GET
 	@Path("/{host}")
 	@RolesAllowed({"VIEW_HOST", "EDIT_HOST"})
-	Host getHost(@PathParam("host") String hostName);
+	Host getHost(@PathParam("host") String hostUuid);
 
 	/**
-	 * @param hostName the host name
+	 * @param hostUuid the host uuid
 	 */
 	@DELETE
 	@Path("/{host}")
 	@RolesAllowed({"EDIT_HOST"})
-	void deleteHost(@PathParam("host") String hostName);
+	void deleteHost(@PathParam("host") String hostUuid);
 
 	/**
 	 * @param changeServiceState the change service state object
