@@ -3,6 +3,7 @@ package de.cinovo.cloudconductor.api.interfaces;
 import de.cinovo.cloudconductor.api.MediaType;
 import de.cinovo.cloudconductor.api.model.ChangeServiceState;
 import de.cinovo.cloudconductor.api.model.Host;
+import de.cinovo.cloudconductor.api.model.SimpleHost;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
@@ -30,6 +31,13 @@ public interface IHost {
 	@GET
 	@RolesAllowed({"VIEW_HOST", "EDIT_HOST"})
 	Host[] getHosts();
+
+	/**
+	 * @return list of simple hosts
+	 */
+	@GET
+	@Path("/simple")
+	SimpleHost[] getSimpleHosts();
 
 	/**
 	 * @param hostUuid the host uuid

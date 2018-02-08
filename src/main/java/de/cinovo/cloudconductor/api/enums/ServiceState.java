@@ -71,7 +71,7 @@ public enum ServiceState {
 	/**
 	 * states in flight/ in transition
 	 */
-	public static ServiceState[] INFLIGHT_STATES = new ServiceState[]{STARTING, STOPPING, RESTARTING_STOPPING, RESTARTING_STARTING};
+	public static ServiceState[] INFLIGHT_STATES = new ServiceState[]{ServiceState.STARTING, ServiceState.STOPPING, ServiceState.RESTARTING_STOPPING, ServiceState.RESTARTING_STARTING};
 
 	/**
 	 * @param nextState the next desired state
@@ -83,19 +83,19 @@ public enum ServiceState {
 		}
 		switch(this) {
 			case STARTING:
-				return nextState == STARTED || nextState == STOPPING;
+				return nextState == ServiceState.STARTED || nextState == ServiceState.STOPPING;
 			case STARTED:
-				return nextState == STOPPING || nextState == RESTARTING_STOPPING || nextState == IN_SERVICE;
+				return nextState == ServiceState.STOPPING || nextState == ServiceState.RESTARTING_STOPPING || nextState == ServiceState.IN_SERVICE;
 			case IN_SERVICE:
-				return nextState == STOPPING || nextState == RESTARTING_STOPPING;
+				return nextState == ServiceState.STOPPING || nextState == ServiceState.RESTARTING_STOPPING;
 			case STOPPING:
-				return nextState == STOPPED || nextState == STARTING;
+				return nextState == ServiceState.STOPPED || nextState == ServiceState.STARTING;
 			case STOPPED:
-				return nextState == STARTING;
+				return nextState == ServiceState.STARTING;
 			case RESTARTING_STOPPING:
-				return nextState == RESTARTING_STARTING;
+				return nextState == ServiceState.RESTARTING_STARTING;
 			case RESTARTING_STARTING:
-				return nextState == STARTED;
+				return nextState == ServiceState.STARTED;
 		}
 		return false;
 	}
@@ -109,19 +109,19 @@ public enum ServiceState {
 		for(ServiceState s : ServiceState.INFLIGHT_STATES) {
 			if(s.equals(current)) {
 				inflight = true;
-				continue;
+				break;
 			}
 		}
 		if(inflight) {
 			switch(current) {
 				case RESTARTING_STARTING:
-					return STARTED;
+					return ServiceState.STARTED;
 				case RESTARTING_STOPPING:
-					return RESTARTING_STARTING;
+					return ServiceState.RESTARTING_STARTING;
 				case STARTING:
-					return STARTED;
+					return ServiceState.STARTED;
 				case STOPPING:
-					return STOPPED;
+					return ServiceState.STOPPED;
 				default:
 					break;
 
