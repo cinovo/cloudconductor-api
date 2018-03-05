@@ -63,4 +63,13 @@ public interface IHost {
 	@Path("/changeservicestate")
 	@RolesAllowed({"EDIT_HOST"})
 	void setServiceState(ChangeServiceState changeServiceState);
+
+	/**
+	 * @param hostUuid the host uuid
+	 * @param newTemplate the new template of the host
+	 */
+	@GET
+	@Path("/{host}/changetemplate/{template}")
+	@RolesAllowed({"EDIT_HOST"})
+	void moveHost(@PathParam("host")String hostUuid, @PathParam("template")String newTemplate);
 }
