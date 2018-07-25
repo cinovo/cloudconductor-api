@@ -43,6 +43,16 @@ public interface IConfigValue {
 	ConfigValue[] get(@PathParam("template") String template);
 	
 	/**
+	 * Deletes all configuration values for the given template.
+	 * 
+	 * @param templateName the name of the template
+	 */
+	@DELETE
+	@Path("/{template}")
+	@RolesAllowed({"EDIT_CONFIGVALUES"})
+	void deleteForTemplate(@PathParam("template") String templateName);
+	
+	/**
 	 * Returns all configuration key of a template in a non stacked variant
 	 *
 	 * @param template the template name
@@ -67,6 +77,17 @@ public interface IConfigValue {
 	ConfigValue[] get(@PathParam("template") String template, @PathParam("service") String service);
 	
 	/**
+	 * Deletes all configuration values for given template and service.
+	 * 
+	 * @param template the name of the template
+	 * @param service the name of the service
+	 */
+	@DELETE
+	@Path("/{template}/{service}")
+	@RolesAllowed({"EDIT_CONFIGVALUES"})
+	void deleteForService(@PathParam("template") String template, @PathParam("service") String service);
+	
+	/**
 	 * Returns the value for a key of the given service within the template as Key-Value Pairs
 	 *
 	 * @param template the template name
@@ -79,7 +100,7 @@ public interface IConfigValue {
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_JAVAARGS, MediaType.APPLICATION_JAVAPROPS})
 	@RolesAllowed({"VIEW_CONFIGVALUES", "EDIT_CONFIGVALUES", "USE_AGENT_API"})
 	String get(@PathParam("template") String template, @PathParam("service") String service, @PathParam("key") String key);
-
+	
 	/**
 	 * Returns the value for a key of the given service within the template as Key-Value Pair, but does no parent matching
 	 *
