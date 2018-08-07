@@ -24,7 +24,7 @@ import de.cinovo.cloudconductor.api.MediaType;
 public interface IServiceUsage {
 	
 	/**
-	 * @return map service -> serviceUsage (template -> package)
+	 * @return map service - serviceUsage (template - package)
 	 */
 	@GET
 	@Path("/")
