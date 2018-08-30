@@ -1,6 +1,7 @@
 package de.cinovo.cloudconductor.api.interfaces;
 
 import de.cinovo.cloudconductor.api.MediaType;
+import de.cinovo.cloudconductor.api.model.ConfigDiff;
 import de.cinovo.cloudconductor.api.model.ConfigValue;
 
 import javax.annotation.security.RolesAllowed;
@@ -51,6 +52,19 @@ public interface IConfigValue {
 	@Path("/{template}")
 	@RolesAllowed({"EDIT_CONFIGVALUES"})
 	void deleteForTemplate(@PathParam("template") String templateName);
+
+	/**
+	 * Returns all configuration key of a template in a non stacked variant
+	 *
+	 * @param template the template name
+	 * @return array of configuration values
+	 * @deprecated use getCleanUnstacked instead.
+	 */
+	@GET
+	@Path("/{template}/unstacked")
+	@RolesAllowed({"VIEW_CONFIGVALUES", "EDIT_CONFIGVALUES", "USE_AGENT_API"})
+	@Deprecated
+	ConfigValue[] getUnstacked(@PathParam("template") String template);
 
 	/**
 	 * Returns configuration of the given service within the template as Key-Value Pairs
@@ -127,7 +141,7 @@ public interface IConfigValue {
 
 
 	/**
-	 * Returns all configuration key of a template in a non stacked variant
+	 * Returns all configuration key of a template, without variable swaps
 	 *
 	 * @param template the template name
 	 * @return array of configuration values
@@ -138,7 +152,18 @@ public interface IConfigValue {
 	ConfigValue[] getClean(@PathParam("template") String template);
 
 	/**
-	 * Returns configuration of the given service within the template as Key-Value Pairs
+	 * Returns all configuration key of a template in a non stacked variant, without variable swaps
+	 *
+	 * @param template the template name
+	 * @return array of configuration values
+	 */
+	@GET
+	@Path("/clean/unstacked/{template}")
+	@RolesAllowed({"VIEW_CONFIGVALUES", "EDIT_CONFIGVALUES", "USE_AGENT_API"})
+	ConfigValue[] getCleanUnstacked(@PathParam("template") String template);
+
+	/**
+	 * Returns configuration of the given service within the template as Key-Value Pairs, without variable swaps
 	 *
 	 * @param template the template name
 	 * @param service  the name of the service
@@ -150,8 +175,9 @@ public interface IConfigValue {
 	@RolesAllowed({"VIEW_CONFIGVALUES", "EDIT_CONFIGVALUES", "USE_AGENT_API"})
 	ConfigValue[] getClean(@PathParam("template") String template, @PathParam("service") String service);
 
+
 	/**
-	 * Returns the value for a key of the given service within the template as Key-Value Pairs
+	 * Returns the value for a key of the given service within the template as Key-Value Pairs, without variable swaps
 	 *
 	 * @param template the template name
 	 * @param service  the name of the service
@@ -166,7 +192,7 @@ public interface IConfigValue {
 
 
 	/**
-	 * Returns the value for a key of the given service within the template as Key-Value Pair, but does no parent matching
+	 * Returns the value for variables of the given  template as Key-Value Pair, but does no parent matching
 	 *
 	 * @param template the template name
 	 * @return the value of the key of the service within the template
@@ -176,6 +202,19 @@ public interface IConfigValue {
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_JAVAARGS, MediaType.APPLICATION_JAVAPROPS})
 	@RolesAllowed({"VIEW_CONFIGVALUES", "EDIT_CONFIGVALUES", "USE_AGENT_API"})
 	ConfigValue[] getCleanVars(@PathParam("template") String template);
+
+	/**
+	 * Returns the value for a key of the given service within the template as Key-Value Pair, but does no parent matching
+	 *
+	 * @param templateA the template name
+	 * @param templateB the other themplate name
+	 * @return the value of the key of the service within the template
+	 */
+	@GET
+	@Path("diff/{templateA}/{templateB}")
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_JAVAARGS, MediaType.APPLICATION_JAVAPROPS})
+	@RolesAllowed({"VIEW_CONFIGVALUES", "EDIT_CONFIGVALUES"})
+	ConfigDiff[] diffTemplates(@PathParam("templateA") String templateA, @PathParam("templateB") String templateB);
 }
 
 

@@ -184,5 +184,6 @@ public interface ITemplate {
 	 */
 	@GET
 	@Path("/packagediff/{templateA}/{templateB}")
+	@RolesAllowed({"VIEW_TEMPLATE", "EDIT_TEMPLATE"})
 	PackageDiff[] packageDiff(@PathParam("templateA") String templateA, @PathParam("templateB") String templateB);
 }
