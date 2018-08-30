@@ -47,6 +47,7 @@ public class Template implements INamed {
 	private Map<String, String> versions;
 	private Boolean autoUpdate;
 	private Boolean smoothUpdate;
+	private String group;
 
 
 	/**
@@ -160,5 +161,19 @@ public class Template implements INamed {
 	 */
 	public void setSmoothUpdate(Boolean smoothUpdate) {
 		this.smoothUpdate = smoothUpdate;
+	}
+
+	/**
+	 * @return the group
+	 */
+	public String getGroup() {
+		return this.group;
+	}
+
+	/**
+	 * @param group the group to set
+	 */
+	public void setGroup(String group) {
+		this.group = group;
 	}
 }
