@@ -215,6 +215,14 @@ public interface IConfigValue {
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_JAVAARGS, MediaType.APPLICATION_JAVAPROPS})
 	@RolesAllowed({"VIEW_CONFIGVALUES", "EDIT_CONFIGVALUES"})
 	ConfigDiff[] diffTemplates(@PathParam("templateA") String templateA, @PathParam("templateB") String templateB);
+	
+	/**
+	 * Migrate global configuration values.
+	 */
+	@PUT
+	@Path("migrate")
+	@RolesAllowed({"EDIT_CONFIGVALUES"})
+	void migrateGlobalConfig();
 }
 
 
