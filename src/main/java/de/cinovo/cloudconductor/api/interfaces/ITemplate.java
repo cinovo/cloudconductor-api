@@ -8,6 +8,7 @@ import de.cinovo.cloudconductor.api.model.Repo;
 import de.cinovo.cloudconductor.api.model.SSHKey;
 import de.cinovo.cloudconductor.api.model.Service;
 import de.cinovo.cloudconductor.api.model.ServiceDefaultState;
+import de.cinovo.cloudconductor.api.model.SimplePackageVersion;
 import de.cinovo.cloudconductor.api.model.SimpleTemplate;
 import de.cinovo.cloudconductor.api.model.Template;
 
@@ -19,6 +20,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import java.util.List;
 
 /**
  * Copyright 2017 Cinovo AG<br>
@@ -175,8 +177,27 @@ public interface ITemplate {
 	@Path("/{template}/package/versions")
 	@RolesAllowed({"VIEW_TEMPLATE", "EDIT_TEMPLATE"})
 	PackageVersion[] getPackageVersionsForTemplate(@PathParam("template") String templateName);
-
-
+	
+	
+	/**
+	 * @param templateName		name of the template to override
+	 * @param packageVersions	new package versions for given template
+	 * @return the modified template
+	 */
+	@PUT
+	@Path("/{template}/package/versions")
+	@RolesAllowed({"EDIT_TEMPLATE"})
+	Template replacePackageVersionsForTemplate(@PathParam("template") String templateName, List<SimplePackageVersion> packageVersions);
+	
+	/**
+	 * @param templateName	the name of the template
+	 * @return package versions used in the given template without its dependencies
+	 */
+	@GET
+	@Path("/{template}/package/versions/simple")
+	@RolesAllowed({"VIEW_TEMPLATE", "EDIT_TEMPLATE"})
+	SimplePackageVersion[] getSimplePackageVersionsForTemplate(@PathParam("template") String templateName);
+	
 	/**
 	 * @param templateA the name of the first template of the diff
 	 * @param templateB the name of the second template of the diff
