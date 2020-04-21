@@ -3,6 +3,7 @@ package de.cinovo.cloudconductor.api.interfaces;
 import de.cinovo.cloudconductor.api.MediaType;
 import de.cinovo.cloudconductor.api.model.ConfigDiff;
 import de.cinovo.cloudconductor.api.model.ConfigValue;
+import de.cinovo.cloudconductor.api.model.ConfigValues;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
@@ -127,6 +128,14 @@ public interface IConfigValue {
 	@RolesAllowed({"EDIT_CONFIGVALUES"})
 	void save(ConfigValue config);
 
+	/**
+	 * @param configValues the config values to save in bulk
+	 */
+	@PUT
+	@Path("/bulk")
+	@RolesAllowed({"EDIT_CONFIGVALUES"})
+	void save(ConfigValues configValues);
+	
 	/**
 	 * Delete a ConfigValue
 	 *
