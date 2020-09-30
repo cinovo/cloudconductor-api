@@ -21,11 +21,11 @@ package de.cinovo.cloudconductor.api.model;
  */
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import de.cinovo.cloudconductor.api.enums.ServiceState;
 import de.cinovo.cloudconductor.api.interfaces.INamed;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -34,7 +34,7 @@ import java.util.Set;
  *
  * @author psigloch
  */
-@JsonTypeInfo(include = As.PROPERTY, use = Id.CLASS)
+@JsonTypeInfo(use = Id.CLASS)
 public class Service implements INamed {
 
 	private Long id;
@@ -44,6 +44,24 @@ public class Service implements INamed {
 	private ServiceState state = ServiceState.STOPPED;
 	private Set<String> packages;
 
+	/** default constructor */
+	public Service() {
+		// nothing to do
+	}
+
+	/**
+	 * @param id			service id
+	 * @param name			service name
+	 * @param description	service description
+	 * @param initScript	service init script
+	 */
+	public Service(long id, String name, String description, String initScript) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.initScript = initScript;
+		this.packages = new HashSet<>();
+	}
 
 	/**
 	 * @return the name

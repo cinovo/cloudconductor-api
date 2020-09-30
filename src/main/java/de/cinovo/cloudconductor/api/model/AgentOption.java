@@ -1,12 +1,10 @@
 package de.cinovo.cloudconductor.api.model;
 
-import java.util.concurrent.TimeUnit;
-
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
-
 import de.cinovo.cloudconductor.api.enums.TaskState;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Copyright 2014 Cinovo AG<br>
@@ -14,7 +12,7 @@ import de.cinovo.cloudconductor.api.enums.TaskState;
  *
  * @author psigloch
  */
-@JsonTypeInfo(include = As.PROPERTY, use = Id.CLASS)
+@JsonTypeInfo(use = Id.CLASS)
 public class AgentOption {
 	
 	private int aliveTimer = 2;
@@ -35,8 +33,27 @@ public class AgentOption {
 	private String templateName;
 	
 	private String uuid;
-	
-	
+
+	/** default constructor */
+	public AgentOption() {
+		// nothing to do
+	}
+
+	public AgentOption(int aliveTimer, TimeUnit aliveTimerUnit, TaskState doSshKeys, int sshKeysTimer, TimeUnit sshKeysTimerUnit, TaskState doPackageManagement, int packageManagementTimer, TimeUnit packageManagementTimerUnit, TaskState doFileManagement, int fileManagementTimer, TimeUnit fileManagementTimerUnit, String templateName) {
+		this.aliveTimer = aliveTimer;
+		this.aliveTimerUnit = aliveTimerUnit;
+		this.doSshKeys = doSshKeys;
+		this.sshKeysTimer = sshKeysTimer;
+		this.sshKeysTimerUnit = sshKeysTimerUnit;
+		this.doPackageManagement = doPackageManagement;
+		this.packageManagementTimer = packageManagementTimer;
+		this.packageManagementTimerUnit = packageManagementTimerUnit;
+		this.doFileManagement = doFileManagement;
+		this.fileManagementTimer = fileManagementTimer;
+		this.fileManagementTimerUnit = fileManagementTimerUnit;
+		this.templateName = templateName;
+	}
+
 	/**
 	 * @return the aliveTimer
 	 */

@@ -27,7 +27,6 @@ public class SimplePackageVersion implements INamed {
 	/**
 	 * Create empty PackageVersion
 	 */
-	@SuppressWarnings("unused")
 	public SimplePackageVersion() {
 		// nothing to do
 	}
