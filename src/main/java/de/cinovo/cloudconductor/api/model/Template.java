@@ -21,7 +21,6 @@ package de.cinovo.cloudconductor.api.model;
  */
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import de.cinovo.cloudconductor.api.interfaces.INamed;
 
@@ -34,7 +33,7 @@ import java.util.Set;
  *
  * @author psigloch
  */
-@JsonTypeInfo(include = As.PROPERTY, use = Id.CLASS)
+@JsonTypeInfo(use = Id.CLASS)
 public class Template implements INamed {
 
 	private String name;
@@ -49,6 +48,10 @@ public class Template implements INamed {
 	private Boolean smoothUpdate;
 	private String group;
 
+	/** default constructor */
+	public Template() {
+		// nothing to do
+	}
 
 	/**
 	 * @return the name

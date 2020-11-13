@@ -1,15 +1,13 @@
 package de.cinovo.cloudconductor.api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+import de.cinovo.cloudconductor.api.interfaces.INamed;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
-import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
-
-import de.cinovo.cloudconductor.api.interfaces.INamed;
 
 /**
  * Copyright 2017 Cinovo AG<br>
@@ -17,7 +15,7 @@ import de.cinovo.cloudconductor.api.interfaces.INamed;
  *
  * @author psigloch
  */
-@JsonTypeInfo(include = As.PROPERTY, use = Id.CLASS)
+@JsonTypeInfo(use = Id.CLASS)
 public class User implements INamed {
 	
 	private String loginName;

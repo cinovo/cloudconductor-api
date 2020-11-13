@@ -20,8 +20,23 @@ public class AdditionalLink {
 	private Long id;
 	private String label;
 	private String url;
-	
-	
+
+	/** default constructor */
+	public AdditionalLink() {
+		// nothing to do
+	}
+
+	/**
+	 * @param id	link id
+	 * @param label	link label
+	 * @param url	link url
+	 */
+	public AdditionalLink(long id, String label, String url) {
+		this.id = id;
+		this.label = label;
+		this.url = url;
+	}
+
 	/**
 	 * @return the id
 	 */

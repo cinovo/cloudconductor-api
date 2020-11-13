@@ -1,9 +1,9 @@
 package de.cinovo.cloudconductor.api.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -12,13 +12,33 @@ import java.util.Set;
  *
  * @author psigloch
  */
-@JsonTypeInfo(include = As.PROPERTY, use = Id.CLASS)
+@JsonTypeInfo(use = Id.CLASS)
 public class SimpleTemplate {
+
 	private String name;
 	private int hostCount;
 	private int packageCount;
 	private Set<String> repos;
 	private String group;
+
+	/** default constructor */
+	public SimpleTemplate() {
+		// nothing to do
+	}
+
+	/**
+	 * @param name			template name
+	 * @param hostCount		number of hosts
+	 * @param packageCount	number of packages
+	 * @param group			template group
+	 */
+	public SimpleTemplate(String name, int hostCount, int packageCount, String group) {
+		this.name = name;
+		this.hostCount = hostCount;
+		this.packageCount = packageCount;
+		this.repos = new HashSet<>();
+		this.group = group;
+	}
 
 	/**
 	 * @return the name
