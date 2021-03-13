@@ -22,6 +22,7 @@ package de.cinovo.cloudconductor.api.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+import de.cinovo.cloudconductor.api.enums.UpdateRange;
 import de.cinovo.cloudconductor.api.interfaces.INamed;
 
 import java.util.Map;
@@ -47,6 +48,8 @@ public class Template implements INamed {
 	private Boolean autoUpdate;
 	private Boolean smoothUpdate;
 	private String group;
+
+	private UpdateRange updateRange;
 
 	/** default constructor */
 	public Template() {
@@ -178,5 +181,13 @@ public class Template implements INamed {
 	 */
 	public void setGroup(String group) {
 		this.group = group;
+	}
+
+	public UpdateRange getUpdateRange() {
+		return updateRange;
+	}
+
+	public void setUpdateRange(UpdateRange updateRange) {
+		this.updateRange = updateRange;
 	}
 }

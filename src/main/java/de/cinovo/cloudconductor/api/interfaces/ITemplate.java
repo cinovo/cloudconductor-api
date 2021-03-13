@@ -1,9 +1,11 @@
 package de.cinovo.cloudconductor.api.interfaces;
 
 import de.cinovo.cloudconductor.api.MediaType;
+import de.cinovo.cloudconductor.api.enums.UpdateRange;
 import de.cinovo.cloudconductor.api.model.AgentOption;
 import de.cinovo.cloudconductor.api.model.PackageDiff;
 import de.cinovo.cloudconductor.api.model.PackageVersion;
+import de.cinovo.cloudconductor.api.model.PackageVersionUpdates;
 import de.cinovo.cloudconductor.api.model.Repo;
 import de.cinovo.cloudconductor.api.model.SSHKey;
 import de.cinovo.cloudconductor.api.model.Service;
@@ -94,6 +96,38 @@ public interface ITemplate {
 	Template deletePackage(@PathParam("template") String templateName, @PathParam("pkg") String packageName);
 
 	/**
+	 * Update single package of template to latest version within update range.
+	 *
+	 * @param templateName the template name
+	 * @param packageName  the package to update
+	 * @param range			the update range
+	 * @return the updated template
+	 */
+	@PUT
+	@Path("/{template}/package/{pkg}/range/{range}")
+	@RolesAllowed({"EDIT_TEMPLATE"})
+	Template updatePackage(@PathParam("template") String templateName, //
+						   @PathParam("pkg") String packageName, //
+						   @PathParam("range") UpdateRange range //
+	);
+
+	/**
+	 * Update single package of template to specific target version.
+	 *
+	 * @param templateName	the template name
+	 * @param packageName 	the package to update
+	 * @param targetVersion	the target version
+	 * @return the updated template
+	 */
+	@PUT
+	@Path("/{template}/package/{pkg}/version/{version}")
+	@RolesAllowed({"EDIT_TEMPLATE"})
+	Template updatePackage(@PathParam("template") String templateName, //
+						   @PathParam("pkg") String packageName, //
+						   @PathParam("version") String targetVersion //
+	);
+
+	/**
 	 * @param templateName the name of the template
 	 * @return set of service objects
 	 */
@@ -178,7 +212,6 @@ public interface ITemplate {
 	@RolesAllowed({"VIEW_TEMPLATE", "EDIT_TEMPLATE"})
 	PackageVersion[] getPackageVersionsForTemplate(@PathParam("template") String templateName);
 	
-	
 	/**
 	 * @param templateName		name of the template to override
 	 * @param packageVersions	new package versions for given template
@@ -197,7 +230,16 @@ public interface ITemplate {
 	@Path("/{template}/package/versions/simple")
 	@RolesAllowed({"VIEW_TEMPLATE", "EDIT_TEMPLATE"})
 	SimplePackageVersion[] getSimplePackageVersionsForTemplate(@PathParam("template") String templateName);
-	
+
+	/**
+	 * @param templateName	 name of the template
+	 * @return package versions as maps
+	 */
+	@GET
+	@Path("/{template}/updates")
+	@RolesAllowed({"VIEW_TEMPLATE", "EDIT_TEMPLATE"})
+	PackageVersionUpdates getPackageVersionUpdatesForTemplate(@PathParam("template") String templateName);
+
 	/**
 	 * @param templateA the name of the first template of the diff
 	 * @param templateB the name of the second template of the diff
