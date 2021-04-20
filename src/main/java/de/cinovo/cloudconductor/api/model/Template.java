@@ -47,6 +47,7 @@ public class Template implements INamed {
 	private Map<String, String> versions;
 	private Boolean autoUpdate;
 	private Boolean smoothUpdate;
+	private Boolean noUninstalls;
 	private String group;
 
 	private UpdateRange updateRange;
@@ -168,7 +169,21 @@ public class Template implements INamed {
 	public void setSmoothUpdate(Boolean smoothUpdate) {
 		this.smoothUpdate = smoothUpdate;
 	}
-
+	
+	/**
+	 * @return the noUninstalls
+	 */
+	public Boolean getNoUninstalls() {
+		return this.noUninstalls;
+	}
+	
+	/**
+	 * @param noUninstalls the noUninstalls to set
+	 */
+	public void setNoUninstalls(Boolean noUninstalls) {
+		this.noUninstalls = noUninstalls;
+	}
+	
 	/**
 	 * @return the group
 	 */
@@ -182,11 +197,17 @@ public class Template implements INamed {
 	public void setGroup(String group) {
 		this.group = group;
 	}
-
+	
+	/**
+	 * @return the update range
+	 */
 	public UpdateRange getUpdateRange() {
-		return updateRange;
+		return this.updateRange;
 	}
-
+	
+	/**
+	 * @param updateRange the update range to set
+	 */
 	public void setUpdateRange(UpdateRange updateRange) {
 		this.updateRange = updateRange;
 	}
