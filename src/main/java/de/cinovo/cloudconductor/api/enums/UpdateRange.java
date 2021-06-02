@@ -7,15 +7,15 @@ package de.cinovo.cloudconductor.api.enums;
  * @author mweise
  */
 public enum UpdateRange {
-    /** [0] Update to latest version, without any restriction e.g. 1.2.3 -> 2.5.6 */
+    /** [0] Update to latest version, without any restriction e.g. 1.2.3 to 2.5.6 */
     all,
 
-    /** [1] Update to latest version within major, e.g. 1.2.3 -> 1.4.0 */
+    /** [1] Update to latest version within major, e.g. 1.2.3 to 1.4.0 */
     major,
 
-    /** [2] Update to latest version within minor, e.g. 1.2.3 -> 1.2.5 */
+    /** [2] Update to latest version within minor, e.g. 1.2.3 to 1.2.5 */
     minor,
 
-    /** [3] Update to latest version within patch, e.g. 1.2.3-1 -> 1.2.3-5 */
+    /** [3] Update to latest version within patch, e.g. 1.2.3-1 to 1.2.3-5 */
     patch,
 }
