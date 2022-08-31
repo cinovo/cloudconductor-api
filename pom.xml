@@ -8,7 +8,7 @@
     </parent>
     <groupId>de.cinovo.cloudconductor</groupId>
     <artifactId>cloudconductor-api</artifactId>
-    <version>3.7</version>
+    <version>3.8-SNAPSHOT</version>
     <name>CloudConductor API</name>
     <description>Server to manage deployment environments</description>
     <inceptionYear>2017</inceptionYear>
@@ -54,7 +54,7 @@
     <scm>
         <connection>scm:git:git@github.com:cinovo/cloudconductor-api.git</connection>
         <developerConnection>scm:git:git@github.com:cinovo/cloudconductor-api.git</developerConnection>
-        <tag>v3.7</tag>
+        <tag>HEAD</tag>
     </scm>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
