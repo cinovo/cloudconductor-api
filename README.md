@@ -1,5 +1,4 @@
-[![Build Status](https://travis-ci.org/cinovo/cloudconductor-api.png?branch=master)](https://travis-ci.org/cinovo/cloudconductor-api)
-
+[![Build Status](https://github.com/cinovo/cloudconductor-api/actions/workflows/build.yml/badge.svg)](https://github.com/cinovo/cloudconductor-api/actions/workflows/build.yml)
 
 # Why use CloudConductor
 We needed some tooling which would allow easy and fast deployment of multiple services and configurations to a vast bulk of machines while keeping the installation and maintenance time as low as possible.
